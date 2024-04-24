@@ -5,6 +5,7 @@ What is the difference between a class and an object?
 ___
 
 Answer:
+A class defines an object. An object is an instance of a class.
 
 ___
 
@@ -75,6 +76,7 @@ What is the output of this program? Explain why.
 
 ___
 
-Answer:
+Answer: The output is: "Bert", "Gerry", "Bert", "James".
+The names of person1 and person2 are different to the initial ones because the name values are changed directly class. The name of modifiedPerson1 is changed in the first function, then returned into a variable. The last name is James since the method creates a new person which it then returns, overriding the one passed into the method.
 
 ___

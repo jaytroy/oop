@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+/**
+ * The submission class.
+ */
 public class Submission {
     @Getter
     private int quality;
@@ -14,6 +17,11 @@ public class Submission {
     @Getter
     private Assignment assignment;
 
+    /**
+     * The submission constructor.
+     * @param student The student submitting.
+     * @param assignment The assignment being submitted.
+     */
     public Submission(Student student, Assignment assignment) {
         this.student = student;
         this.assignment = assignment;

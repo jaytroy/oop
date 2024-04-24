@@ -2,6 +2,9 @@ package nl.rug.oop.introduction;
 
 import lombok.Getter;
 
+/**
+ * The student class.
+ */
 public class Student {
     @Getter
     private int knowledgeLevel;
