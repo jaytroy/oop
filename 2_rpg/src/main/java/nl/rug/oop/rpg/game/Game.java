@@ -1,10 +1,8 @@
-package nl.rug.oop.rpg.model;
+package nl.rug.oop.rpg.game;
 
 import lombok.Getter;
-import nl.rug.oop.rpg.entities.Player;
-import nl.rug.oop.rpg.util.Scan;
-
-import java.util.Scanner;
+import nl.rug.oop.rpg.game.entities.Player;
+import nl.rug.oop.rpg.game.util.Scan;
 
 public class Game {
     @Getter

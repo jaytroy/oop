@@ -1,13 +1,12 @@
-package nl.rug.oop.rpg.model;
+package nl.rug.oop.rpg.game.model;
 
-import nl.rug.oop.rpg.Inspectable;
-import nl.rug.oop.rpg.entities.NPC;
-import nl.rug.oop.rpg.entities.Player;
-import nl.rug.oop.rpg.util.Scan;
+import nl.rug.oop.rpg.game.Inspectable;
+import nl.rug.oop.rpg.game.entities.npc.NPC;
+import nl.rug.oop.rpg.game.entities.Player;
+import nl.rug.oop.rpg.game.util.Scan;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Room implements Inspectable {
     private final String description;
@@ -73,7 +72,7 @@ public class Room implements Inspectable {
             i++;
         }
 
-        System.out.println("Interact with an NPC? (-1 : do nothing");
+        System.out.println("Interact with an NPC? (-1 : do nothing)");
         int choice = Scan.nextInt();
         if(choice == -1) {
             System.out.println("You do not interact with any npcs.");

@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg.util;
+package nl.rug.oop.rpg.game.util;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

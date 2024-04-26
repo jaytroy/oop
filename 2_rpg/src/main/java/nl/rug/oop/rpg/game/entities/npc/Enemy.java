@@ -1,8 +1,12 @@
-package nl.rug.oop.rpg.entities;
+package nl.rug.oop.rpg.game.entities.npc;
 
-import nl.rug.oop.rpg.util.Scan;
+import lombok.Getter;
+import nl.rug.oop.rpg.game.entities.Combatable;
+import nl.rug.oop.rpg.game.entities.Player;
+import nl.rug.oop.rpg.game.util.Scan;
 
-public class Enemy extends NPC implements Combatable {
+public class Enemy extends NPC implements Combatable<Player> {
+    @Getter
     private int damage;
     private int health;
 
@@ -24,13 +28,10 @@ public class Enemy extends NPC implements Combatable {
 
             switch (choice) {
                 case 0:
-                    if(this.health <= 0) {
-                        System.out.println("You talk to " + super.getDescription() + ". Dead things don't tend to say much");
-                        break;
-                    }
-                    System.out.println("You talk to " + super.getDescription() + ". They're not very coherent"); break;
+                    talk();
+                    break;
                 case 1:
-                    exit = combat(p);
+                    exit = attack(p);
                     break;
                 case 2:
                     exit = true;
@@ -50,30 +51,32 @@ public class Enemy extends NPC implements Combatable {
                         "  (2) Leave them alone\n");
     }
 
-    public boolean combat(Player p) {
+    public boolean attack(Player p) {
         if(this.health <= 0) {
             System.out.println("You attack the corpse of " + super.getDescription() + " They stay dead.");
             return false;
         }
-        System.out.println("You attack " + super.getDescription() + "!");
+        System.out.println("You attack " + super.getDescription() + "! You deal " + p.getDamage() + " damage.");
         this.takeDamage(p.getDamage());
         if (this.health <= 0) {
             System.out.println("You killed " + super.getDescription() + ". Shame on you.");
             return true;
         }
         System.out.println(super.getDescription() + " is at " + this.health + " health\n");
-        System.out.println(super.getDescription() + " attacks you!");
-        p.takeDamage(this.damage);
-        if (p.getHealth() <= 0) {
-            System.out.println("You've been killed. Terribly sad.");
-            return true;
-        }
-        System.out.println(p.getName() + " is at " + p.getHealth() + " health\n");
-        return false;
+
+        return p.attack(this);
     }
 
     @Override
     public void takeDamage(int damage) {
         health -= damage;
+    }
+
+    public void talk() {
+        if(this.health <= 0) {
+            System.out.println("You try to talk to " + super.getDescription() + ". Dead things don't tend to say much");
+            return;
+        }
+        System.out.println("You talk to " + super.getDescription()+ ". They're not very coherent. You notice that they have " + this.health + " health.");
     }
 }
