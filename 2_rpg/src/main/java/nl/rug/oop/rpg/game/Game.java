@@ -23,7 +23,7 @@ public class Game implements Serializable {
     }
 
     public void start() {
-        while(player.getHealth() > 0) {
+        while (player.getHealth() > 0) {
             showInteractionMenu();
             int choice = Scan.nextInt();
             decide(choice);
@@ -49,18 +49,18 @@ public class Game implements Serializable {
             case 0 -> player.getCurrentRoom().inspect();
             case 1 -> player.getCurrentRoom().showDoors(player);
             case 2 -> player.getCurrentRoom().showNPCs(player);
-            case 3 -> save(this,0);
-            case 4 -> save(this,1);
+            case 3 -> save(this, 0);
+            case 4 -> save(this, 1);
             case 5 -> {
                 Game loadedGame = load(0);
-                if(loadedGame != null) {
+                if (loadedGame != null) {
                     this.player = loadedGame.player;
                     this.npcs = loadedGame.npcs;
                 }
             }
             case 6 -> {
                 Game loadedGame = load(1);
-                if(loadedGame != null) {
+                if (loadedGame != null) {
                     this.player = loadedGame.player;
                     this.npcs = loadedGame.npcs;
                 }
