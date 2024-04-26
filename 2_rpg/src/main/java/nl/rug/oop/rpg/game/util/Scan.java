@@ -17,6 +17,17 @@ public class Scan {
         }
     }
 
+    public static String nextLine() {
+        while (true) {
+            try {
+                return scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input.");
+                scanner.nextLine();
+            }
+        }
+    }
+
     public static void closeScanner() {
         scanner.close();
     }

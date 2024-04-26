@@ -5,12 +5,13 @@ import nl.rug.oop.rpg.game.entities.npc.NPC;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Room implements Inspectable {
+public class Room implements Inspectable, Serializable {
     private final String description;
-    private List<Door> doors;
+    private transient List<Door> doors;
     private List<NPC> npcs;
 
     public Room(String description) {

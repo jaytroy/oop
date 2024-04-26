@@ -2,14 +2,24 @@ package nl.rug.oop.rpg.game;
 
 import lombok.Getter;
 import nl.rug.oop.rpg.game.entities.Player;
+import nl.rug.oop.rpg.game.entities.npc.NPC;
 import nl.rug.oop.rpg.game.util.Scan;
 
-public class Game {
+import java.io.Serializable;
+import java.util.List;
+
+import static nl.rug.oop.rpg.game.util.IOUtils.load;
+import static nl.rug.oop.rpg.game.util.IOUtils.save;
+
+
+public class Game implements Serializable {
     @Getter
     private Player player;
+    private List npcs;
 
-    public Game(String playerName) {
-        this.player = new Player(playerName, 10, 5);
+    public Game(Player player, List<NPC> npcs) {
+        this.player = player;
+        this.npcs = npcs;
     }
 
     public void start() {
@@ -27,15 +37,35 @@ public class Game {
                 "\nWhat do you want to do?\n" +
                         "  (0) Look around\n" +
                         "  (1) Look for a way out\n" +
-                        "  (2) Look for company\n");
+                        "  (2) Look for company\n" +
+                        "  (3) QuickSave\n" +
+                        "  (4) Save\n" +
+                        "  (5) QuickLoad\n" +
+                        "  (6) Load\n");
     }
 
     public void decide(int choice) {
         switch (choice) {
-            case 0: player.getCurrentRoom().inspect(); break;
-            case 1: player.getCurrentRoom().showDoors(player); break;
-            case 2: player.getCurrentRoom().showNPCs(player); break;
-            default: System.out.println(choice + " is not one of the choices"); break;
+            case 0 -> player.getCurrentRoom().inspect();
+            case 1 -> player.getCurrentRoom().showDoors(player);
+            case 2 -> player.getCurrentRoom().showNPCs(player);
+            case 3 -> save(this,0);
+            case 4 -> save(this,1);
+            case 5 -> {
+                Game loadedGame = load(0);
+                if(loadedGame != null) {
+                    this.player = loadedGame.player;
+                    this.npcs = loadedGame.npcs;
+                }
+            }
+            case 6 -> {
+                Game loadedGame = load(1);
+                if(loadedGame != null) {
+                    this.player = loadedGame.player;
+                    this.npcs = loadedGame.npcs;
+                }
+            }
+            default -> System.out.println(choice + " is not one of the choices");
         }
     }
 }

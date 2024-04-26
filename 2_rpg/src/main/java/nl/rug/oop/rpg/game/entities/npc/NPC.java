@@ -5,7 +5,9 @@ import nl.rug.oop.rpg.game.Inspectable;
 import nl.rug.oop.rpg.game.Interactable;
 import nl.rug.oop.rpg.game.entities.Player;
 
-public abstract class NPC implements Inspectable, Interactable {
+import java.io.Serializable;
+
+public abstract class NPC implements Inspectable, Interactable, Serializable {
     @Getter
     private String description;
 

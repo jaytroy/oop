@@ -5,8 +5,10 @@ import lombok.Setter;
 import nl.rug.oop.rpg.game.entities.npc.Enemy;
 import nl.rug.oop.rpg.game.model.Room;
 
+import java.io.Serializable;
+
 @Getter
-public class Player implements Combatable<Enemy> {
+public class Player implements Combatable<Enemy>, Serializable {
     private final String name;
     private int health;
     @Setter

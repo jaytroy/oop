@@ -5,6 +5,8 @@ import nl.rug.oop.rpg.game.entities.Combatable;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
+import java.io.Serializable;
+
 public class Enemy extends NPC implements Combatable<Player> {
     @Getter
     private int damage;
