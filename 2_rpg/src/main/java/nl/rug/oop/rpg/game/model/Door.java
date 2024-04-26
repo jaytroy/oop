@@ -23,6 +23,7 @@ public abstract class Door implements Inspectable, Interactable {
 
     public void interact(Player player) {
         player.setCurrentRoom(room2);
+        System.out.println("You go through the door");
     }
 
 }
