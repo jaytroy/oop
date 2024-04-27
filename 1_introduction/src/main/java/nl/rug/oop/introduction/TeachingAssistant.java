@@ -23,7 +23,6 @@ public class TeachingAssistant {
         if (sub.getSubmissionTime().isBefore(sub.getAssignment().getDeadline())) {
             Random random = new Random();
             int grade = random.nextInt(5) + sub.getQuality();
-            //System.out.println(sub.getQuality());
             System.out.println("Student " + sub.getStudent().getName() + " received grade " + grade + " for assignment "
                     + sub.getAssignment().getName() + ". Graded by " + this.name + ".");
         } else {
