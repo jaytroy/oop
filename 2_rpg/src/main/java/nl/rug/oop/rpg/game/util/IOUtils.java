@@ -17,7 +17,7 @@ public class IOUtils {
 
     public static void createSaveFolderIfNotExists() {
         File folder = new File(SAVE_FOLDER);
-        if (!folder.exists() && !folder.mkdirs()) {
+        if (folder.exists() && !folder.mkdirs()) {
             System.out.println("Save folder created successfully.");
         } else {
             System.out.println("Failed to create save folder.");
@@ -33,43 +33,37 @@ public class IOUtils {
      * @param game The game being saved.
      * @param type The quick-save type (Regular, QuickSave).
      */
-    public static void save(Game game, SaveType type) { //This needs to be optimized.
-        String fileName;
+    public static void save(Game game, SaveType type) {
+        String fileName = type == QUICKSAVE ? "quicksave.ser" : getFileNameFromUser();
+        if(fileName == null) {
+            System.out.println("Filename is null");
+            return;
+        }
+        String filePath = SAVE_FOLDER + fileName;
 
-        if (type == QUICKSAVE) {
-            fileName = SAVE_FOLDER + "quicksave.ser";
-            try (FileOutputStream fileOut = new FileOutputStream(fileName);
-                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
-
-                objectOut.writeObject(game);
-                System.out.println("Game saved successfully.");
-            } catch (IOException e) {
-                System.out.println("An error occured while quicksaving: " + e);
-            }
-        } else {
-            //Check if filename matches pattern
-            do {
-                System.out.println("Enter a save file name: ");
-                fileName = Scan.nextLine();
-                if (isValidFileName(fileName)) {
-                    break;
-                }
-                System.out.println("Invalid file name. Only include letters, numbers, underscores, hyphens");
-            } while (!isValidFileName(fileName));
-
-            String filePath = SAVE_FOLDER + fileName + ".ser";
-
-            try (FileOutputStream fileOut = new FileOutputStream(filePath);
-                 ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
-                objectOut.writeObject(game);
-                System.out.println("Game saved successfully.");
-            } catch (IOException e) {
-                System.out.println("An error occured while saving: " + e.getMessage());
-            }
+        try (FileOutputStream fileOut = new FileOutputStream(filePath);
+             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+            objectOut.writeObject(game);
+            System.out.println("Game saved successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occured while saving: " + e.getMessage());
         }
     }
 
-    public static Game load(SaveType type) { //This also needs to be optimized.
+    private static String getFileNameFromUser() {
+        String fileName;
+        do {
+            System.out.print("Enter a file name: ");
+            fileName = Scan.nextLine();
+            if (isValidFileName(fileName)) {
+                return fileName + ".ser";
+            }
+            System.out.println("Invalid file name. Only include letters, numbers, underscores, hyphens");
+        } while (!isValidFileName(fileName));
+        return null;
+    }
+
+    public static Game load(SaveType type) {
         if (type == QUICKSAVE) {
             File file = new File(SAVE_FOLDER + "quicksave.ser");
 

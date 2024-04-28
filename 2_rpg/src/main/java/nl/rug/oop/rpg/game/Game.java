@@ -4,6 +4,8 @@ import lombok.Getter;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.entities.npc.NPC;
 
+import nl.rug.oop.rpg.game.util.IOUtils;
+import nl.rug.oop.rpg.game.util.SaveType;
 import nl.rug.oop.rpg.game.util.Scan;
 
 import java.io.Serializable;
@@ -52,23 +54,23 @@ public class Game implements Serializable {
             case 0 -> player.getCurrentRoom().inspect();
             case 1 -> player.getCurrentRoom().showDoors(player);
             case 2 -> player.getCurrentRoom().showNPCs(player);
-            case 3 -> save(this, QUICKSAVE);
-            case 4 -> save(this, REGULARSAVE);
-            case 5 -> {
-                Game loadedGame = load(QUICKSAVE);
-                if (loadedGame != null) {
-                    this.player = loadedGame.player;
-                    this.npcs = loadedGame.npcs;
-                }
-            }
-            case 6 -> {
-                Game loadedGame = load(REGULARSAVE);
-                if (loadedGame != null) {
-                    this.player = loadedGame.player;
-                    this.npcs = loadedGame.npcs;
-                }
-            }
+            case 3 -> saveGame(QUICKSAVE);
+            case 4 -> saveGame(REGULARSAVE);
+            case 5 -> loadGame(QUICKSAVE);
+            case 6 -> loadGame(REGULARSAVE);
             default -> System.out.println(choice + " is not one of the choices");
+        }
+    }
+
+    private void saveGame(SaveType saveType) {
+        IOUtils.save(this, saveType);
+    }
+
+    private void loadGame(SaveType type) {
+        Game loadedGame = IOUtils.load(type);
+        if (loadedGame != null) {
+            this.player = loadedGame.player;
+            this.npcs = loadedGame.npcs;
         }
     }
 }

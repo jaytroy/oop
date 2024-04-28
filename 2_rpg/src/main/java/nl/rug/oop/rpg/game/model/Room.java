@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Room implements Inspectable, Serializable {
     private final String description;
-    private transient List<Door> doors;
+    private List<Door> doors;
     private List<NPC> npcs;
 
     public Room(String description) {
