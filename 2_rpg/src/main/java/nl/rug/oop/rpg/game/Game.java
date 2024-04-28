@@ -3,6 +3,7 @@ package nl.rug.oop.rpg.game;
 import lombok.Getter;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.entities.npc.NPC;
+
 import nl.rug.oop.rpg.game.util.Scan;
 
 import java.io.Serializable;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import static nl.rug.oop.rpg.game.util.IOUtils.load;
 import static nl.rug.oop.rpg.game.util.IOUtils.save;
+import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
+import static nl.rug.oop.rpg.game.util.SaveType.REGULARSAVE;
 
 
 public class Game implements Serializable {
@@ -25,8 +28,7 @@ public class Game implements Serializable {
     public void start() {
         while (player.getHealth() > 0) {
             showInteractionMenu();
-            int choice = Scan.nextInt();
-            decide(choice);
+            decide();
         }
 
         Scan.closeScanner();
@@ -44,22 +46,23 @@ public class Game implements Serializable {
                         "  (6) Load\n");
     }
 
-    public void decide(int choice) {
+    public void decide() {
+        int choice = Scan.nextInt();
         switch (choice) {
             case 0 -> player.getCurrentRoom().inspect();
             case 1 -> player.getCurrentRoom().showDoors(player);
             case 2 -> player.getCurrentRoom().showNPCs(player);
-            case 3 -> save(this, 0);
-            case 4 -> save(this, 1);
+            case 3 -> save(this, QUICKSAVE);
+            case 4 -> save(this, REGULARSAVE);
             case 5 -> {
-                Game loadedGame = load(0);
+                Game loadedGame = load(QUICKSAVE);
                 if (loadedGame != null) {
                     this.player = loadedGame.player;
                     this.npcs = loadedGame.npcs;
                 }
             }
             case 6 -> {
-                Game loadedGame = load(1);
+                Game loadedGame = load(REGULARSAVE);
                 if (loadedGame != null) {
                     this.player = loadedGame.player;
                     this.npcs = loadedGame.npcs;

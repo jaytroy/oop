@@ -5,18 +5,23 @@ import nl.rug.oop.rpg.game.Game;
 import java.io.*;
 import java.util.regex.Pattern;
 
+import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
+
 public class IOUtils {
     private static String SAVE_FOLDER = "savedgames/";
     private static final Pattern VALID_FILENAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+$");
 
+    static {
+        createSaveFolderIfNotExists();
+    }
+
     public static void createSaveFolderIfNotExists() {
         File folder = new File(SAVE_FOLDER);
-        if (!folder.exists()) {
-            if (folder.mkdirs()) {
-                System.out.println("Save folder created successfully.");
-            } else {
-                System.out.println("Failed to create save folder.");
-            }
+        if (!folder.exists() && !folder.mkdirs()) {
+            System.out.println("Save folder created successfully.");
+        } else {
+            System.out.println("Failed to create save folder.");
+
         }
     }
 
@@ -26,13 +31,12 @@ public class IOUtils {
 
     /**
      * @param game The game being saved.
-     * @param type 0 indicates quicksave, 1 indicates regular save
+     * @param type The quick-save type (Regular, QuickSave).
      */
-    public static void save(Game game, int type) {
-        createSaveFolderIfNotExists();
+    public static void save(Game game, SaveType type) { //This needs to be optimized.
         String fileName;
 
-        if (type == 0) {
+        if (type == QUICKSAVE) {
             fileName = SAVE_FOLDER + "quicksave.ser";
             try (FileOutputStream fileOut = new FileOutputStream(fileName);
                  ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
@@ -65,8 +69,8 @@ public class IOUtils {
         }
     }
 
-    public static Game load(int type) {
-        if (type == 0) {
+    public static Game load(SaveType type) { //This also needs to be optimized.
+        if (type == QUICKSAVE) {
             File file = new File(SAVE_FOLDER + "quicksave.ser");
 
             if (file.exists()) {
@@ -76,7 +80,7 @@ public class IOUtils {
 
                     Object loadedSave = objectInputStream.readObject();
 
-                    if(loadedSave instanceof Game) {
+                    if (loadedSave instanceof Game) {
                         Game game = (Game) loadedSave;
                         System.out.println("Game loaded successfully.");
                         return game;
