@@ -35,7 +35,7 @@ public class TeachingAssistant {
     /**
      * A method to grade the submissions of multiple students.
      *
-     * @param submissions The list of submissions.
+     * @param submissions A list of submissions.
      */
     public void gradeAll(List<Submission> submissions) {
         for (Submission sub : submissions) {
