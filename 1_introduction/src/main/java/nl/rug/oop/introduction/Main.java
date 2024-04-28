@@ -19,7 +19,7 @@ public class Main {
         Student student1 = new Student(0, "John");
         Student student2 = new Student(1, "Hannah");
         Student student3 = new Student(2, "Bobert");
-        Student student4 = new Student(3, "Spud");
+        Student student4 = new Student(10, "Spud");
 
         List<Student> students = new ArrayList<>();
         students.add(student1);

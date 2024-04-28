@@ -12,7 +12,7 @@ public class Student {
     private String name;
 
     public Student(int knowledgeLevel, String name) {
-        this.knowledgeLevel = knowledgeLevel;
+        this.knowledgeLevel = Math.min(knowledgeLevel,6);
         this.name = name;
     }
 

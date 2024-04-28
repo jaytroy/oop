@@ -18,11 +18,8 @@ public class Lecturer {
      */
     public void lecture(List<Student> attendees) {
         System.out.println(this.name + ": Don't expect to get all information from the lecture slides. Read the " +
-                "entire " +
-                "reader, " +
-                "carefully scan every single page of the book, and even then, you can't expect to know everything " +
-                "this " +
-                "course requires you to know.");
+                "entire reader, carefully scan every single page of the book, read all possible available material " +
+                "online, and even then, you can't expect to know everything this course requires you to know.");
 
         for(Student attendee : attendees) {
             attendee.obtainKnowledge();
