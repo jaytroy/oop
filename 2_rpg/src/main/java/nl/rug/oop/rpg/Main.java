@@ -1,10 +1,7 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.game.entities.npc.Enemy;
-import nl.rug.oop.rpg.game.entities.npc.NPC;
-import nl.rug.oop.rpg.game.entities.npc.Person;
+import nl.rug.oop.rpg.game.entities.npc.*;
 import nl.rug.oop.rpg.game.entities.Player;
-import nl.rug.oop.rpg.game.entities.npc.Teacher;
 import nl.rug.oop.rpg.game.model.DamageDoor;
 import nl.rug.oop.rpg.game.model.Door;
 import nl.rug.oop.rpg.game.Game;
@@ -34,14 +31,16 @@ public class Main {
         room1.addDoor(door1);
         room1.addDoor(door2);
 
-        NPC npc1 = new Enemy("Arnold Meijster", 6, 1);
+        NPC npc1 = new Enemy("Meijster's TA", 6, 1);
         NPC npc2 = new Person("Janitor");
-        NPC npc3 = new Enemy("Public enemy #1", 100, 5);
+        NPC npc3 = new Enemy("Arnold Meijster", 100, 5);
         NPC npc4 = new Teacher("The best lecturer", 5, 1);
+        NPC npc5 = new Healer("StudentArts", 5);
 
         room1.addNPC(npc1);
         room2.addNPC(npc3);
         room3.addNPC(npc2);
+        room3.addNPC(npc5);
         room1.addNPC(npc4);
 
         List<NPC> npcs = new ArrayList<>();
@@ -49,8 +48,10 @@ public class Main {
         npcs.add(npc2);
         npcs.add(npc3);
         npcs.add(npc4);
+        npcs.add(npc5
+        );
 
-        Game game = new Game(new Player("Jay", 10, 5), npcs);
+        Game game = new Game(new Player("JaPan", 10, 5), npcs);
         Player player = game.getPlayer();
 
         player.setCurrentRoom(room1);

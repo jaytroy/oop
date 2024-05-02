@@ -36,6 +36,17 @@ Justify your answer in at least 250 words. Please explain the consequences, bene
 ___
 
 Answer:
+The implementation of the first developer is superior. By assigning the description of the room as a private variable they are abiding by the fundamental principle of encapsulation, 
+while the second developer completely disregards it. This gives the first developers code the following three advantages. 
+
+Firstly, privacy, by restricting access to possible sensitive information it protects the data and ensures that unwanted changes are not made. 
+
+Secondly, extendability, with this design it is easier for additional logic to be implemented on the Room class without altering the current functionality.
+
+Lastly this design makes the code more readable and easier for its functions to be understood, especially for other developers.
+This consequently also helps increasing the ease of debugging.
+
+The only possible drawback the first approach might have is that it requires more lines of code to write, so in an extremely niche situation where speed is the only factor under consideration it could be considered the superior choice. However, considering all the previously mentioned benefits in almost all other cases such a drawback is well worth it.
 
 ___
 
@@ -59,6 +70,25 @@ Please justify your answer in at least 250 words, and support your justification
 ___
 
 Answer:
+This claim disregards the fundamental role interfaces play in OOP and the benefits they offer in terms of code
+organization, flexibility, and maintainability. Interfaces serve as contracts that define a set of methods that 
+a class must implement. While it's true that interfaces themselves do not provide implementations for these methods,
+their purpose lies in establishing a common protocol or behavior that can be implemented by multiple classes. 
+Thus they offer a great deal of benefits to the programmers that chose to implement them.
+
+First of all because of abstraction: Interfaces hide away the implementation details and focus on defining the contract
+or behavior that classes must adhere to. This abstraction allows for more flexible and loosely coupled designs, as classes 
+can interact with objects based on their interfaces rather than their concrete implementations. This makes the code easier 
+to organize and maintain.
+
+Secondly because of the power of polymorphism: Through its use objects of different classes can implement the same interface
+in their own way while being treated uniformly, allowing us for greater flexibility while coding. If we were to just make all
+of our interfaces classes we would be severely limiting ourselves since Java allows a class to inherit behavior from multiple
+interfaces, while on the other hand they can extend only one other class.
+
+Lastly , interfaces help enforce the "contract" between classes, ensuring that implementing classes provide the necessary functionality
+as specified by the interface. This promotes consistency and helps prevent errors by providing a clear expectation of behavior.
+
 
 ___
 
@@ -70,7 +100,7 @@ These two classes are part of the Java libraries, and they are designed based on
 Which design pattern do `FileOutputStream` and `ObjectOutputStream` implement?
 
 Explain the roles of this design pattern and how `FileOutputStream` and `ObjectOutputStream` implement it. Also explain the benefit of implementing this design pattern.
-
+``
 ___
 
 Answer:

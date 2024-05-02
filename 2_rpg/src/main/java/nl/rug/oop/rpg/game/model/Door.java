@@ -1,6 +1,5 @@
 package nl.rug.oop.rpg.game.model;
 
-import lombok.Getter;
 import nl.rug.oop.rpg.game.Inspectable;
 import nl.rug.oop.rpg.game.Interactable;
 import nl.rug.oop.rpg.game.entities.Player;

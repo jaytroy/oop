@@ -7,6 +7,9 @@ import nl.rug.oop.rpg.game.entities.Player;
 
 import java.io.Serializable;
 
+/**
+ * NPC abstract class outlining their basic expected functionality.
+ */
 public abstract class NPC implements Inspectable, Interactable, Serializable {
     @Getter
     private String description;

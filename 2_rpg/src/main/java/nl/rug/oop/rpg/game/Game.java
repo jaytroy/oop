@@ -11,7 +11,9 @@ import java.util.List;
 import static nl.rug.oop.rpg.game.util.IOUtils.load;
 import static nl.rug.oop.rpg.game.util.IOUtils.save;
 
-
+/**
+ * Game class containing all of the logic oft he game.
+ */
 public class Game implements Serializable {
     @Getter
     private Player player;
@@ -22,6 +24,9 @@ public class Game implements Serializable {
         this.npcs = npcs;
     }
 
+    /**
+     * called in the main method to start a new game.
+     */
     public void start() {
         while (player.getHealth() > 0) {
             showInteractionMenu();
@@ -32,6 +37,9 @@ public class Game implements Serializable {
         Scan.closeScanner();
     }
 
+    /**
+     * default interaction menu that gets printed and prompts the player to choose an option.
+     */
     public void showInteractionMenu() {
         System.out.println(
                 "\nWhat do you want to do?\n" +
@@ -44,6 +52,10 @@ public class Game implements Serializable {
                         "  (6) Load\n");
     }
 
+    /**
+     * method performing the underlying logic for each option.
+     * @param choice the users recorded input.
+     */
     public void decide(int choice) {
         switch (choice) {
             case 0 -> player.getCurrentRoom().inspect();

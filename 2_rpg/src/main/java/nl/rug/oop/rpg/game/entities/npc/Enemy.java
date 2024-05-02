@@ -5,13 +5,20 @@ import nl.rug.oop.rpg.game.entities.Combatable;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
-import java.io.Serializable;
-
+/**
+ *  class defining a NPC that is capable of dealing damage to the player.
+ */
 public class Enemy extends NPC implements Combatable<Player> {
     @Getter
     private int damage;
     private int health;
 
+    /**
+     * Enemy class for NPCs one can engage in combat with.
+     * @param description description of the enemy.
+     * @param health health of the enemy.
+     * @param damage damage the enemy can deal.
+     */
     public Enemy(String description, int health, int damage) {
         super(description);
         this.health = health;
@@ -45,7 +52,11 @@ public class Enemy extends NPC implements Combatable<Player> {
         }
     }
 
+    /**
+     * prints the possible interaction options to the player.
+     */
     public void showInteractionMenu() {
+
         System.out.println(
                 "\nWhat do you want to do?\n" +
                         "  (0) Talk\n" +
@@ -53,6 +64,11 @@ public class Enemy extends NPC implements Combatable<Player> {
                         "  (2) Leave them alone\n");
     }
 
+    /**
+     * Method for botht the enemy and the attacking player to deal damage to each other.
+     * @param p player attacking the enemy.
+     * @return boolean indicating if the enemy is still alive or not after the attack.
+     */
     public boolean attack(Player p) {
         if(this.health <= 0) {
             System.out.println("You attack the corpse of " + super.getDescription() + " They stay dead.");
@@ -74,11 +90,15 @@ public class Enemy extends NPC implements Combatable<Player> {
         health -= damage;
     }
 
+    /**
+     * method that will output a given dialogue provided the enemy is alive.
+     */
     public void talk() {
         if(this.health <= 0) {
             System.out.println("You try to talk to " + super.getDescription() + ". Dead things don't tend to say much");
             return;
         }
-        System.out.println("You talk to " + super.getDescription()+ ". They're not very coherent. You notice that they have " + this.health + " health.");
+        System.out.println("You talk to " + super.getDescription()+ ". They're not very coherent." +
+                " You notice that they have " + this.health + " health.");
     }
 }
