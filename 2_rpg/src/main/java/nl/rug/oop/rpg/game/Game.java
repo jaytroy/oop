@@ -60,7 +60,6 @@ public class Game implements Serializable {
      * method performing the underlying logic for each option.
      * @param choice the users recorded input.
      */
-    public void decide(int choice) {
     public void decide() {
         int choice = Scan.nextInt();
         switch (choice) {
