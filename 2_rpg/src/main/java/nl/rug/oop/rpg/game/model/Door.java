@@ -4,7 +4,9 @@ import nl.rug.oop.rpg.game.Inspectable;
 import nl.rug.oop.rpg.game.Interactable;
 import nl.rug.oop.rpg.game.entities.Player;
 
-public abstract class Door implements Inspectable, Interactable {
+import java.io.Serializable;
+
+public abstract class Door implements Inspectable, Interactable, Serializable {
     protected final String description;
     protected final Room room1;
     protected final Room room2;
