@@ -13,7 +13,7 @@ public class DamageDoor extends Door {
     @Override
     public void interact(Player p) {
         p.takeDamage(damage);
-        System.out.println(super.description + " hurts you! You take " + damage + " damage");
+        System.out.println("The crossbow shoots at you! You take " + damage + " damage");
         p.setCurrentRoom(super.room2);
     }
 

@@ -33,6 +33,8 @@ public class Game implements Serializable {
      * called in the main method to start a new game.
      */
     public void start() {
+        System.out.println("Welcome to the dungeon of aletta Jacobs hall!" +
+                "To exit the game you must defeat the evil lecturer Meijster.\n");
         while (player.getHealth() > 0) {
             showInteractionMenu();
             decide();

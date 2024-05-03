@@ -23,7 +23,11 @@ public abstract class Door implements Inspectable, Interactable, Serializable {
     }
 
     public void interact(Player player) {
-        player.setCurrentRoom(room2);
+        if(player.getCurrentRoom() == room1) {
+            player.setCurrentRoom(room2);
+        }else{
+            player.setCurrentRoom(room1);
+        }
         System.out.println("You go through the door");
     }
 

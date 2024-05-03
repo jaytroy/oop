@@ -53,15 +53,15 @@ public class Healer extends NPC {
      * @param p the player receiving the lecture.
      */
     public boolean heal(Player p) {
-        if(p.getHealth() <= 5) {
-            System.out.println(super.getDescription() + " sees that you are not under any medical emergency" +
-                    "and you should just take some paracetamol");
+        if(p.getHealth() >= 5) {
+            System.out.println(super.getDescription() + " sees that you are not under any medical emergency," +
+                    " you should just take some paracetamol");
             return false;
         } else {
-            heal(p);
+            p.setHealth(p.getHealth()+5);
             increaseExperience();
-            System.out.println("Being in critical condition and aving made an appointment 4 weeks in advance " +
-                    super.getDescription() + " agrees to prescribe you some medicine, you now have" + p.getHealth() +
+            System.out.println("Being in critical condition and on the brink of death " +
+                    super.getDescription() + " agree to prescribe you some medicine, you now have " + p.getHealth() +
                     " health.\n");
             return true;
         }
