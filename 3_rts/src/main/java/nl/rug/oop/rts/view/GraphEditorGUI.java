@@ -1,12 +1,12 @@
 package nl.rug.oop.rts.view;
 
+import main.java.nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Edge;
-import nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.view.GraphPanel;
-import org.w3c.dom.Node;
+import nl.rug.oop.rts.model.Node;
+
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 
 public class GraphEditorGUI extends JFrame {
@@ -18,11 +18,9 @@ public class GraphEditorGUI extends JFrame {
         setSize(400, 400);
         setLocationRelativeTo(null);
 
-        // Retrieve nodes and edges from the Graph object
         List<Node> nodes = graph.getNodes();
         List<Edge> edges = graph.getEdges();
 
-        // Create GraphPanel with nodes, edges, and positions
         graphPanel = new GraphPanel(nodes, edges, nodeXPositions, nodeYPositions);
         add(graphPanel);
 

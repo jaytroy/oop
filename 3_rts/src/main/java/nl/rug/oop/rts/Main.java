@@ -1,12 +1,11 @@
 package nl.rug.oop.rts;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
+import main.java.nl.rug.oop.rts.model.Graph;
 import nl.rug.oop.rts.model.Edge;
-import nl.rug.oop.rts.model.Graph;
+
 import nl.rug.oop.rts.model.Node;
 import nl.rug.oop.rts.view.GraphEditorGUI;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import java.util.List;
  */
     public class Main {
         public static void main(String[] args) {
-            // Create some sample nodes and edges
             List<Node> nodes = new ArrayList<>();
             List<Edge> edges = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
@@ -27,14 +25,12 @@ import java.util.List;
             edges.add(new Edge(3, "Edge 4", nodes.get(3), nodes.get(4)));
             edges.add(new Edge(4, "Edge 5", nodes.get(4), nodes.get(0)));
 
-            // Hardcoded x and y positions for nodes
             int[] nodeXPositions = {50, 150, 250, 100, 200};
             int[] nodeYPositions = {50, 100, 150, 200, 250};
 
-            // Create the graph and GUI
             Graph graph = new Graph(nodes, edges);
             GraphEditorGUI gui = new GraphEditorGUI(graph, nodeXPositions, nodeYPositions);
-            gui.show(); // Make the GUI visible
+            gui.show();
         }
     }
     

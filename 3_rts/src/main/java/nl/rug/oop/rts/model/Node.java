@@ -37,12 +37,10 @@ public class Node {
         return edges;
     }
 
-    // Method to add an edge to the node
     public void addEdge(Edge edge) {
         edges.add(edge);
     }
 
-    // Method to remove an edge from the node
     public void removeEdge(Edge edge) {
         edges.remove(edge);
     }
