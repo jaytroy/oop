@@ -30,5 +30,4 @@ public abstract class Door implements Inspectable, Interactable, Serializable {
         }
         System.out.println("You go through the door");
     }
-
 }

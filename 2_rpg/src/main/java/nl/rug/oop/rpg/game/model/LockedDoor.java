@@ -12,7 +12,7 @@ public class LockedDoor extends Door {
     @Override
     public void interact(Player player) {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
-        System.out.println("The door is locked, to enter please type\" +
+        System.out.println("The door is locked, to enter please type\n" +
                 " the answer to life the universe and everything:");
         String input = scanner.nextLine();
         if (input.equals(PASSWORD)) {
