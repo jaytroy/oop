@@ -11,22 +11,23 @@ import nl.rug.oop.rpg.game.util.Scan;
 import java.io.Serializable;
 import java.util.List;
 
-import static nl.rug.oop.rpg.game.util.IOUtils.load;
-import static nl.rug.oop.rpg.game.util.IOUtils.save;
+
 import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
 import static nl.rug.oop.rpg.game.util.SaveType.REGULARSAVE;
 
 /**
- * Game class containing all of the logic oft he game.
+ * Contains the main logic of the game.
  */
 public class Game implements Serializable {
     @Getter
     private Player player;
     private List npcs;
+    private IOUtils utils;
 
     public Game(Player player, List<NPC> npcs) {
         this.player = player;
         this.npcs = npcs;
+        this.utils = new IOUtils();
     }
 
     /**
@@ -76,11 +77,11 @@ public class Game implements Serializable {
     }
 
     private void saveGame(SaveType saveType) {
-        IOUtils.save(this, saveType);
+        utils.save(this, saveType);
     }
 
     private void loadGame(SaveType type) {
-        Game loadedGame = IOUtils.load(type);
+        Game loadedGame = utils.load(type);
         if (loadedGame != null) {
             this.player = loadedGame.player;
             this.npcs = loadedGame.npcs;

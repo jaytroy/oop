@@ -8,14 +8,10 @@ import java.util.regex.Pattern;
 import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
 
 public class IOUtils {
-    private static String SAVE_FOLDER = "savedgames/";
-    private static final Pattern VALID_FILENAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+$");
+    private String SAVE_FOLDER = "savedgames/";
+    private final Pattern VALID_FILENAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+$");
 
-    static {
-        createSaveFolderIfNotExists();
-    }
-
-    public static void createSaveFolderIfNotExists() {
+    public void createSaveFolderIfNotExists() {
         File folder = new File(SAVE_FOLDER);
         if (folder.exists() && !folder.mkdirs()) {
             System.out.println("Save folder created successfully.");
@@ -25,7 +21,7 @@ public class IOUtils {
         }
     }
 
-    private static boolean isValidFileName(String name) {
+    private boolean isValidFileName(String name) {
         return VALID_FILENAME_PATTERN.matcher(name).matches();
     }
 
@@ -33,7 +29,9 @@ public class IOUtils {
      * @param game The game being saved.
      * @param type The quick-save type (Regular, QuickSave).
      */
-    public static void save(Game game, SaveType type) {
+    public void save(Game game, SaveType type) {
+        createSaveFolderIfNotExists();
+
         String fileName = type == QUICKSAVE ? "quicksave.ser" : getFileNameFromUser();
         if(fileName == null) {
             System.out.println("Filename is null");
@@ -50,7 +48,7 @@ public class IOUtils {
         }
     }
 
-    private static String getFileNameFromUser() {
+    private String getFileNameFromUser() {
         String fileName;
         do {
             System.out.print("Enter a file name: ");
@@ -63,7 +61,9 @@ public class IOUtils {
         return null;
     }
 
-    public static Game load(SaveType type) {
+    public Game load(SaveType type) {
+        createSaveFolderIfNotExists();
+
         if (type == QUICKSAVE) {
             File file = new File(SAVE_FOLDER + "quicksave.ser");
 

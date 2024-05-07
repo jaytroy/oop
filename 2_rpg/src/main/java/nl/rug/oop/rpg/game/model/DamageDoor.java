@@ -16,5 +16,4 @@ public class DamageDoor extends Door {
         System.out.println("The crossbow shoots at you! You take " + damage + " damage");
         p.setCurrentRoom(super.room2);
     }
-
 }
