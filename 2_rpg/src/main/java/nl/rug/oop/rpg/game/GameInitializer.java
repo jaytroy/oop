@@ -16,7 +16,7 @@ public class GameInitializer{
         Door door1 = new DamageDoor("A mysterious door with a huge crossbow attached to it", room1, room2, 1);
         Door door2 = new NormalDoor("A door with a small window", room1, room3);
         Door door3 = new LockedDoor("A door with intricate lock mechanism around it", room2, room3);
-        Door door4 = new EvilDoor("A door covered with flesh.", room1,room2);
+        Door door4 = new EvilDoor("A door covered with flesh.", room1,room2, 8, 2);
 
         room1.addDoor(door1);
         room1.addDoor(door2);

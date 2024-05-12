@@ -9,4 +9,6 @@ public interface Combatable<T> {
     void takeDamage(int damage);
 
     boolean attack(T target);
+
+    void getAliveAttributes();
 }

@@ -2,6 +2,7 @@ package nl.rug.oop.rpg.game.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.rug.oop.rpg.game.AliveAttributes;
 import nl.rug.oop.rpg.game.entities.npc.Enemy;
 import nl.rug.oop.rpg.game.model.Room;
 
@@ -13,11 +14,7 @@ import java.io.Serializable;
 @Getter
 public class Player implements Combatable<Enemy>, Serializable {
     private final String name;
-    @Setter
-    @Getter
-    private int health;
-    @Setter
-    private int damage;
+    private AliveAttributes aliveAttributes;
     @Setter
     private Room currentRoom;
 
@@ -29,13 +26,12 @@ public class Player implements Combatable<Enemy>, Serializable {
      */
     public Player(String name, int health, int damage) {
         this.name = name;
-        this.health = health;
-        this.damage = damage;
+        this.aliveAttributes = new AliveAttributes(health, damage);
     }
 
     @Override
     public void takeDamage(int damage) {
-        health -= damage;
+        aliveAttributes.takeDamage(damage);
     }
 
     /**
@@ -44,13 +40,13 @@ public class Player implements Combatable<Enemy>, Serializable {
      * @return boolean signifying if the player is dead or not after the attack.
      */
     public boolean attack(Enemy e) {
-        System.out.println(e.getDescription() + " attacks you! They deal " + e.getDamage() + " damage.");
-        this.takeDamage(e.getDamage());
-        if (this.getHealth() <= 0) {
+        System.out.println(e.getDescription() + " attacks you! They deal " + e.getAliveAttributes().getDamage() + " damage.");
+        this.takeDamage(e.getAliveAttributes().getDamage());
+        if (aliveAttributes.getHealth() <= 0) {
             System.out.println("You've been killed. Terribly sad.");
             return true;
         }
-        System.out.println(this.getName() + " is at " + this.getHealth() + " health\n");
+        System.out.println(this.getName() + " is at " + aliveAttributes.getHealth() + " health\n");
         return false;
     }
 }

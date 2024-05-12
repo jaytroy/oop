@@ -30,9 +30,9 @@ public class Teacher extends NPC {
             System.out.println(super.getDescription() + " has taught you everything they could!");
             return;
         }
-        p.setDamage(p.getDamage() + value);
+        p.getAliveAttributes().addDamage(value);
         System.out.println(super.getDescription() + " teaches you about combat. You gain " + value + " damage.\n" +
-                "Your damage: " + p.getDamage());
+                "Your damage: " + p.getAliveAttributes().getDamage());
         lectures--;
     }
 

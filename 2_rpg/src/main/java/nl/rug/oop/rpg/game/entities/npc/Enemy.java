@@ -1,28 +1,29 @@
 package nl.rug.oop.rpg.game.entities.npc;
 
 import lombok.Getter;
+import nl.rug.oop.rpg.game.AliveAttributes;
+import nl.rug.oop.rpg.game.Decideable;
 import nl.rug.oop.rpg.game.entities.Combatable;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
 /**
- *  class defining a NPC that is capable of dealing damage to the player.
+ * class defining a NPC that is capable of dealing damage to the player.
  */
-public class Enemy extends NPC implements Combatable<Player> {
+public class Enemy extends NPC implements Combatable<Player>, Decideable {
     @Getter
-    private int damage;
-    private int health;
+    private AliveAttributes aliveAttributes;
 
     /**
      * Enemy class for NPCs one can engage in combat with.
+     *
      * @param description description of the enemy.
-     * @param health health of the enemy.
-     * @param damage damage the enemy can deal.
+     * @param health      health of the enemy.
+     * @param damage      damage the enemy can deal.
      */
     public Enemy(String description, int health, int damage) {
         super(description);
-        this.health = health;
-        this.damage = damage;
+        this.aliveAttributes = new AliveAttributes(health, damage);
     }
 
     @Override
@@ -33,30 +34,15 @@ public class Enemy extends NPC implements Combatable<Player> {
         boolean exit = false;
         while (!exit) {
             showInteractionMenu();
-            int choice = Scan.nextInt();
-
-            switch (choice) {
-                case 0:
-                    talk();
-                    break;
-                case 1:
-                    exit = attack(p);
-                    break;
-                case 2:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println(choice + " is not one of the choices");
-                    break;
-            }
+            exit = decide(p);
         }
     }
 
     /**
      * prints the possible interaction options to the player.
      */
+    @Override
     public void showInteractionMenu() {
-
         System.out.println(
                 "\nWhat do you want to do?\n" +
                         "  (0) Talk\n" +
@@ -64,41 +50,56 @@ public class Enemy extends NPC implements Combatable<Player> {
                         "  (2) Leave them alone\n");
     }
 
+    @Override
+    public boolean decide(Player p) {
+        int choice = Scan.nextInt();
+
+        switch (choice) {
+            case 0 -> talk();
+            case 1 -> {return attack(p);}
+            case 2 -> {return true;}
+            default -> System.out.println(choice + " is not one of the choices");
+        }
+        return false;
+    }
+
     /**
-     * Method for botht the enemy and the attacking player to deal damage to each other.
+     * Method for both the enemy and the attacking player to deal damage to each other.
+     *
      * @param p player attacking the enemy.
      * @return boolean indicating if the enemy is still alive or not after the attack.
      */
     public boolean attack(Player p) {
-        if(this.health <= 0) {
+        if (this.aliveAttributes.getHealth() <= 0) {
             System.out.println("You attack the corpse of " + super.getDescription() + " They stay dead.");
             return false;
         }
-        System.out.println("You attack " + super.getDescription() + "! You deal " + p.getDamage() + " damage.");
-        this.takeDamage(p.getDamage());
-        if (this.health <= 0) {
+        System.out.println("You attack " + super.getDescription() + "! You deal " + p.getAliveAttributes().getDamage() + " damage.");
+
+        this.takeDamage(p.getAliveAttributes().getDamage());
+        if (this.aliveAttributes.getHealth() <= 0) {
             System.out.println("You killed " + super.getDescription() + ". Shame on you.");
             return true;
         }
-        System.out.println(super.getDescription() + " is at " + this.health + " health\n");
+        System.out.println(super.getDescription() + " is at " + this.getAliveAttributes().getHealth() + " health\n");
 
         return p.attack(this);
     }
 
     @Override
     public void takeDamage(int damage) {
-        health -= damage;
+        aliveAttributes.takeDamage(damage);
     }
 
     /**
      * method that will output a given dialogue provided the enemy is alive.
      */
     public void talk() {
-        if(this.health <= 0) {
+        if (aliveAttributes.getHealth() <= 0) {
             System.out.println("You try to talk to " + super.getDescription() + ". Dead things don't tend to say much");
             return;
         }
-        System.out.println("You talk to " + super.getDescription()+ ". They're not very coherent." +
-                " You notice that they have " + this.health + " health.");
+        System.out.println("You talk to " + super.getDescription() + ". They're not very coherent." +
+                " You notice that they have " + aliveAttributes.getHealth() + " health.");
     }
 }
