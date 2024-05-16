@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class AliveAttributes implements Serializable {
     private int health;
     private int damage;
+    private static final long serialVersionUID = 42L;
 
     /**
      * The constructor for alive attributes.

@@ -13,6 +13,7 @@ import java.io.Serializable;
 public abstract class NPC implements Inspectable, Interactable, Serializable {
     @Getter
     private String description;
+    private static final long serialVersionUID = 42L;
 
     public NPC(String description) {
         this.description = description;

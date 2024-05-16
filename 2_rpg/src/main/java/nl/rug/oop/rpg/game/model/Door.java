@@ -14,6 +14,8 @@ public abstract class Door implements Inspectable, Interactable, Serializable {
     @Getter
     private final String description;
     private final Room room1;
+    private static final long serialVersionUID = 42L;
+
     /**
      * Room2.
      */

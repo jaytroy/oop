@@ -21,6 +21,7 @@ public class Game implements Serializable, Decideable {
     private Player player;
     private List npcs;
     private IOUtils utils;
+    private static final long serialVersionUID = 42L;
 
     /**
      * The constructor for the game.

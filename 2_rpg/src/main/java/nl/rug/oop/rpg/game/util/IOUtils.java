@@ -13,6 +13,7 @@ import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
 public class IOUtils implements Serializable {
     private final String SAVE_FOLDER = "savedgames/";
     private final Pattern VALID_FILENAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+$");
+    private static final long serialVersionUID = 42L;
 
     /**
      * Creates a save folder if one does not exist.

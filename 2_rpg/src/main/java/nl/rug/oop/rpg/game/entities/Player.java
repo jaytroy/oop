@@ -17,6 +17,7 @@ public class Player implements Combatable, Serializable {
     private AliveAttributes aliveAttributes;
     @Setter
     private Room currentRoom;
+    private static final long serialVersionUID = 42L;
 
     /**
      * The constructor for the player class.
