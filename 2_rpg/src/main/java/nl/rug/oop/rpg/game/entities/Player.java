@@ -3,29 +3,32 @@ package nl.rug.oop.rpg.game.entities;
 import lombok.Getter;
 import lombok.Setter;
 import nl.rug.oop.rpg.game.AliveAttributes;
-import nl.rug.oop.rpg.game.entities.npc.Enemy;
 import nl.rug.oop.rpg.game.model.Room;
 
 import java.io.Serializable;
 
 /**
- * player class which we play the game through.
+ * The player class.
  */
 @Getter
-public class Player implements Combatable<Enemy>, Serializable {
+public class Player implements Combatable, Serializable {
     private final String name;
+    @Getter
+    private final String description;
     private AliveAttributes aliveAttributes;
     @Setter
     private Room currentRoom;
 
     /**
-     * constructor for the player class.
-     * @param name name of the player.
-     * @param health current health of the player.
-     * @param damage damage the player cna inflict.
+     * The constructor for the player class.
+     * @param name The name of the player.
+     * @param description The description of the player.
+     * @param health The health of the player.
+     * @param damage The damage the player can inflict.
      */
-    public Player(String name, int health, int damage) {
+    public Player(String name, String description, int health, int damage) {
         this.name = name;
+        this.description = description;
         this.aliveAttributes = new AliveAttributes(health, damage);
     }
 
@@ -34,13 +37,10 @@ public class Player implements Combatable<Enemy>, Serializable {
         aliveAttributes.takeDamage(damage);
     }
 
-    /**
-     * handling combat between two combatable enemies.
-     * @param e the attacking enemy.
-     * @return boolean signifying if the player is dead or not after the attack.
-     */
-    public boolean attack(Enemy e) {
-        System.out.println(e.getDescription() + " attacks you! They deal " + e.getAliveAttributes().getDamage() + " damage.");
+    @Override
+    public boolean attack(Combatable e) {
+        System.out.println(e.getDescription() + " attacks you! They deal " +
+                e.getAliveAttributes().getDamage() + " damage.");
         this.takeDamage(e.getAliveAttributes().getDamage());
         if (aliveAttributes.getHealth() <= 0) {
             System.out.println("You've been killed. Terribly sad.");

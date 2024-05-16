@@ -1,14 +1,17 @@
 package nl.rug.oop.rpg.game.entities;
 
+import nl.rug.oop.rpg.game.AliveAttributes;
+
 /**
- * interface assigned to entities that can recieve (have health) and deal damage.
- * @param <T> The other combatable target of the attacker.
+ * Interface assigned to entities that can receive and deal damage.
  */
-public interface Combatable<T> {
+public interface Combatable {
 
     void takeDamage(int damage);
 
-    boolean attack(T target);
+    boolean attack(Combatable target);
 
-    void getAliveAttributes();
+    AliveAttributes getAliveAttributes();
+
+    String getDescription();
 }

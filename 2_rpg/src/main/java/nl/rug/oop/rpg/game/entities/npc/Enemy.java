@@ -8,18 +8,18 @@ import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
 /**
- * class defining a NPC that is capable of dealing damage to the player.
+ * An NPC that damages the player.
  */
-public class Enemy extends NPC implements Combatable<Player>, Decideable {
+public class Enemy extends NPC implements Combatable, Decideable {
     @Getter
     private AliveAttributes aliveAttributes;
 
     /**
-     * Enemy class for NPCs one can engage in combat with.
+     * The constructor for the enemy.
      *
-     * @param description description of the enemy.
-     * @param health      health of the enemy.
-     * @param damage      damage the enemy can deal.
+     * @param description The description of the enemy.
+     * @param health      The health of the enemy.
+     * @param damage      The damage the enemy can deal.
      */
     public Enemy(String description, int health, int damage) {
         super(description);
@@ -56,8 +56,12 @@ public class Enemy extends NPC implements Combatable<Player>, Decideable {
 
         switch (choice) {
             case 0 -> talk();
-            case 1 -> {return attack(p);}
-            case 2 -> {return true;}
+            case 1 -> {
+                return attack(p);
+            }
+            case 2 -> {
+                return true;
+            }
             default -> System.out.println(choice + " is not one of the choices");
         }
         return false;
@@ -69,12 +73,13 @@ public class Enemy extends NPC implements Combatable<Player>, Decideable {
      * @param p player attacking the enemy.
      * @return boolean indicating if the enemy is still alive or not after the attack.
      */
-    public boolean attack(Player p) {
+    public boolean attack(Combatable p) {
         if (this.aliveAttributes.getHealth() <= 0) {
             System.out.println("You attack the corpse of " + super.getDescription() + " They stay dead.");
             return false;
         }
-        System.out.println("You attack " + super.getDescription() + "! You deal " + p.getAliveAttributes().getDamage() + " damage.");
+        System.out.println("You attack " + super.getDescription() + "! You deal " +
+                p.getAliveAttributes().getDamage() + " damage.");
 
         this.takeDamage(p.getAliveAttributes().getDamage());
         if (this.aliveAttributes.getHealth() <= 0) {

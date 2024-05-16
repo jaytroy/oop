@@ -3,9 +3,16 @@ package nl.rug.oop.rpg.game.util;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * A scanner utility class, used to take in input.
+ */
 public class Scan {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Scans an int from the console.
+     * @return The scanner integer.
+     */
     public static int nextInt() {
         while (true) {
             try {
@@ -17,6 +24,10 @@ public class Scan {
         }
     }
 
+    /**
+     * Scans a string from the console.
+     * @return The scanned line.
+     */
     public static String nextLine() {
         while (true) {
             try {

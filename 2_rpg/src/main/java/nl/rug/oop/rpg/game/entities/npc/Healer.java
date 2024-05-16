@@ -4,15 +4,23 @@ import nl.rug.oop.rpg.game.Decideable;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
+/**
+ * An NPC that heals the player.
+ */
 public class Healer extends NPC implements Decideable {
     private int experience;
     private final int MAX_XP = 10;
 
+    /**
+     * The constructor for the healer.
+     *
+     * @param description The description of the NPC.
+     * @param experience  The amount of experience that the healer has.
+     */
     public Healer(String description, int experience) {
         super(description);
         this.experience = Math.max(experience, MAX_XP);
     }
-
 
     @Override
     public void interact(Player p) {
@@ -39,18 +47,23 @@ public class Healer extends NPC implements Decideable {
         int choice = Scan.nextInt();
 
         switch (choice) {
-            case 0 -> {return heal(p);}
-            case 1 -> {return true;}
+            case 0 -> {
+                return heal(p);
+            }
+            case 1 -> {
+                return true;
+            }
             default -> System.out.println(choice + " is not one of the choices");
         }
         return false;
     }
 
     /**
-     * method in which the healer restores the player's health of they have less than 6.
-     * increasing their experience every time they do so
+     * Method in which the healer restores the player's health of they have less than 6 HP,
+     * increasing its experience every time it does so.
      *
-     * @param p the player receiving the lecture.
+     * @param p The player getting healed.
+     * @return False if player gets healed, true otherwise.
      */
     public boolean heal(Player p) {
         if (p.getAliveAttributes().getHealth() >= 5) {
@@ -67,8 +80,11 @@ public class Healer extends NPC implements Decideable {
         }
     }
 
-    public void increaseExperience() {
-        if(experience < MAX_XP) {
+    /**
+     * Increases the healers experience.
+     */
+    private void increaseExperience() {
+        if (experience < MAX_XP) {
             experience += 1;
         }
     }

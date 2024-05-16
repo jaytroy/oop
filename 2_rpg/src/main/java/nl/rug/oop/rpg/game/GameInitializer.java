@@ -7,12 +7,18 @@ import nl.rug.oop.rpg.game.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Initializes a game.
+ */
 public class GameInitializer{
+    /**
+     * The constructor which initializes the game.
+     * @return The initalized game.
+     */
     public Game initializeGame() {
         Room room1 = new Room("A large lecture hall");
         Room room2 = new Room("A long hallway");
         Room room3 = new Room("A broom closet");
-
         Door door1 = new DamageDoor("A mysterious door with a huge crossbow attached to it", room1, room2, 1);
         Door door2 = new NormalDoor("A door with a small window", room1, room3);
         Door door3 = new LockedDoor("A door with intricate lock mechanism around it", room2, room3);
@@ -36,7 +42,6 @@ public class GameInitializer{
         room3.addNPC(npc2);
         room3.addNPC(npc5);
         room1.addNPC(npc4);
-
         List<NPC> npcs = new ArrayList<>();
         npcs.add(npc1);
         npcs.add(npc2);
@@ -48,7 +53,6 @@ public class GameInitializer{
         Player player = game.getPlayer();
 
         player.setCurrentRoom(room1);
-
         return game;
     }
 }
