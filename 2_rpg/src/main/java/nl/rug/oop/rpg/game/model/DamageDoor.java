@@ -23,7 +23,8 @@ public class DamageDoor extends Door {
     @Override
     public void interact(Player p) {
         p.takeDamage(damage);
-        System.out.println("The crossbow shoots at you! You take " + damage + " damage");
+        System.out.println("The crossbow shoots at you! You take " + damage + " damage.\n" +
+                "You have " + p.getAliveAttributes().getHealth() + "health");
         p.setCurrentRoom(super.room2);
     }
 }

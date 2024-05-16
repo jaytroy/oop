@@ -2,7 +2,6 @@ package nl.rug.oop.rpg.game.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.rug.oop.rpg.game.AliveAttributes;
 import nl.rug.oop.rpg.game.model.Room;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package nl.rug.oop.rpg.game.entities.npc;
 
 import lombok.Getter;
-import nl.rug.oop.rpg.game.AliveAttributes;
 import nl.rug.oop.rpg.game.Decideable;
+import nl.rug.oop.rpg.game.entities.AliveAttributes;
 import nl.rug.oop.rpg.game.entities.Combatable;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
@@ -75,7 +75,7 @@ public class Enemy extends NPC implements Combatable, Decideable {
      */
     public boolean attack(Combatable p) {
         if (this.aliveAttributes.getHealth() <= 0) {
-            System.out.println("You attack the corpse of " + super.getDescription() + " They stay dead.");
+            System.out.println("You attack the corpse of " + super.getDescription() + ". They stay dead.");
             return false;
         }
         System.out.println("You attack " + super.getDescription() + "! You deal " +

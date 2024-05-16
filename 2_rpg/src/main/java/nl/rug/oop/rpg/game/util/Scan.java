@@ -31,6 +31,7 @@ public class Scan {
     public static String nextLine() {
         while (true) {
             try {
+                scanner.nextLine();
                 return scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input.");

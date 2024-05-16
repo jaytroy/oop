@@ -1,7 +1,5 @@
 package nl.rug.oop.rpg.game.entities;
 
-import nl.rug.oop.rpg.game.AliveAttributes;
-
 /**
  * Interface assigned to entities that can receive and deal damage.
  */

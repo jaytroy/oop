@@ -49,7 +49,7 @@ public class GameInitializer{
         npcs.add(npc4);
         npcs.add(npc5);
 
-        Game game = new Game(new Player("Jay","The strongest, coolest, most educated person", 10, 5), npcs);
+        Game game = new Game(new Player("Jay","The strongest, coolest, most educated person", 10, 500), npcs);
         Player player = game.getPlayer();
 
         player.setCurrentRoom(room1);

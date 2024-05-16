@@ -10,7 +10,7 @@ import static nl.rug.oop.rpg.game.util.SaveType.QUICKSAVE;
 /**
  * A utility class for saving and loading.
  */
-public class IOUtils {
+public class IOUtils implements Serializable {
     private final String SAVE_FOLDER = "savedgames/";
     private final Pattern VALID_FILENAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_-]+$");
 

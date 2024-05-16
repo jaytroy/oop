@@ -101,7 +101,7 @@ public class Room implements Inspectable, Serializable {
         if (choice == -1) {
             System.out.println("You do not interact with any npcs.");
             return;
-        } else if (choice <= npcs.size()) {
+        } else if (choice < npcs.size()) {
             npcs.get(choice).interact(p);
         } else {
             System.out.println(choice + " is not one of the choices");

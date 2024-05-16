@@ -1,4 +1,4 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.game.entities;
 
 import lombok.Getter;
 
