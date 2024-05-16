@@ -2,11 +2,13 @@ package nl.rug.oop.rpg.game;
 
 import lombok.Getter;
 
+import java.io.Serializable;
+
 /**
  * Stores attributes specific to "alive" classes.
  */
 @Getter
-public class AliveAttributes {
+public class AliveAttributes implements Serializable {
     private int health;
     private int damage;
 

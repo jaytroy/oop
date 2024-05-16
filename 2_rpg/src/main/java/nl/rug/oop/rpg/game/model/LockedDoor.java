@@ -4,7 +4,7 @@ import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.util.Scan;
 
 /**
- * A locked door.
+ * A locked door that requires a password.
  */
 public class LockedDoor extends Door {
     private static final String PASSWORD = "42";

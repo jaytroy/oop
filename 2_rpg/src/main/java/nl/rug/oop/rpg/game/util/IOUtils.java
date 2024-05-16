@@ -19,10 +19,12 @@ public class IOUtils {
      */
     public void createSaveFolderIfNotExists() {
         File folder = new File(SAVE_FOLDER);
-        if (folder.exists() && !folder.mkdirs()) {
-            System.out.println("Save folder created successfully.");
-        } else {
-            System.out.println("Failed to create save folder.");
+        if (!folder.exists()) {
+            if (folder.mkdirs()) {
+                System.out.println("Save folder created successfully.");
+            } else {
+                System.out.println("Failed to create save folder.");
+            }
         }
     }
 

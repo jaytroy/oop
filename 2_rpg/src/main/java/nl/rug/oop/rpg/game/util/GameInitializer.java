@@ -1,5 +1,6 @@
-package nl.rug.oop.rpg.game;
+package nl.rug.oop.rpg.game.util;
 
+import nl.rug.oop.rpg.game.Game;
 import nl.rug.oop.rpg.game.entities.Player;
 import nl.rug.oop.rpg.game.entities.npc.*;
 import nl.rug.oop.rpg.game.model.*;
@@ -22,7 +23,6 @@ public class GameInitializer{
         Door door1 = new DamageDoor("A mysterious door with a huge crossbow attached to it", room1, room2, 1);
         Door door2 = new NormalDoor("A door with a small window", room1, room3);
         Door door3 = new LockedDoor("A door with intricate lock mechanism around it", room2, room3);
-        Door door4 = new EvilDoor("A door covered with flesh.", room1,room2, 8, 2);
 
         room1.addDoor(door1);
         room1.addDoor(door2);
@@ -49,7 +49,7 @@ public class GameInitializer{
         npcs.add(npc4);
         npcs.add(npc5);
 
-        Game game = new Game(new Player("JaPan", 10, 5), npcs);
+        Game game = new Game(new Player("Jay","The strongest, coolest, most educated person", 10, 5), npcs);
         Player player = game.getPlayer();
 
         player.setCurrentRoom(room1);

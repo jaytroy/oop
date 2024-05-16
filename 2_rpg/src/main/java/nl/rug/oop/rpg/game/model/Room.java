@@ -72,7 +72,7 @@ public class Room implements Inspectable, Serializable {
         if (choice == -1) {
             System.out.println("You stay here.");
             return;
-        } else if (choice <= doors.size()) {
+        } else if (choice < doors.size()) {
             doors.get(choice).interact(p);
         } else {
             System.out.println(choice + " is not one of the choices");

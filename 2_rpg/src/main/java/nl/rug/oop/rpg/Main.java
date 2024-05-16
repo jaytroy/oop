@@ -1,6 +1,6 @@
 package nl.rug.oop.rpg;
 
-import nl.rug.oop.rpg.game.GameInitializer;
+import nl.rug.oop.rpg.game.util.GameInitializer;
 import nl.rug.oop.rpg.game.Game;
 
 /**
