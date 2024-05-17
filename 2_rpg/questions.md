@@ -104,5 +104,19 @@ Explain the roles of this design pattern and how `FileOutputStream` and `ObjectO
 ___
 
 Answer:
+The `FileOutputStream` and `ObjectOutputStream` classes in Java implement the Decorator Pattern.
+This design pattern is used to dynamically add behavior to objects without modifying their structure. 
+Here `FileOutputStream` is the class that provides basic functionality to write raw bytes to a file. 
+`ObjectOutputStream` is used to write objects to an output stream, including a `FileOutputStream`.
+
+The Decorator Pattern involves components and decorators.
+The `OutputStream` abstract class serves as the component interface, defining the basic operations for writing data.
+`FileOutputStream` is a concrete component that implements this interface to write data to files. 
+`ObjectOutputStream` is a concrete decorator that extends `OutputStream` and adds the ability to serialize objects and write them to any `OutputStream` instance, such as a `FileOutputStream`.
+
+By using the Decorator Pattern, `ObjectOutputStream` can extend the capabilities of `FileOutputStream` without altering its code.
+This pattern provides flexibility by allowing additional behaviors to be added to objects at runtime, ensuring that each class adheres to the single responsibility principle.
+The client code remains unaware of the specific decorators used, interacting only with the component interface, which promotes transparency and ease of maintenance.
+
 
 ___
