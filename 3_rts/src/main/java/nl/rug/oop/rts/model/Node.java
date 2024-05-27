@@ -1,40 +1,70 @@
 package nl.rug.oop.rts.model;
 
-import nl.rug.oop.rts.model.Edge;
+import lombok.Getter;
+import lombok.Setter;
+import nl.rug.oop.rts.model.events.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handles the nodes we need.
+ */
 public class Node {
+    @Getter
     private int id;
+    @Getter
+    @Setter
     private String name;
+    @Getter
     private List<Edge> edges;
+    @Getter
+    @Setter
+    private int x;
+    @Getter
+    @Setter
+    private int y;
+    @Getter
+    @Setter
+    private int width;
+    @Getter
+    @Setter
+    private int height;
+    @Setter
+    private boolean selected;
+    @Getter
+    @Setter
+    private List<Army> armies;
+    @Getter
+    @Setter
+    private List<Event> events;
+    @Getter
+    @Setter
+    private Event event;
+    @Getter
+    @Setter
+    private String textureName;
 
-    public Node(int id, String name) {
+
+    /**
+     * This is the constructor of the nodes.
+     * @param id the id of the node
+     * @param name the name of the node
+     * @param x x-axis coordinates of the node
+     * @param y y-axis coordinates of the node
+     */
+    public Node(int id, String name, int x, int y) {
         this.id = id;
         this.name = name;
+        this.x = x;
+        this.y = y;
         this.edges = new ArrayList<>();
-    }
-
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Edge> getEdges() {
-        return edges;
+        this.armies = new ArrayList<>();
+        this.events = new ArrayList<>();
+        this.selected = false;
+        this.width = 40;
+        this.height = 40;
+        this.event = null;
     }
 
     public void addEdge(Edge edge) {
@@ -43,5 +73,40 @@ public class Node {
 
     public void removeEdge(Edge edge) {
         edges.remove(edge);
+    }
+
+    public void addArmy(Army army) {
+        armies.add(army);
+    }
+
+    public void removeArmy(Army givenArmy) {
+        armies.removeIf(army-> army.getId() == givenArmy.getId());
+    }
+
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public void removeEvent(Event givenEvent) {
+        armies.removeIf(army-> army.getId() == givenEvent.getId());
+    }
+
+
+    public boolean contains(int x, int y) {
+        return x >= this.x && x <= this.x + this.width &&
+                y >= this.y && y <= this.y + this.height;
+    }
+    public boolean isHasArmy(){
+        if(armies.isEmpty()) {
+            return false;
+        } else{
+            return true;
+        }
+
+    }
+
+
+    public boolean isSelected() {
+        return selected;
     }
 }
