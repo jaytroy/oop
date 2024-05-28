@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class HiddenWeaponryEvent extends Event {
     public HiddenWeaponryEvent(int nextid, String description) {
-        super(nextid, "Hidden Weaponry Event: Units receive a boost of damage");
+        super(nextid, "Hidden Weaponry");
     }
 
     @Override

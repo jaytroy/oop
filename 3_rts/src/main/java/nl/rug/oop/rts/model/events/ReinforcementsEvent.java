@@ -11,7 +11,7 @@ import java.util.List;
 public class ReinforcementsEvent extends Event {
 
     public ReinforcementsEvent(int nextid, String description) {
-        super(nextid, "Reinforcements, new units join the armies");
+        super(nextid, "Reinforcements");
     }
 
     @Override

@@ -90,6 +90,7 @@ public class Panel extends JPanel implements GraphObserver {
         add(parentPanel);
     }
 
+
     /**
      * This updates 2 labels for nodes and edges that show us which ones are selected at the moment.
      */
@@ -99,42 +100,48 @@ public class Panel extends JPanel implements GraphObserver {
         if (selectedNode != null) {
             selectedNodeLabel.setText("Selected Node: " + selectedNode.getName());
 
-            StringBuilder armiesInfo = new StringBuilder();
-            StringBuilder eventsInfo = new StringBuilder();
+            StringBuilder infoBuilder = new StringBuilder();
             List<Army> armies = selectedNode.getArmies();
-            for (Army army : armies) {
-                armiesInfo.append("Faction: ").append(army.getFaction()).append(", ");
-                armiesInfo.append("Units: ").append(army.getUnits().size()).append("\n");
-            }
-
-            if (armiesInfo.length() > 0) {
-                armiesInfo.setLength(armiesInfo.length() - 1);
+            if (!armies.isEmpty()) {
+                infoBuilder.append("Armies:\n");
+                for (Army army : armies) {
+                    infoBuilder.append("- Faction: ").append(army.getFaction()).append(", Units: ").append(army.getUnits().size()).append("\n");
+                }
             } else {
-                armiesInfo.append("No armies\n");
+                infoBuilder.append("No armies\n");
             }
 
             List<Event> events = selectedNode.getEvents();
-            for (Event event : events) {
-                eventsInfo.append("\nEvents: ").append(event.getDescription()).append(", ");
-            }
-
-            if (eventsInfo.length() > 0) {
-                eventsInfo.setLength(eventsInfo.length() - 1);
+            if (!events.isEmpty()) {
+                infoBuilder.append("\nEvents:\n");
+                for (Event event : events) {
+                    infoBuilder.append("- ").append(event.getDescription()).append("\n");
+                }
             } else {
-                armiesInfo.append("\nNo events.");
+                infoBuilder.append("\nNo events.\n");
             }
 
-            informationJTextArea.setText(armiesInfo.toString() + eventsInfo.toString());
+            informationJTextArea.setText(infoBuilder.toString());
+        } else if (selectedEdge != null) {
+            selectedEdgeLabel.setText("Selected Edge: " + selectedEdge.getName());
+
+            StringBuilder infoBuilder = new StringBuilder();
+            List<Event> events = selectedEdge.getEvents();
+            if (!events.isEmpty()) {
+                infoBuilder.append("Events:\n");
+                for (Event event : events) {
+                    infoBuilder.append("- ").append(event.getDescription()).append("\n");
+                }
+            } else {
+                infoBuilder.append("No events.\n");
+            }
+
+            informationJTextArea.setText(infoBuilder.toString());
         } else {
             selectedNodeLabel.setText("Selected Node: None");
-        }
-
-        if (selectedEdge != null) {
-            selectedEdgeLabel.setText("Selected Edge: " + selectedEdge.getName());
-        } else {
             selectedEdgeLabel.setText("Selected Edge: None");
+            informationJTextArea.setText("");
         }
-
     }
 
     @Override

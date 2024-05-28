@@ -14,7 +14,7 @@ import java.util.Random;
 public class NaturalDisasterEvent extends Event {
 
     public NaturalDisasterEvent(int nextid, String description) {
-        super(nextid, "Natural disaster: Units ide");
+        super(nextid, "Natural Disaster");
     }
 
     @Override

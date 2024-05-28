@@ -11,7 +11,7 @@ import java.util.List;
 public class TrainingMontage extends Event {
 
     public TrainingMontage(int nextid, String description) {
-        super(nextid, "Training Montage, the units get stronger.");
+        super(nextid, "Training Montage");
     }
 
     @Override

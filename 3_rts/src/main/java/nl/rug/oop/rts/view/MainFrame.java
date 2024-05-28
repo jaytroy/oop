@@ -231,8 +231,8 @@ public class MainFrame extends JFrame {
         removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(graph, graphPanel));
         addArmyItem.addActionListener(e -> buttonActions.addArmyToSelectedNode(graph, graphPanel, this));
         removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(graph, graphPanel, this));
-        addEventButton.addActionListener(e -> buttonActions.addEventToSelectedNode(graph, graphPanel, this));
-        removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedNode(graph, graphPanel, this));
+        addEventButton.addActionListener(e -> buttonActions.addEventToSelectedElement(graph, graphPanel, this));
+        removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedElement(graph, graphPanel, this));
         sim1Step.addActionListener(e -> buttonActions.simulation1Step(graph, graphPanel));
     }
 

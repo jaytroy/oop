@@ -75,33 +75,32 @@ public class Simulation {
 
 
     private static void eventsOnEdges(List<Edge> edges) {
+        Random random = new Random();
         for (Edge edge : edges) {
             if (edge.getEvents() != null && random.nextDouble() < CHANCE) {
                 List<Event> events = edge.getEvents();
-                if (!events.isEmpty()) {
-                    Event randomEvent = events.get(random.nextInt(events.size()));
-                    List<Army> postEventArmies = new ArrayList<>();
-
+                Event randomEvent = events.get(random.nextInt(events.size()));
+                if (randomEvent != null) {
                     for (Army army : edge.getArmies()) {
-                        Army postEventArmy = randomEvent.startEvent(army);
-                        postEventArmies.add(postEventArmy);
+                        if (army != null) {
+                            randomEvent.startEvent(army);
+                            System.out.println("Event started for army: " + army);
+                        }
                     }
-                    edge.setArmies(postEventArmies);
                 }
             }
         }
     }
 
+
+
     private static void eventsOnNodes(List<Node> nodes) {
         Random random = new Random();
-        System.out.println("eventsOnNodes method called.");
         for (Node node : nodes) {
             if (node.getEvents() != null && random.nextDouble() < CHANCE) {
-                System.out.println("Event present on node and chance is met.");
                 List<Event> events = node.getEvents();
                 Event randomEvent = events.get(random.nextInt(events.size()));
                 if (randomEvent != null) {
-                    System.out.println("Random event selected: " + randomEvent);
                     for (Army army : new ArrayList<>(node.getArmies())) {
                         randomEvent.startEvent(army);
                         System.out.println("Event started for army: " + army);
