@@ -15,7 +15,7 @@ public class NodeSelectionerListener extends MouseAdapter {
     private Edge selectedEdge;
     private int initialX;
     private int initialY;
-    private static final int NODE_CLICK_THRESHOLD = 10; // Define NODE_CLICK_THRESHOLD here
+    private static final int NODE_CLICK_THRESHOLD = 10;
     private static final int EDGE_CLICK_THRESHOLD = 10;
 
     public NodeSelectionerListener(Graph graph, Panel panel) {
@@ -31,7 +31,6 @@ public class NodeSelectionerListener extends MouseAdapter {
         selectedNode = null;
         selectedEdge = null;
 
-        // Check if the click is near any nodes
         for (Node node : graph.getNodes()) {
             if (isPointNearNode(mouseX, mouseY, node)) {
                 selectedNode = node;
@@ -39,7 +38,6 @@ public class NodeSelectionerListener extends MouseAdapter {
             }
         }
 
-        // Check if the click is near any edges
         if (selectedNode == null) {
             for (Edge edge : graph.getEdges()) {
                 if (isPointNearEdge(mouseX, mouseY, edge)) {
@@ -67,6 +65,7 @@ public class NodeSelectionerListener extends MouseAdapter {
         int y2 = edge.getNode2().getY();
 
         double distance = Utils.pointToSegmentDistance(x1, y1, x2, y2, x, y);
+
         return distance <= EDGE_CLICK_THRESHOLD;
     }
 

@@ -40,9 +40,6 @@ public class Node {
     private List<Event> events;
     @Getter
     @Setter
-    private Event event;
-    @Getter
-    @Setter
     private String textureName;
 
 
@@ -64,7 +61,6 @@ public class Node {
         this.selected = false;
         this.width = 40;
         this.height = 40;
-        this.event = null;
     }
 
     public void addEdge(Edge edge) {
@@ -88,7 +84,7 @@ public class Node {
     }
 
     public void removeEvent(Event givenEvent) {
-        armies.removeIf(army-> army.getId() == givenEvent.getId());
+        events.removeIf(event-> event.getId() == givenEvent.getId());
     }
 
 
@@ -108,5 +104,14 @@ public class Node {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public boolean isConnected(Node node) {
+        for (Edge edge : edges) {
+            if (edge.getNode1() == node || edge.getNode2() == node) {
+                return true;
+            }
+        }
+        return false;
     }
 }

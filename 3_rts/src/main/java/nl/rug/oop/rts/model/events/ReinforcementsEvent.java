@@ -9,13 +9,16 @@ import java.util.List;
  * This class handles a special event, when an army gets a random number of bonus units.
  */
 public class ReinforcementsEvent extends Event {
-    public ReinforcementsEvent(String description, int nextid) {
-        super(description, nextid);
+
+    public ReinforcementsEvent(int nextid, String description) {
+        super(nextid, "Reinforcements, new units join the armies");
     }
 
     @Override
-    public void startEvent(Army army) {
+    public Army startEvent(Army army) {
         List<Unit> reinforcements = army.createRandomUnits(army.getFaction());
         army.getUnits().addAll(reinforcements);
+        return army;
     }
 }
+

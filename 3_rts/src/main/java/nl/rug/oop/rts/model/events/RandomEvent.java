@@ -11,18 +11,18 @@ public class RandomEvent {
      *
      * @return the selected event.
      */
-    public static Event startRandomEvent(int nextid) {
+    public static Event getRandomEvent(int nextid) {
         Random random = new Random();
         int eventType = random.nextInt(4);
         switch (eventType) {
             case 0:
-                return new ReinforcementsEvent("Reinforcements event", nextid);
+                return new ReinforcementsEvent( nextid, "");
             case 1:
-                return new NaturalDisasterEvent("Natural disaster event", nextid);
+                return new NaturalDisasterEvent( nextid, "");
             case 2:
-                return new HiddenWeaponryEvent("hidden weaponry event", nextid);
+                return new HiddenWeaponryEvent( nextid, "");
             case 3:
-                return new TrainingMontage("training montage event", nextid);
+                return new TrainingMontage(nextid, "");
             default:
                 return null;
         }

@@ -1,10 +1,6 @@
 package nl.rug.oop.rts.controller;
 
 public class Utils {
-    public static boolean isPointNearLine(int x1, int y1, int x2, int y2, int px, int py, int threshold) {
-        double distance = pointToSegmentDistance(x1, y1, x2, y2, px, py);
-        return distance <= threshold;
-    }
 
     public static double pointToSegmentDistance(int x1, int y1, int x2, int y2, int px, int py) {
         double lineLengthSquared = Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2);

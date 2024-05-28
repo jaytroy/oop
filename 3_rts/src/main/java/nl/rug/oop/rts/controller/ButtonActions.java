@@ -1,11 +1,13 @@
-package nl.rug.oop.rts.util.controller;
+package nl.rug.oop.rts.controller;
 
 import nl.rug.oop.rts.model.*;
-import nl.rug.oop.rts.model.events.RandomEvent;
+import nl.rug.oop.rts.model.events.*;
 import nl.rug.oop.rts.view.MainFrame;
 import nl.rug.oop.rts.view.Panel;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the class that handles what every button does.
@@ -62,7 +64,7 @@ public class ButtonActions {
                         " it to be attached to:");
                 Node node2 = graph.getNodeByName(nodeName2);
 
-                if (node2 != null) {
+                if (node2 != null && !selectedNode.isConnected(node2)) {
                     Edge edge = new Edge(graph.getNextEdgeId(), edgeName, selectedNode, node2);
                     graph.addEdge(edge);
 
@@ -108,16 +110,12 @@ public class ButtonActions {
                     factions[0]
             );
             if (selectedFaction != null) {
-                // Generate a random number of units between 10 and 50
                 int units = (int) (Math.random() * 41) + 10;
 
-                // Generate random unit names from the selected faction
                 String[] unitNames = generateRandomUnitNames(selectedFaction, units);
-                // Create and add the army to the selected node
                 Army army = new Army(nextArmyID, selectedFaction);
                 selectedNode.addArmy(army);
                 nextArmyID++;
-                // Repaint the panel
                 panel.repaint();
             }
         }
@@ -138,34 +136,134 @@ public class ButtonActions {
         return unitNames;
     }
 
-//    public void removeArmyFromSelectedNode(Graph graph, Panel panel) {
-//        Node selectedNode = graph.getSelectedNode();
-//        if (selectedNode != null) {
-//            Army selectedArmy = selectedNode.getSelectedArmy();
-//            if (selectedArmy != null) {
-//                selectedNode.removeArmy(selectedArmy);
-//                panel.repaint();
-//            }
-//        }
-//    }
-
-    public void addEventToSelectedNode(Graph graph) {
+    /**
+     * This function handles the removal of an army from the selected node.
+     *
+     * @param graph     the graph in which we have the node
+     * @param panel     the panel that we have to repaint
+     * @param mainFrame the frame where this happens
+     */
+    public void removeArmyFromSelectedNode(Graph graph, Panel panel, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
-        if (selectedNode != null) {
-            selectedNode.addEvent(RandomEvent.startRandomEvent(nextEventID));
-            nextEventID++;
-            System.out.println("Event added to the selected node.");
+        if (selectedNode != null && selectedNode.isHasArmy()) {
+            List<Army> armies = selectedNode.getArmies();
+            List<String> armyOptions = new ArrayList<>();
+            for (Army army : armies) {
+                armyOptions.add(army.getFaction().toString() + " - Units: " + army.getUnits().size());
+            }
+            String[] armyOptionsArray = armyOptions.toArray(new String[0]);
+            String selectedArmyString = (String) JOptionPane.showInputDialog(
+                    mainFrame,
+                    "Select an army to remove:",
+                    "Remove Army",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    armyOptionsArray,
+                    armyOptionsArray[0]
+            );
+            if (selectedArmyString != null) {
+                String[] parts = selectedArmyString.split(" - Units: ");
+                String factionString = parts[0];
+                Faction faction = Faction.valueOf(factionString);
+                int unitCount = Integer.parseInt(parts[1]);
+
+                Army selectedArmy = null;
+                for (Army army : armies) {
+                    if (army.getFaction() == faction && army.getUnits().size() == unitCount) {
+                        selectedArmy = army;
+                        break;
+                    }
+                }
+
+                if (selectedArmy != null) {
+                    selectedNode.removeArmy(selectedArmy);
+                    panel.repaint();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(mainFrame, "No armies to remove from the selected node.");
         }
     }
 
-    public void removeEventFromSelectedNode(Graph graph) {
+    /**
+     * This function handles adding an event to the selected node.
+     *
+     * @param graph      the graph in which we have the node
+     * @param panel
+     * @param mainFrame  the frame where this happens
+     */
+    public void addEventToSelectedNode(Graph graph, Panel panel, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
-            selectedNode.getEvents().clear();
-            JOptionPane.showMessageDialog(null, "All events have been removed from the node.");
+            EventTypes[] eventTypes = EventTypes.values();
+            EventTypes selectedEventType = (EventTypes) JOptionPane.showInputDialog(
+                    mainFrame,
+                    "Select an event type:",
+                    "Add Event",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    eventTypes,
+                    eventTypes[0]
+            );
+            if (selectedEventType != null) {
+                switch (selectedEventType) {
+                    case HiddenWeaponryEvent:
+                        selectedNode.addEvent(new HiddenWeaponryEvent( nextEventID, ""));
+                        break;
+                    case NaturalDisasterEvent:
+                        selectedNode.addEvent(new NaturalDisasterEvent(nextEventID, ""));
+                        break;
+                    case RandomEvent:
+                        selectedNode.addEvent(RandomEvent.getRandomEvent(nextEventID));
+                        break;
+                    case ReinforcementsEvent:
+                        selectedNode.addEvent(new ReinforcementsEvent(nextEventID, ""));
+                        break;
+                    case TrainingMontage:
+                        selectedNode.addEvent(new TrainingMontage(nextEventID, ""));
+                        break;
+                }
+                nextEventID++;
+                panel.repaint();
+                System.out.println("Event added to the selected node.");
+            }
         }
     }
+    public void removeEventFromSelectedNode(Graph graph, Panel graphPanel, MainFrame mainFrame) {
+        Node selectedNode = graph.getSelectedNode();
+        if (selectedNode != null && !selectedNode.getEvents().isEmpty()) {
+            List<Event> events = selectedNode.getEvents();
+            List<String> eventOptions = new ArrayList<>();
+            for (Event event : events) {
+                eventOptions.add(event.toStringWithID());
+            }
+            String[] eventOptionsArray = eventOptions.toArray(new String[0]);
+            String selectedEventString = (String) JOptionPane.showInputDialog(
+                    mainFrame,
+                    "Select an event to remove:",
+                    "Remove Event",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    eventOptionsArray,
+                    eventOptionsArray[0]
+            );
+            if (selectedEventString != null) {
+                Event selectedEvent = null;
+                for (Event event : events) {
+                    if (event.toStringWithID().equals(selectedEventString)) {
+                        selectedEvent = event;
+                        break;
+                    }
+                }
 
+                if (selectedEvent != null) {
+                    selectedNode.removeEvent(selectedEvent);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(mainFrame, "No events to remove from the selected node.");
+        }
+    }
 
 
 
@@ -176,7 +274,6 @@ public class ButtonActions {
      */
     public void simulation1Step(Graph graph, Panel panel) {
         Simulation sim = new Simulation();
-        sim.firstFight(graph);
         sim.simulateSingleStep(graph);
         panel.repaint();
     }

@@ -53,15 +53,19 @@ public class Edge {
      */
     public Node getOtherNode(Node givenNode) {
         if (givenNode.getId() == Node2.getId()) {
-            return Node2;
-        } else if (givenNode.getId() == Node1.getId()) {
             return Node1;
+        } else if (givenNode.getId() == Node1.getId()) {
+            return Node2;
         } else {
             System.out.println("Node" + givenNode.getName() + "(Node id = " + givenNode.getId() + ") is not connected" +
                     " with any other Nodes");
             return null;
         }
 
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 
     public boolean contains(int x, int y, int range) {

@@ -78,7 +78,7 @@ public class Panel extends JPanel implements GraphObserver {
         informationJTextArea.setWrapStyleWord(true);
 
         JScrollPane scrollPane = new JScrollPane(informationJTextArea);
-        scrollPane.setPreferredSize(new Dimension(200, 120)); // Adjust the dimensions as needed
+        scrollPane.setPreferredSize(new Dimension(200, 120));
 
         informationPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -95,6 +95,7 @@ public class Panel extends JPanel implements GraphObserver {
      */
     public void updateMenus() {
         Node selectedNode = graph.getSelectedNode();
+        Edge selectedEdge = graph.getSelectedEdge();
         if (selectedNode != null) {
             selectedNodeLabel.setText("Selected Node: " + selectedNode.getName());
 
@@ -107,26 +108,33 @@ public class Panel extends JPanel implements GraphObserver {
             }
 
             if (armiesInfo.length() > 0) {
-                armiesInfo.setLength(armiesInfo.length() - 1); // Remove the last newline character
+                armiesInfo.setLength(armiesInfo.length() - 1);
             } else {
-                armiesInfo.append("No armies");
+                armiesInfo.append("No armies\n");
             }
 
             List<Event> events = selectedNode.getEvents();
             for (Event event : events) {
-                eventsInfo.append("Events: ").append(event.getDescription()).append(", ");
+                eventsInfo.append("\nEvents: ").append(event.getDescription()).append(", ");
             }
 
             if (eventsInfo.length() > 0) {
-                eventsInfo.setLength(eventsInfo.length() - 1); // Remove the last newline character
+                eventsInfo.setLength(eventsInfo.length() - 1);
             } else {
-                armiesInfo.append("  No events.");
+                armiesInfo.append("\nNo events.");
             }
 
             informationJTextArea.setText(armiesInfo.toString() + eventsInfo.toString());
         } else {
             selectedNodeLabel.setText("Selected Node: None");
         }
+
+        if (selectedEdge != null) {
+            selectedEdgeLabel.setText("Selected Edge: " + selectedEdge.getName());
+        } else {
+            selectedEdgeLabel.setText("Selected Edge: None");
+        }
+
     }
 
     @Override
@@ -136,6 +144,12 @@ public class Panel extends JPanel implements GraphObserver {
 
         for (Edge edge : graph.getEdges()) {
             paintEdgesSelected((Graphics2D) g, edge, g2d);
+
+            int midX = (edge.getNode1().getX() + edge.getNode2().getX()) / 2;
+            int midY = (edge.getNode1().getY() + edge.getNode2().getY()) / 2;
+
+            g.setColor(Color.BLACK);
+            g.drawString(edge.getName(), midX, midY);
         }
 
         for (Node node : graph.getNodes()) {
@@ -162,14 +176,12 @@ public class Panel extends JPanel implements GraphObserver {
      * @param nodeSize size of the node
      */
     public void paintNodesWithArmies(Graphics2D g, Node node, int x, int y, int nodeSize) {
-        // Draw the node icon
-        g.setColor(Color.BLUE); // Set the default color to blue
+        g.setColor(Color.BLUE);
         g.fillOval(x, y, nodeSize, nodeSize);
 
-        // Draw army indicators if there are any
         if (node.isHasArmy()) {
-            int armySize = 10; // Adjust the army size here
-            int armyOffset = 5; // Adjust the army offset here
+            int armySize = 10;
+            int armyOffset = 5;
             List<Army> armies = node.getArmies();
             int armyX = x + nodeSize / 2 - (armySize * armies.size() + armyOffset * (armies.size() - 1)) / 2;
             int armyY = y + nodeSize / 2 - armySize / 2;
@@ -211,16 +223,23 @@ public class Panel extends JPanel implements GraphObserver {
     public void paintEdgesSelected(Graphics2D g, Edge edge, Graphics2D g2d){
         if (edge.isSelected()) {
             g.setColor(Color.YELLOW);
-            g2d.setStroke(new BasicStroke(3)); // Set thicker line for selected edge
+            g2d.setStroke(new BasicStroke(3));
             g.drawLine(edge.getNode1().getX(), edge.getNode1().getY(), edge.getNode2().getX(),
                     edge.getNode2().getY());
+
+            int midX = (edge.getNode1().getX() + edge.getNode2().getX()) / 2;
+            int midY = (edge.getNode1().getY() + edge.getNode2().getY()) / 2;
+
+            g.setColor(Color.BLACK);
+            g.drawString(edge.getName(), midX, midY);
         } else {
             g.setColor(Color.BLACK);
-            g2d.setStroke(new BasicStroke(1)); // Set default line thickness
+            g2d.setStroke(new BasicStroke(1));
             g.drawLine(edge.getNode1().getX(), edge.getNode1().getY(), edge.getNode2().getX(),
                     edge.getNode2().getY());
         }
     }
+
 
     private Color getFactionColor(Faction faction) {
         switch (faction) {

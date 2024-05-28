@@ -13,12 +13,12 @@ import java.util.Random;
  */
 public class NaturalDisasterEvent extends Event {
 
-    public NaturalDisasterEvent(String description, int nextid) {
-        super(description, nextid);
+    public NaturalDisasterEvent(int nextid, String description) {
+        super(nextid, "Natural disaster: Units ide");
     }
 
     @Override
-    public void startEvent(Army army) {
+    public Army startEvent(Army army) {
         List<Army> armies = new ArrayList<>();
         List<Unit> armylist = army.getUnits();
         Random random = new Random();
@@ -32,5 +32,7 @@ public class NaturalDisasterEvent extends Event {
         }
         armies.add(army);
         Battle.removeCasualties(armies);
+        System.out.println("EVENT HAPPENS");
+        return army;
     }
 }

@@ -1,7 +1,4 @@
 package nl.rug.oop.rts.model;
-
-//import nl.rug.oop.rts.util.model.events.RandomEvent;
-
 import nl.rug.oop.rts.model.events.Event;
 
 import java.util.ArrayList;
@@ -12,19 +9,8 @@ import java.util.Random;
  * Class that handles the simulations.
  */
 public class Simulation {
-    private static final double CHANCE = 0.25;
+    private static final double CHANCE = 0.70;
     private static final Random random = new Random();
-    /**
-     * Initialising the fight.
-     * @param graph graph where it happens
-     */
-    public void firstFight(Graph graph) {
-        List<Node> nodes = graph.getNodes();
-        for (Node node : nodes) {
-            node.setArmies(Battle.battleStart(node.getArmies()));
-        }
-        System.out.println("first fight complete");
-    }
 
     /**
       * Simulation of  a single step in the simulation.
@@ -34,6 +20,12 @@ public class Simulation {
         List<Node> nodes = new ArrayList<>(graph.getNodes());
         List<Edge> edges = new ArrayList<>(graph.getEdges());
 
+        // Phase 1: Resolve battles on nodes before moving armies to edges
+        for (Node node : nodes) {
+            node.setArmies(Battle.battleStart(node.getArmies()));
+        }
+
+        // Phase 2: Move armies to a random edge
         for (Node node : nodes) {
             List<Edge> nodeEdges = new ArrayList<>(node.getEdges());
             List<Army> armies = new ArrayList<>(node.getArmies());
@@ -46,11 +38,16 @@ public class Simulation {
                 }
             }
         }
-        System.out.println("Armies moved to a random edge");
 
+        // Phase 3: Resolve battles on edges after moving armies
+        for (Edge edge : edges) {
+            edge.setArmies(Battle.battleStart(edge.getArmies()));
+        }
+
+        // Phase 4: Apply events to armies on edges
         eventsOnEdges(edges);
-        System.out.println("Events were added to the Nodes and applied to the armies");
 
+        // Phase 5: Move armies back to nodes
         for (Edge edge : edges) {
             List<Army> armies = new ArrayList<>(edge.getArmies());
             for (Army army : armies) {
@@ -61,38 +58,56 @@ public class Simulation {
                 }
             }
         }
-        System.out.println("Armies moved back to Nodes");
 
+        // Phase 6: Resolve battles on nodes after moving armies back
+        for (Node node : nodes) {
+            node.setArmies(Battle.battleStart(node.getArmies()));
+        }
+        System.out.println("EVENTS START");
+        // Phase 7: Apply events to armies on nodes
         eventsOnNodes(nodes);
-        System.out.println("Events were added to the Nodes and applied to the armies");
+        System.out.println("EVENTS END");
+
 
         System.out.println("Simulation complete");
     }
 
 
+
     private static void eventsOnEdges(List<Edge> edges) {
         for (Edge edge : edges) {
             if (edge.getEvents() != null && random.nextDouble() < CHANCE) {
-                for(Event event : edge.getEvents()) {
-                    for (Army army : new ArrayList<>(edge.getArmies())) {
-                        event.startEvent(army);
+                List<Event> events = edge.getEvents();
+                if (!events.isEmpty()) {
+                    Event randomEvent = events.get(random.nextInt(events.size()));
+                    List<Army> postEventArmies = new ArrayList<>();
+
+                    for (Army army : edge.getArmies()) {
+                        Army postEventArmy = randomEvent.startEvent(army);
+                        postEventArmies.add(postEventArmy);
                     }
+                    edge.setArmies(postEventArmies);
                 }
             }
-            edge.setArmies(Battle.battleStart(edge.getArmies()));
         }
     }
 
     private static void eventsOnNodes(List<Node> nodes) {
+        Random random = new Random();
+        System.out.println("eventsOnNodes method called.");
         for (Node node : nodes) {
-            if (node.getEvent() != null && random.nextDouble() < CHANCE) {
-                for(Event event : node.getEvents()) {
+            if (node.getEvents() != null && random.nextDouble() < CHANCE) {
+                System.out.println("Event present on node and chance is met.");
+                List<Event> events = node.getEvents();
+                Event randomEvent = events.get(random.nextInt(events.size()));
+                if (randomEvent != null) {
+                    System.out.println("Random event selected: " + randomEvent);
                     for (Army army : new ArrayList<>(node.getArmies())) {
-                        event.startEvent(army);
+                        randomEvent.startEvent(army);
+                        System.out.println("Event started for army: " + army);
                     }
                 }
             }
-            node.setArmies(Battle.battleStart(node.getArmies()));
         }
     }
 }

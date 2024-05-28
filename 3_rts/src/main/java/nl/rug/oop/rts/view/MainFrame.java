@@ -1,8 +1,11 @@
 package nl.rug.oop.rts.view;
 
 import lombok.Getter;
-import nl.rug.oop.rts.util.controller.ButtonActions;
+import nl.rug.oop.rts.controller.ButtonActions;
 import nl.rug.oop.rts.model.*;
+import nl.rug.oop.rts.model.events.Event;
+import nl.rug.oop.rts.model.events.NaturalDisasterEvent;
+import nl.rug.oop.rts.model.events.ReinforcementsEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,18 +53,16 @@ public class MainFrame extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
         graph = new Graph();
-        // Create some nodes
         Node node1 = new Node(1, "Node 1", 150, 200);
         Node node2 = new Node(2, "Node 2", 300, 300);
         Node node3 = new Node(3, "Node 3", 110, 400);
-        node1.addArmy(new Army(001, Faction.MEN));
+        node1.addArmy(new Army(1, Faction.MEN));
+        node1.addEvent(new ReinforcementsEvent(1, "hey"));
 
-        // Create some edges
         Edge edge1 = new Edge(1, "Edge 1", node1, node2);
         Edge edge2 = new Edge(2, "Edge 2", node2, node3);
         Edge edge3 = new Edge(3, "Edge 3", node1, node3);
 
-        //Add everything to the graph
         graph.addNode(node1);
         graph.addNode(node2);
         graph.addNode(node3);
@@ -90,7 +91,7 @@ public class MainFrame extends JFrame {
 
         JButton editNodeButton = new JButton("Edit Node Name");
         JButton editEdgeButton = new JButton("Edit Edge Name");
-        createTextFields(editNodeButton,editEdgeButton);
+        createTextFields(editNodeButton, editEdgeButton);
 
         optionsPanel.add(nodeTextField);
         optionsPanel.add(editNodeButton);
@@ -111,7 +112,7 @@ public class MainFrame extends JFrame {
      * @param editNodeButton button to confirm editing the node
      * @param editEdgeButton button to confirm editing the edge
      */
-    public void createTextFields(JButton editNodeButton, JButton editEdgeButton){
+    public void createTextFields(JButton editNodeButton, JButton editEdgeButton) {
         nodeTextField = new JTextField();
 
         editNodeButton.addActionListener(e -> {
@@ -126,7 +127,7 @@ public class MainFrame extends JFrame {
         edgeTextField = new JTextField();
 
         editEdgeButton.addActionListener(e -> {
-            String newName = nodeTextField.getText();
+            String newName = edgeTextField.getText();
             Edge selectedEdge = graph.getSelectedEdge();
             if (selectedEdge != null && !newName.isEmpty()) {
                 selectedEdge.setName(newName);
@@ -140,11 +141,11 @@ public class MainFrame extends JFrame {
      */
     public void createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        JMenuItem nodeMenu = new JMenu("Node");
-        JMenuItem edgeMenu = new JMenu("Edge");
-        JMenuItem armyMenu = new JMenu("Army");
-        JMenuItem eventMenu = new JMenu("Events");
-        JMenuItem simulationMenu = new JMenu("Simulation");
+        JMenu nodeMenu = new JMenu("Node");
+        JMenu edgeMenu = new JMenu("Edge");
+        JMenu armyMenu = new JMenu("Army");
+        JMenu eventMenu = new JMenu("Events");
+        JMenu simulationMenu = new JMenu("Simulation");
 
         createMenuItems(nodeMenu, edgeMenu, armyMenu, eventMenu, simulationMenu);
 
@@ -165,8 +166,10 @@ public class MainFrame extends JFrame {
         edgeMenu.add(removeEdgeItem);
         armyMenu.add(addArmyItem);
         armyMenu.add(removeArmyItem);
-        eventMenu.add(addEventItem);       // Use addEventButton instead of addEventItem
-        eventMenu.add(removeEventItem);    // Use removeEventButton instead of removeEventItem
+        eventMenu.add(addEventButton);
+        eventMenu.add(addEventItem);
+        eventMenu.add(removeEventButton);
+        eventMenu.add(removeEventItem);
     }
 
 
@@ -175,9 +178,10 @@ public class MainFrame extends JFrame {
      * @param nodeMenu menu handling actions on nodes
      * @param edgeMenu menu handling actions on edges
      * @param armyMenu menu handling actions on armies
+     * @param eventMenu menu handling actions on events
      * @param simulationMenu menu handling actions on the simulation
      */
-    public void createMenuItems(JMenuItem nodeMenu, JMenuItem edgeMenu, JMenuItem armyMenu, JMenuItem eventMenu, JMenuItem simulationMenu ){
+    public void createMenuItems(JMenu nodeMenu, JMenu edgeMenu, JMenu armyMenu, JMenu eventMenu, JMenu simulationMenu) {
         addNodeItem = new JMenuItem("Add Node");
         removeNodeItem = new JMenuItem("Remove Node");
         nodeMenu.add(addNodeItem);
@@ -205,7 +209,7 @@ public class MainFrame extends JFrame {
     /**
      * This creates the buttons to handle the actions needed.
      */
-    public void createButtons(){
+    public void createButtons() {
         addNodeButton = new JButton("Add Node");
         removeNodeButton = new JButton("Remove Node");
         addEdgeButton = new JButton("Add Edge");
@@ -226,11 +230,16 @@ public class MainFrame extends JFrame {
         addEdgeItem.addActionListener(e -> buttonActions.addEdge(graph, graphPanel, this));
         removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(graph, graphPanel));
         addArmyItem.addActionListener(e -> buttonActions.addArmyToSelectedNode(graph, graphPanel, this));
-        // removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(graph, graphPanel));
-        addEventButton.addActionListener(e -> buttonActions.addEventToSelectedNode(graph)); // Add action listener for addEventButton
-        removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedNode(graph)); // Add action listener for removeEventButton
+        removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(graph, graphPanel, this));
+        addEventButton.addActionListener(e -> buttonActions.addEventToSelectedNode(graph, graphPanel, this));
+        removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedNode(graph, graphPanel, this));
         sim1Step.addActionListener(e -> buttonActions.simulation1Step(graph, graphPanel));
     }
 
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+        });
+    }
 }

@@ -1,29 +1,31 @@
 package nl.rug.oop.rts.model.events;
 
+import lombok.Getter;
+import lombok.Setter;
 import nl.rug.oop.rts.model.Army;
 
-/**
- * This function handles the events.
- */
 public abstract class Event {
-
+    @Getter
+    @Setter
     private String description;
+    @Getter
+    @Setter
     private int id;
 
-    public Event(String description, int id) {
-        this.description = description;
+    public Event(int id, String description) {
         this.id = id;
+        this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void startEvent(Army army) {
+    public Army startEvent(Army army) {
+        return army;
     }
 
     public int getId() {
         return id;
     }
-}
 
+    public String toStringWithID() {
+        return String.format("%s - Event ID: %d", getDescription(), getId());
+    }
+}

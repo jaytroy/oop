@@ -30,8 +30,6 @@ public class Battle {
         while (!goodArmies.isEmpty() && !evilArmies.isEmpty()) {
             Army goodArmy = goodArmies.get(random.nextInt(goodArmies.size()));
             Army evilArmy = evilArmies.get(random.nextInt(evilArmies.size()));
-            //simulateBattle(goodArmy, evilArmy);
-            // Remove defeated armies from the corresponding list
             simulateBattle(goodArmy, evilArmy);
             if (goodArmy.getUnits().isEmpty()) {
                 goodArmies.remove(goodArmy);
@@ -53,10 +51,8 @@ public class Battle {
         Unit goodUnit = null;
         Unit evilUnit = null;
         while (!goodArmy.getUnits().isEmpty() && !evilArmy.getUnits().isEmpty()) {
-            //Select a random unit from each army to attack
             goodUnit = goodArmy.getUnits().get(random.nextInt(goodArmy.getUnits().size()));
             evilUnit = evilArmy.getUnits().get(random.nextInt(evilArmy.getUnits().size()));
-            //Reduce the health of the opposing unit
             if (goodUnit.getAccuracy() >= random.nextInt(101)) {
                 goodUnit.setHealth(evilUnit.getHealth() - evilUnit.getDamage());
             }
