@@ -23,6 +23,7 @@ public class NaturalDisasterEvent extends Event {
         List<Unit> armylist = army.getUnits();
         Random random = new Random();
         int unitsToRemove = random.nextInt(11);
+        unitsToRemove = Math.min(unitsToRemove, armylist.size());
         for (int i = 0; i <= unitsToRemove; i++) {
             if (armylist.get(i) != null) {
                 armylist.remove(0);
