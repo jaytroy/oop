@@ -7,12 +7,13 @@ public enum Faction {
     MEN(true),
     ELVES(true),
     DWARVES(true),
-    MORDOR(true),
-    ISENGARD(true);
+    MORDOR(false),
+    ISENGARD(false);
 
     private final boolean team;
 
     Faction(boolean team) {
+
         this.team = team;
     }
 
