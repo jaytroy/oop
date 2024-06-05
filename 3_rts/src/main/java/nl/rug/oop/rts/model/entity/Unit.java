@@ -6,16 +6,15 @@ import lombok.Setter;
 /**
  * This class handles one unit in the army.
  */
+@Getter
 public class Unit {
-    @Getter
-    private String name;
-    @Getter
+    private final int MID_ACCURACY = 50;
+
+    private final String name;
     @Setter
     private int damage;
-    @Getter
     @Setter
     private int health;
-    @Getter
     @Setter
     private int accuracy;
 
@@ -29,7 +28,7 @@ public class Unit {
         this.name = name;
         this.damage = damage;
         this.health = health;
-        this.accuracy = 50;
+        this.accuracy = MID_ACCURACY;
     }
 
 }

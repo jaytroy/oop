@@ -17,24 +17,13 @@ public class Names {
     public static String getUnitNames(Faction faction) {
         int numOfNames = 3;
         Random random = new Random();
-        String unitName = null;
-        switch (faction) {
-            case MEN:
-                unitName = caseMen(random, numOfNames);
-                break;
-            case ELVES:
-                unitName = caseElves(random, numOfNames);
-                break;
-            case DWARVES:
-                unitName = caseDwarves(random, numOfNames);
-                break;
-            case MORDOR:
-                unitName = caseMordor(random, numOfNames);
-                break;
-            case ISENGARD:
-                unitName = caseIsengard(random, numOfNames);
-                break;
-        }
+        String unitName = switch (faction) {
+            case MEN -> caseMen(random, numOfNames);
+            case ELVES -> caseElves(random, numOfNames);
+            case DWARVES -> caseDwarves(random, numOfNames);
+            case MORDOR -> caseMordor(random, numOfNames);
+            case ISENGARD -> caseIsengard(random, numOfNames);
+        };
         return unitName;
     }
 

@@ -1,4 +1,5 @@
 package nl.rug.oop.rts.view;
+
 import nl.rug.oop.rts.controller.GraphObserver;
 import nl.rug.oop.rts.controller.NodeSelectionerListener;
 import nl.rug.oop.rts.model.base.Edge;
@@ -13,12 +14,10 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * This handles our panels.
+ * This class handles the panel of the game.
  */
 public class Panel extends JPanel implements GraphObserver {
     private Graph graph;
-    private JPanel nodeMenuPanel;
-    private JPanel edgeMenuPanel;
     private JLabel selectedNodeLabel;
     private JLabel selectedEdgeLabel;
     private JTextArea informationJTextArea;
@@ -46,7 +45,7 @@ public class Panel extends JPanel implements GraphObserver {
     }
 
     private void createNodeMenu() {
-        nodeMenuPanel = new JPanel();
+        JPanel nodeMenuPanel = new JPanel();
         nodeMenuPanel.setBounds(10, 10, 300, 30);
         nodeMenuPanel.setBackground(Color.WHITE);
         nodeMenuPanel.setLayout(new BorderLayout());
@@ -60,7 +59,7 @@ public class Panel extends JPanel implements GraphObserver {
     }
 
     private void createEdgeMenu() {
-        edgeMenuPanel = new JPanel();
+        JPanel edgeMenuPanel = new JPanel();
         edgeMenuPanel.setBounds(10, 50, 300, 30);
         edgeMenuPanel.setBackground(Color.WHITE);
 
@@ -180,10 +179,11 @@ public class Panel extends JPanel implements GraphObserver {
 
     /**
      * This handles painting the nodes that have armies.
-     * @param g the drawing
-     * @param node node where the army is
-     * @param x x-axis coordinates
-     * @param y y-axis coordinates
+     *
+     * @param g        the drawing
+     * @param node     node where the army is
+     * @param x        x-axis coordinates
+     * @param y        y-axis coordinates
      * @param nodeSize size of the node
      */
     public void paintNodesWithArmies(Graphics2D g, Node node, int x, int y, int nodeSize) {
@@ -207,15 +207,13 @@ public class Panel extends JPanel implements GraphObserver {
     }
 
 
-
-
-
     /**
      * This handles painting the node that is selected.
-     * @param g the drawing
-     * @param node node that is selected
-     * @param x x-axis coordinates
-     * @param y y-axis coordinates
+     *
+     * @param g        the drawing
+     * @param node     node that is selected
+     * @param x        x-axis coordinates
+     * @param y        y-axis coordinates
      * @param nodeSize size of the node
      */
     public void paintNodesSelected(Graphics2D g, Node node, int x, int y, int nodeSize) {
@@ -227,11 +225,12 @@ public class Panel extends JPanel implements GraphObserver {
 
     /**
      * This handles painting the selected edge.
-     * @param g drawing
+     *
+     * @param g    drawing
      * @param edge the selected edge
-     * @param g2d make the line thicker for edge
+     * @param g2d  make the line thicker for edge
      */
-    public void paintEdgesSelected(Graphics2D g, Edge edge, Graphics2D g2d){
+    public void paintEdgesSelected(Graphics2D g, Edge edge, Graphics2D g2d) {
         if (edge.isSelected()) {
             g.setColor(Color.YELLOW);
             g2d.setStroke(new BasicStroke(3));

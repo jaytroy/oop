@@ -48,8 +48,8 @@ public class Battle {
 
     private static void simulateBattle(Army goodArmy, Army evilArmy) {
         Random random = new Random();
-        Unit goodUnit = null;
-        Unit evilUnit = null;
+        Unit goodUnit;
+        Unit evilUnit;
         while (!goodArmy.getUnits().isEmpty() && !evilArmy.getUnits().isEmpty()) {
             goodUnit = goodArmy.getUnits().get(random.nextInt(goodArmy.getUnits().size()));
             evilUnit = evilArmy.getUnits().get(random.nextInt(evilArmy.getUnits().size()));
@@ -70,7 +70,7 @@ public class Battle {
     }
 
     /**
-     * This funciton removes units that died in combat.
+     * This function removes units that died in combat.
      *
      * @param armies the list of armies
      */

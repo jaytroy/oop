@@ -29,7 +29,7 @@ public class Army {
     public Army(int id, Faction faction) {
         this.units = createRandomUnits(faction);
         this.faction = faction;
-        this.team = Faction.getTeam(faction);
+        this.team = faction.getTeam();
         this.id = id;
         this.comingFrom = null;
     }

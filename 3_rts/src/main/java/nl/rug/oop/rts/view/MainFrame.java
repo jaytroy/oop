@@ -1,7 +1,7 @@
 package nl.rug.oop.rts.view;
 
 import lombok.Getter;
-import nl.rug.oop.rts.controller.ButtonActions;
+import nl.rug.oop.rts.controller.actions.*;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;

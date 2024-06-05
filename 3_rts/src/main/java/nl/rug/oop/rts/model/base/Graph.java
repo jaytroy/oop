@@ -158,5 +158,4 @@ public class Graph {
         int index = random.nextInt(edges.size());
         return edges.get(index);
     }
-
 }

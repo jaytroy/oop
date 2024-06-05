@@ -1,5 +1,6 @@
 package nl.rug.oop.rts.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
@@ -8,6 +9,7 @@ import nl.rug.oop.rts.view.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@Slf4j
 public class NodeSelectionerListener extends MouseAdapter {
     private Graph graph;
     private Panel panel;
@@ -66,7 +68,7 @@ public class NodeSelectionerListener extends MouseAdapter {
         int x2 = edge.getNode2().getX();
         int y2 = edge.getNode2().getY();
 
-        double distance = Utils.pointToSegmentDistance(x1, y1, x2, y2, x, y);
+        double distance = pointToSegmentDistance(x1, y1, x2, y2, x, y);
 
         return distance <= EDGE_CLICK_THRESHOLD;
     }
@@ -82,6 +84,7 @@ public class NodeSelectionerListener extends MouseAdapter {
         panel.updateMenus();
     }
 
+    //Sets the mouse position when a press is registered
     @Override
     public void mousePressed(MouseEvent e) {
         int mouseX = e.getX();
@@ -97,17 +100,39 @@ public class NodeSelectionerListener extends MouseAdapter {
         }
     }
 
+    /**
+     * Listens for the mouse being dragged on a node and adjusts its positions.
+     * Nodes do not leave game frame bounds.
+     *
+     * @param e The mouse event.
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
         if (selectedNode != null) {
+            //Get the mouse position
             int mouseX = e.getX();
             int mouseY = e.getY();
 
+            //Get the change in position
             int dx = mouseX - initialX;
             int dy = mouseY - initialY;
 
-            selectedNode.setX(selectedNode.getX() + dx);
-            selectedNode.setY(selectedNode.getY() + dy);
+            //Get the new position of the node
+            int newX = selectedNode.getX() + dx;
+            int newY = selectedNode.getY() + dy;
+
+            //Get the size of the panel
+            int panelWidth = panel.getWidth();
+            int panelHeight = panel.getHeight();
+
+            //Check if the new position is within the bounds of the panel
+            if (newX - selectedNode.getWidth() / 2 >= 0 &&
+                    newX + selectedNode.getWidth() / 2 <= panelWidth &&
+                    newY - selectedNode.getHeight() / 2 >= 0 &&
+                    newY + selectedNode.getHeight() / 2 <= panelHeight) {
+                selectedNode.setX(newX);
+                selectedNode.setY(newY);
+            }
 
             initialX = mouseX;
             initialY = mouseY;
@@ -121,5 +146,17 @@ public class NodeSelectionerListener extends MouseAdapter {
         selectedNode = null;
         selectedEdge = null;
         panel.repaint();
+    }
+
+    private double pointToSegmentDistance(int x1, int y1, int x2, int y2, int px, int py) {
+        double lineLengthSquared = Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2);
+        if (lineLengthSquared == 0) return Math.hypot(px - x1, py - y1);
+
+        double t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / lineLengthSquared;
+        t = Math.max(0, Math.min(1, t));
+        double projectionX = x1 + t * (x2 - x1);
+        double projectionY = y1 + t * (y2 - y1);
+        return Math.hypot(px - projectionX, py - projectionY);
+
     }
 }

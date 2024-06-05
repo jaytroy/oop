@@ -1,5 +1,7 @@
 package nl.rug.oop.rts.model;
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.base.Edge;
+import nl.rug.oop.rts.model.base.GameElement;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
@@ -13,9 +15,9 @@ import java.util.Random;
 /**
  * Class that handles the simulations.
  */
+@Slf4j
 public class Simulation {
-    private static final double CHANCE = 0.70;
-    private static final Random random = new Random();
+    private final double CHANCE = 0.70;
 
     /**
       * Simulation of  a single step in the simulation.
@@ -50,7 +52,7 @@ public class Simulation {
         }
 
         // Phase 4: Apply events to armies on edges
-        eventsOnEdges(edges);
+        eventOnElement(edges);
 
         // Phase 5: Move armies back to nodes
         for (Edge edge : edges) {
@@ -68,48 +70,28 @@ public class Simulation {
         for (Node node : nodes) {
             node.setArmies(Battle.battleStart(node.getArmies()));
         }
-        System.out.println("EVENTS START");
+        log.info("EVENTS START");
+
         // Phase 7: Apply events to armies on nodes
-        eventsOnNodes(nodes);
-        System.out.println("EVENTS END");
+        eventOnElement(nodes);
+        log.info("EVENTS END");
 
-
-        System.out.println("Simulation complete");
+        log.info("Simulation complete");
     }
 
 
-
-    private static void eventsOnEdges(List<Edge> edges) {
+    private void eventOnElement(List<? extends GameElement> elements) {
         Random random = new Random();
-        for (Edge edge : edges) {
-            if (edge.getEvents() != null && random.nextDouble() < CHANCE) {
-                List<Event> events = edge.getEvents();
-                System.out.println(events.size());
+        for (GameElement element : elements) {
+            List<Event> events = element.getEvents();
+            if (events != null && !events.isEmpty() && random.nextDouble() < CHANCE) {
                 Event randomEvent = events.get(random.nextInt(events.size()));
                 if (randomEvent != null) {
-                    for (Army army : edge.getArmies()) {
+                    for (Army army : element.getArmies()) {
                         if (army != null) {
                             randomEvent.startEvent(army);
-                            System.out.println("Event started for army: " + army);
+                            log.info("Event started for army: {}", army);
                         }
-                    }
-                }
-            }
-        }
-    }
-
-
-
-    private static void eventsOnNodes(List<Node> nodes) {
-        Random random = new Random();
-        for (Node node : nodes) {
-            if (node.getEvents() != null && random.nextDouble() < CHANCE) {
-                List<Event> events = node.getEvents();
-                Event randomEvent = events.get(random.nextInt(events.size()));
-                if (randomEvent != null) {
-                    for (Army army : new ArrayList<>(node.getArmies())) {
-                        randomEvent.startEvent(army);
-                        System.out.println("Event started for army: " + army);
                     }
                 }
             }

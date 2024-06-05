@@ -1,21 +1,23 @@
 package nl.rug.oop.rts.model.entity;
 
 /**
- * This represets the types of factions we have in the simulator.
+ * This represents the types of factions we have in the simulator.
  */
 public enum Faction {
-    MEN,
-    ELVES,
-    DWARVES,
-    MORDOR,
-    ISENGARD;
+    MEN(true),
+    ELVES(true),
+    DWARVES(true),
+    MORDOR(true),
+    ISENGARD(true);
 
-    public static Boolean getTeam(Faction faction) {
-        if (faction == Faction.MEN || faction == Faction.DWARVES || faction == Faction.ELVES) {
-           return true;
-        } else {
-            return false;
-        }
+    private final boolean team;
+
+    Faction(boolean team) {
+        this.team = team;
+    }
+
+    public boolean getTeam() {
+        return team;
     }
 }
 

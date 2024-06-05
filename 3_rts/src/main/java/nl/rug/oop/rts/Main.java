@@ -17,11 +17,9 @@ public class Main {
      */
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                MainFrame frame = new MainFrame();
-                frame.setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
         });
     }
 }
