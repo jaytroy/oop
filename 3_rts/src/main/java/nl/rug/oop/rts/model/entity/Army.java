@@ -53,8 +53,9 @@ public class Army {
 
         Random random = new Random();
         int numUnits = random.nextInt(41) + 10;
+        Names names = new Names();
         for (int i = 0; i < numUnits; i++) {
-            String randomUnitName = Names.getUnitNames(faction);
+            String randomUnitName = names.getUnitNames(faction);
             int randDamage = random.nextInt(10) + 1;
             int randHealth = random.nextInt(101) + 50;
             randomUnits.add(new Unit(randomUnitName, randDamage, randHealth));

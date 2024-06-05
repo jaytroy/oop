@@ -1,104 +1,27 @@
 package nl.rug.oop.rts.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
 
 /**
  * This class handles the names for every type of faction.
  */
 public class Names {
+    private final Map<Faction, List<String>> factionNames;
 
-    /**
-     * This generates the name for a specific unit in a faction.
-     * @param faction given faction
-     * @return the name
-     */
-    public static String getUnitNames(Faction faction) {
-        int numOfNames = 3;
+    public Names() {
+        factionNames = new EnumMap<>(Faction.class);
+        factionNames.put(Faction.MEN, Arrays.asList("Gondor Soldier", "Tower Guard", "Ithilien Ranger"));
+        factionNames.put(Faction.ELVES, Arrays.asList("Lorien Warrior", "Mirkwood Archer", "Rivendell Lancer"));
+        factionNames.put(Faction.DWARVES, Arrays.asList("Guardian", "Phalanx", "Axe Thrower"));
+        factionNames.put(Faction.MORDOR, Arrays.asList("Orc Warrior", "Orc Pikeman", "Haradrim Archer"));
+        factionNames.put(Faction.ISENGARD, Arrays.asList("Uruk-hai", "Uruk Crossbowman", "Warg Rider"));
+    }
+
+    public String getUnitNames(Faction faction) {
         Random random = new Random();
-        String unitName = switch (faction) {
-            case MEN -> caseMen(random, numOfNames);
-            case ELVES -> caseElves(random, numOfNames);
-            case DWARVES -> caseDwarves(random, numOfNames);
-            case MORDOR -> caseMordor(random, numOfNames);
-            case ISENGARD -> caseIsengard(random, numOfNames);
-        };
-        return unitName;
-    }
-
-    /**
-     * The case for faction MEN.
-     * @param random a random next name
-     * @param numOfNames number of names
-     * @return the name we need
-     */
-    public static String caseMen(Random random, int numOfNames) {
-        List<String> unitNames = new ArrayList<>();
-        unitNames.add("Gondor Soldier");
-        unitNames.add("Tower Guard");
-        unitNames.add("Ithilien Ranger");
-        int index = random.nextInt(numOfNames);
-        return unitNames.get(index);
-    }
-
-    /**
-     * The case for faction ELVES.
-     * @param random a random next name
-     * @param numOfNames number of names
-     * @return the name we need
-     */
-    public static String caseElves(Random random, int numOfNames) {
-        List<String> unitNames = new ArrayList<>();
-        unitNames.add("Lorien Warrior");
-        unitNames.add("Mirkwood Archer");
-        unitNames.add("Rivendell Lancer");
-        int index = random.nextInt(numOfNames);
-        return unitNames.get(index);
-    }
-
-    /**
-     * The case for faction DWARVES.
-     * @param random a random next name
-     * @param numOfNames number of names
-     * @return the name we need
-     */
-    public static String caseDwarves(Random random, int numOfNames) {
-        List<String> unitNames = new ArrayList<>();
-        unitNames.add("Guardian");
-        unitNames.add("Phalanx");
-        unitNames.add("Axe Thrower");
-        int index = random.nextInt(numOfNames);
-        return unitNames.get(index);
-    }
-
-    /**
-     * The case for faction MORDOR.
-     * @param random a random next name
-     * @param numOfNames number of names
-     * @return the name we need
-     */
-    public static String caseMordor(Random random, int numOfNames) {
-        List<String> unitNames = new ArrayList<>();
-        unitNames.add("Orc Warrior");
-        unitNames.add("Orc Pikeman");
-        unitNames.add("Haradrim Archer");
-        int index = random.nextInt(numOfNames);
-        return unitNames.get(index);
-    }
-
-    /**
-     * The case for faction ISENGARD.
-     * @param random a random next name
-     * @param numOfNames number of names
-     * @return the name we need
-     */
-    public static String caseIsengard(Random random, int numOfNames) {
-        List<String> unitNames = new ArrayList<>();
-        unitNames.add("Uruk-hai");
-        unitNames.add("Uruk Crossbowman");
-        unitNames.add("Warg Rider");
-        int index = random.nextInt(numOfNames);
+        List<String> unitNames = factionNames.get(faction);
+        int index = random.nextInt(unitNames.size());
         return unitNames.get(index);
     }
 }
