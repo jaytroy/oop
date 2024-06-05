@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArmyActions {
-    private int nextArmyID= 0;
+    private int nextArmyID = 0;
 
     /**
      * This function should handle adding an army to the selected node. It shows an input dialog that asks you to select
@@ -36,30 +36,12 @@ public class ArmyActions {
                     factions[0]
             );
             if (selectedFaction != null) {
-                int units = (int) (Math.random() * 41) + 10;
-
-                String[] unitNames = generateRandomUnitNames(selectedFaction, units);
                 Army army = new Army(nextArmyID, selectedFaction);
                 selectedNode.addArmy(army);
                 nextArmyID++;
                 panel.repaint();
             }
         }
-    }
-
-    /**
-     * This function generates random unit names.
-     *
-     * @param faction the faction type
-     * @param count   how many units
-     * @return returns the list of the unit names
-     */
-    private String[] generateRandomUnitNames(Faction faction, int count) {
-        String[] unitNames = new String[count];
-        for (int i = 0; i < count; i++) {
-            unitNames[i] = "Unit " + (i + 1);
-        }
-        return unitNames;
     }
 
     /**

@@ -49,11 +49,10 @@ public class Army {
      */
     public List<Unit> createRandomUnits(Faction faction) {
         List<Unit> randomUnits = new ArrayList<>();
-        List<String> unitNames = new ArrayList<>();
 
         Random random = new Random();
-        int numUnits = random.nextInt(41) + 10;
         Names names = new Names();
+        int numUnits = random.nextInt(41) + 10;
         for (int i = 0; i < numUnits; i++) {
             String randomUnitName = names.getUnitNames(faction);
             int randDamage = random.nextInt(10) + 1;
