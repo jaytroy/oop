@@ -73,17 +73,14 @@ public class Node {
 
 
     public boolean contains(int x, int y) {
-        return x >= this.x && x <= this.x + this.width &&
-                y >= this.y && y <= this.y + this.height;
+        int halfWidth = 15 + this.width / 2;
+        int halfHeight = 15 + this.height / 2;
+        return x >= this.x - halfWidth && x <= this.x + halfWidth &&
+                y >= this.y - halfHeight && y <= this.y + halfHeight;
     }
 
     public boolean isHasArmy(){
-        if(armies.isEmpty()) {
-            return false;
-        } else{
-            return true;
-        }
-
+        return !armies.isEmpty();
     }
 
     public boolean isConnected(Node node) {
