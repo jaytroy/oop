@@ -1,8 +1,8 @@
 package nl.rug.oop.rts.controller;
 
-import nl.rug.oop.rts.model.Edge;
-import nl.rug.oop.rts.model.Graph;
-import nl.rug.oop.rts.model.Node;
+import nl.rug.oop.rts.model.base.Edge;
+import nl.rug.oop.rts.model.base.Graph;
+import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.Panel;
 
 import java.awt.event.MouseAdapter;
@@ -15,8 +15,8 @@ public class NodeSelectionerListener extends MouseAdapter {
     private Edge selectedEdge;
     private int initialX;
     private int initialY;
-    private static final int NODE_CLICK_THRESHOLD = 10;
-    private static final int EDGE_CLICK_THRESHOLD = 10;
+    private static final int NODE_CLICK_THRESHOLD = 50;
+    private static final int EDGE_CLICK_THRESHOLD = 50;
 
     public NodeSelectionerListener(Graph graph, Panel panel) {
         this.graph = graph;
@@ -34,6 +34,8 @@ public class NodeSelectionerListener extends MouseAdapter {
         for (Node node : graph.getNodes()) {
             if (isPointNearNode(mouseX, mouseY, node)) {
                 selectedNode = node;
+                initialX = mouseX;
+                initialY = mouseY;
                 break;
             }
         }
@@ -86,7 +88,7 @@ public class NodeSelectionerListener extends MouseAdapter {
         int mouseY = e.getY();
 
         for (Node node : graph.getNodes()) {
-            if (node.isSelected() && node.contains(mouseX, mouseY)) {
+            if (node.contains(mouseX, mouseY)) {
                 selectedNode = node;
                 initialX = mouseX;
                 initialY = mouseY;

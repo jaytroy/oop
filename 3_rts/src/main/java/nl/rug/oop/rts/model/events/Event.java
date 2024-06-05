@@ -2,7 +2,7 @@ package nl.rug.oop.rts.model.events;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.rug.oop.rts.model.Army;
+import nl.rug.oop.rts.model.entity.Army;
 
 public abstract class Event {
     @Getter

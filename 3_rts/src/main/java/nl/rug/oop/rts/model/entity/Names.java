@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +112,4 @@ public class Names {
         int index = random.nextInt(numOfNames);
         return unitNames.get(index);
     }
-
 }
-

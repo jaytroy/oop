@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.entity;
 
 /**
  * This represets the types of factions we have in the simulator.

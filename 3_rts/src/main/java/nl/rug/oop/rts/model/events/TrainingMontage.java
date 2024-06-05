@@ -1,7 +1,7 @@
 package nl.rug.oop.rts.model.events;
 
-import nl.rug.oop.rts.model.Army;
-import nl.rug.oop.rts.model.Unit;
+import nl.rug.oop.rts.model.entity.Army;
+import nl.rug.oop.rts.model.entity.Unit;
 
 import java.util.List;
 

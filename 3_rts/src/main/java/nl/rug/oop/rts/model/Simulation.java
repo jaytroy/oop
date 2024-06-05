@@ -1,4 +1,9 @@
 package nl.rug.oop.rts.model;
+import nl.rug.oop.rts.model.base.Edge;
+import nl.rug.oop.rts.model.base.Graph;
+import nl.rug.oop.rts.model.base.Node;
+import nl.rug.oop.rts.model.entity.Army;
+import nl.rug.oop.rts.model.entity.Battle;
 import nl.rug.oop.rts.model.events.Event;
 
 import java.util.ArrayList;
@@ -30,7 +35,7 @@ public class Simulation {
             List<Edge> nodeEdges = new ArrayList<>(node.getEdges());
             List<Army> armies = new ArrayList<>(node.getArmies());
             for (Army army : armies) {
-                if (army != null && nodeEdges.size() > 0) {
+                if (army != null && !nodeEdges.isEmpty()) {
                     Edge targetEdge = graph.getRandomEdge(nodeEdges);
                     army.setComingFrom(node);
                     node.removeArmy(army);
@@ -79,6 +84,7 @@ public class Simulation {
         for (Edge edge : edges) {
             if (edge.getEvents() != null && random.nextDouble() < CHANCE) {
                 List<Event> events = edge.getEvents();
+                System.out.println(events.size());
                 Event randomEvent = events.get(random.nextInt(events.size()));
                 if (randomEvent != null) {
                     for (Army army : edge.getArmies()) {

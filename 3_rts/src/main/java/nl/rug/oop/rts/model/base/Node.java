@@ -1,7 +1,8 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.base;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.events.Event;
 
 import java.util.ArrayList;
@@ -10,36 +11,19 @@ import java.util.List;
 /**
  * This class handles the nodes we need.
  */
+@Getter
+@Setter
 public class Node {
-    @Getter
     private int id;
-    @Getter
-    @Setter
     private String name;
-    @Getter
     private List<Edge> edges;
-    @Getter
-    @Setter
     private int x;
-    @Getter
-    @Setter
     private int y;
-    @Getter
-    @Setter
     private int width;
-    @Getter
-    @Setter
     private int height;
-    @Setter
     private boolean selected;
-    @Getter
-    @Setter
     private List<Army> armies;
-    @Getter
-    @Setter
     private List<Event> events;
-    @Getter
-    @Setter
     private String textureName;
 
 
@@ -92,6 +76,7 @@ public class Node {
         return x >= this.x && x <= this.x + this.width &&
                 y >= this.y && y <= this.y + this.height;
     }
+
     public boolean isHasArmy(){
         if(armies.isEmpty()) {
             return false;
@@ -99,11 +84,6 @@ public class Node {
             return true;
         }
 
-    }
-
-
-    public boolean isSelected() {
-        return selected;
     }
 
     public boolean isConnected(Node node) {

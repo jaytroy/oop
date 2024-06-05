@@ -1,7 +1,8 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.rug.oop.rts.model.base.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +11,12 @@ import java.util.Random;
 /**
  * This class handles the details of armies.
  */
+@Getter
 public class Army {
-    @Getter
     private List<Unit> units;
-    @Getter
     private Faction faction;
-    @Getter
     private Boolean team;
-    @Getter
     private int id;
-    @Getter
     @Setter
     private Node comingFrom;
 

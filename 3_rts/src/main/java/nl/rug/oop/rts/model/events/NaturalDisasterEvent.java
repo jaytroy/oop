@@ -1,8 +1,8 @@
 package nl.rug.oop.rts.model.events;
 
-import nl.rug.oop.rts.model.Army;
-import nl.rug.oop.rts.model.Battle;
-import nl.rug.oop.rts.model.Unit;
+import nl.rug.oop.rts.model.entity.Army;
+import nl.rug.oop.rts.model.entity.Battle;
+import nl.rug.oop.rts.model.entity.Unit;
 
 import java.util.ArrayList;
 import java.util.List;

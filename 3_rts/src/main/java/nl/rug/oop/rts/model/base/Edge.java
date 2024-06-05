@@ -1,7 +1,8 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.base;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.events.Event;
 
 import java.awt.geom.Line2D;
@@ -11,21 +12,16 @@ import java.util.List;
 /**
  * This class handles the Edges that we have.
  */
+@Getter
 public class Edge {
-    @Getter
     private int id;
-    @Getter
     @Setter
     private String name;
-    @Getter
     private Node Node1, Node2;
-    @Getter
     @Setter
     private boolean selected;
-    @Getter
     @Setter
     private List<Army> armies;
-    @Getter
     @Setter
     private List<Event> events;
 

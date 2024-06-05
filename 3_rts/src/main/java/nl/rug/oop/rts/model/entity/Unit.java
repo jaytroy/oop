@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.model;
+package nl.rug.oop.rts.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,11 @@
 package nl.rug.oop.rts.controller;
 
 import nl.rug.oop.rts.model.*;
+import nl.rug.oop.rts.model.base.Edge;
+import nl.rug.oop.rts.model.base.Graph;
+import nl.rug.oop.rts.model.base.Node;
+import nl.rug.oop.rts.model.entity.Army;
+import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.*;
 import nl.rug.oop.rts.view.MainFrame;
 import nl.rug.oop.rts.view.Panel;
