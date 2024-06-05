@@ -9,10 +9,10 @@ import nl.rug.oop.rts.view.Panel;
  * This is the class that handles what every button does.
  */
 public class ButtonActions {
-    private NodeActions nodeActions = new NodeActions();
-    private EdgeActions edgeActions = new EdgeActions();
-    private ArmyActions armyActions = new ArmyActions();
-    private EventActions eventActions = new EventActions();
+    private final NodeActions nodeActions = new NodeActions();
+    private final EdgeActions edgeActions = new EdgeActions();
+    private final ArmyActions armyActions = new ArmyActions();
+    private final EventActions eventActions = new EventActions();
 
     public void addNode(Graph graph, Panel panel, MainFrame mainFrame) {
         nodeActions.addAction(graph, panel, mainFrame);

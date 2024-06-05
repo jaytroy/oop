@@ -252,18 +252,13 @@ public class Panel extends JPanel implements GraphObserver {
 
 
     private Color getFactionColor(Faction faction) {
-        switch (faction) {
-            case MEN:
-                return Color.WHITE;
-            case ELVES:
-                return Color.GREEN;
-            case DWARVES:
-                return Color.GRAY;
-            case MORDOR:
-                return Color.MAGENTA;
-            default:
-                return Color.PINK;
-        }
+        return switch (faction) {
+            case MEN -> Color.WHITE;
+            case ELVES -> Color.GREEN;
+            case DWARVES -> Color.GRAY;
+            case MORDOR -> Color.MAGENTA;
+            default -> Color.PINK;
+        };
     }
 
     @Override

@@ -6,8 +6,7 @@ import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.Panel;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 @Slf4j
 public class NodeSelectionerListener extends MouseAdapter {
