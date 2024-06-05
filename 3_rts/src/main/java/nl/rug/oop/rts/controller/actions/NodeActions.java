@@ -16,13 +16,32 @@ public class NodeActions implements Action {
      * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
+
     public void addAction(Graph graph, Panel panel, MainFrame mainFrame) {
-        String nodeName = JOptionPane.showInputDialog(mainFrame, "Enter a name for the node:");
+        String nodeName;
+        boolean nameExists;
+
+        do {
+            nodeName = JOptionPane.showInputDialog(mainFrame, "Enter a name for the node:");
+            if (nodeName == null) {
+                return;
+            }
+
+            nameExists = false;
+
+            for (Node existingNode : graph.getNodes()) {
+                if (existingNode.getName().equals(nodeName)) {
+                    nameExists = true;
+                    JOptionPane.showMessageDialog(mainFrame, "This name already exists. Please pick a new one.");
+                    break;
+                }
+            }
+        } while (nameExists);
+
         Node node = new Node(graph.getNextNodeId(), nodeName, 200, 200);
         graph.addNode(node);
         panel.repaint();
     }
-
     /**
      * This function removes the selected node.
      *
