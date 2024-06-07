@@ -1,6 +1,7 @@
 package nl.rug.oop.rts.view;
 
-import nl.rug.oop.rts.controller.actions.*;
+import lombok.Getter;
+import nl.rug.oop.rts.controller.actions.ButtonActions;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
@@ -12,41 +13,14 @@ import nl.rug.oop.rts.view.components.GraphPanel;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * This handles our main frame for the simulation.
- */
+@Getter
 public class MainFrame extends JFrame {
-    private JMenuItem addNodeItem;
-    private JMenuItem removeNodeItem;
-    private JMenuItem addEdgeItem;
-    private JMenuItem removeEdgeItem;
-    private JMenuItem addArmyItem;
-    private JMenuItem removeArmyItem;
-
-    private JMenuItem addEventItem;
-    private JMenuItem removeEventItem;
-    private JMenuItem sim1Step;
-
-    private JButton addNodeButton;
-    private JButton removeNodeButton;
-    private JButton addEdgeButton;
-    private JButton removeEdgeButton;
-    private JButton addArmyButton;
-    private JButton removeArmyButton;
-    private JButton simulateSingleButton;
-    private JButton addEventButton;
-    private JButton removeEventButton;
-
     private final GraphPanel graphPanel;
     private final Graph graph;
+    private final ButtonActions buttonActions = new ButtonActions();
     private JTextField nodeTextField;
     private JTextField edgeTextField;
 
-    private ButtonActions buttonActions = new ButtonActions();
-
-    /**
-     * This is our main frame, where we define the graph and panel and add everything (nodes, edges, armies, etc.).
-     */
     public MainFrame() {
         setTitle("Graph Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +28,18 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         graph = new Graph();
 
-        //Debug initialization
+        initializeGraph();
+        graphPanel = new GraphPanel(graph);
+        graphPanel.setFocusable(true);
+        graphPanel.requestFocusInWindow();
+
+        setContentPane(createMainPanel(graphPanel));
+
+        MainMenu mainMenu = new MainMenu(this);
+        setJMenuBar(mainMenu.createMenuBar());
+    }
+
+    private void initializeGraph() {
         Node node1 = new Node(1, "Node 1", 150, 200);
         Node node2 = new Node(2, "Node 2", 300, 300);
         Node node3 = new Node(3, "Node 3", 110, 400);
@@ -71,21 +56,8 @@ public class MainFrame extends JFrame {
         graph.addEdge(edge1);
         graph.addEdge(edge2);
         graph.addEdge(edge3);
-        //End init
-
-        graphPanel = new GraphPanel(graph);
-        graphPanel.setFocusable(true);
-        graphPanel.requestFocusInWindow();
-        setContentPane(createMainPanel(graphPanel));
-        createMenuBar();
     }
 
-    /**
-     * This is where we create the main panel.
-     *
-     * @param graphPanel the panel of the graph
-     * @return the main panel
-     */
     private JPanel createMainPanel(GraphPanel graphPanel) {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(graphPanel, BorderLayout.CENTER);
@@ -111,15 +83,8 @@ public class MainFrame extends JFrame {
         return panel;
     }
 
-    /**
-     * This handles the creation of the fields that help us edit the nodes and the edges.
-     *
-     * @param editNodeButton button to confirm editing the node
-     * @param editEdgeButton button to confirm editing the edge
-     */
-    public void createTextFields(JButton editNodeButton, JButton editEdgeButton) {
+    private void createTextFields(JButton editNodeButton, JButton editEdgeButton) {
         nodeTextField = new JTextField();
-
         editNodeButton.addActionListener(e -> {
             String newName = nodeTextField.getText();
             Node selectedNode = graph.getSelectedNode();
@@ -130,7 +95,6 @@ public class MainFrame extends JFrame {
         });
 
         edgeTextField = new JTextField();
-
         editEdgeButton.addActionListener(e -> {
             String newName = edgeTextField.getText();
             Edge selectedEdge = graph.getSelectedEdge();
@@ -139,106 +103,5 @@ public class MainFrame extends JFrame {
                 graphPanel.repaint();
             }
         });
-    }
-
-    /**
-     * This creates the menu bar with all of our options of adding/removing or simulating.
-     */
-    public void createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu nodeMenu = new JMenu("Node");
-        JMenu edgeMenu = new JMenu("Edge");
-        JMenu armyMenu = new JMenu("Army");
-        JMenu eventMenu = new JMenu("Events");
-        JMenu simulationMenu = new JMenu("Simulation");
-
-        createMenuItems(nodeMenu, edgeMenu, armyMenu, eventMenu, simulationMenu);
-
-        menuBar.add(nodeMenu);
-        menuBar.add(edgeMenu);
-        menuBar.add(armyMenu);
-        menuBar.add(eventMenu);
-        menuBar.add(simulationMenu);
-
-        setJMenuBar(menuBar);
-
-        createButtons();
-        createActionListeners();
-
-        nodeMenu.add(addNodeItem);
-        nodeMenu.add(removeNodeItem);
-        edgeMenu.add(addEdgeItem);
-        edgeMenu.add(removeEdgeItem);
-        armyMenu.add(addArmyItem);
-        armyMenu.add(removeArmyItem);
-        eventMenu.add(addEventButton);
-        eventMenu.add(addEventItem);
-        eventMenu.add(removeEventButton);
-        eventMenu.add(removeEventItem);
-    }
-
-
-    /**
-     * This creates the actual menu items to do the previous things.
-     *
-     * @param nodeMenu       menu handling actions on nodes
-     * @param edgeMenu       menu handling actions on edges
-     * @param armyMenu       menu handling actions on armies
-     * @param eventMenu      menu handling actions on events
-     * @param simulationMenu menu handling actions on the simulation
-     */
-    public void createMenuItems(JMenu nodeMenu, JMenu edgeMenu, JMenu armyMenu, JMenu eventMenu, JMenu simulationMenu) {
-        addNodeItem = new JMenuItem("Add Node");
-        removeNodeItem = new JMenuItem("Remove Node");
-        nodeMenu.add(addNodeItem);
-        nodeMenu.add(removeNodeItem);
-
-        addEdgeItem = new JMenuItem("Add Edge");
-        removeEdgeItem = new JMenuItem("Remove Edge");
-        edgeMenu.add(addEdgeItem);
-        edgeMenu.add(removeEdgeItem);
-
-        addArmyItem = new JMenuItem("Add Army");
-        removeArmyItem = new JMenuItem("Remove Army");
-        armyMenu.add(addArmyItem);
-        armyMenu.add(removeArmyItem);
-
-        addEventItem = new JMenuItem("Add Event");
-        removeEventItem = new JMenuItem("Remove Event");
-        eventMenu.add(addEventItem);
-        eventMenu.add(removeEventItem);
-
-        sim1Step = new JMenuItem("Simulate Single Time Step");
-        simulationMenu.add(sim1Step);
-    }
-
-    /**
-     * This creates the buttons to handle the actions needed.
-     */
-    public void createButtons() {
-        addNodeButton = new JButton("Add Node");
-        removeNodeButton = new JButton("Remove Node");
-        addEdgeButton = new JButton("Add Edge");
-        removeEdgeButton = new JButton("Remove Edge");
-        addArmyButton = new JButton("Add Army");
-        removeArmyButton = new JButton("Remove Army");
-        addEventButton = new JButton("Add Event");
-        removeEventButton = new JButton("Remove Event");
-        simulateSingleButton = new JButton("Simulate Single Time Step");
-    }
-
-    /**
-     * This function handles the actual behaviour of the buttons.
-     */
-    public void createActionListeners() {
-        addNodeItem.addActionListener(e -> buttonActions.addNode(graph, graphPanel, this));
-        removeNodeItem.addActionListener(e -> buttonActions.removeNode(graph, graphPanel));
-        addEdgeItem.addActionListener(e -> buttonActions.addEdge(graph, graphPanel, this));
-        removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(graph, graphPanel));
-        addArmyItem.addActionListener(e -> buttonActions.addArmyToSelectedNode(graph, graphPanel, this));
-        removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(graph, graphPanel, this));
-        addEventButton.addActionListener(e -> buttonActions.addEventToSelectedElement(graph, graphPanel, this));
-        removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedElement(graph, graphPanel, this));
-        sim1Step.addActionListener(e -> buttonActions.simulation1Step(graph, graphPanel));
     }
 }
