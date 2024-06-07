@@ -1,11 +1,7 @@
 package nl.rug.oop.rts.view;
 
-import lombok.Getter;
-import nl.rug.oop.rts.controller.actions.ButtonActions;
-
 import javax.swing.*;
 
-@Getter
 public class MainMenu {
     private final MainFrame mainFrame;
 

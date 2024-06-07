@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class GraphPanel extends JPanel implements GraphObserver {
     private Graph graph;
-    private JLabel selectedNodeLabel;
-    private JLabel selectedEdgeLabel;
+    private NodeMenu nodeMenu;
+    private EdgeMenu edgeMenu;
     private JTextArea informationJTextArea;
 
     /**
@@ -44,32 +44,13 @@ public class GraphPanel extends JPanel implements GraphObserver {
     }
 
     private void createNodeMenu() {
-        JPanel nodeMenuPanel = new JPanel();
-        nodeMenuPanel.setBounds(10, 10, 300, 30);
-        nodeMenuPanel.setBackground(Color.WHITE);
-        nodeMenuPanel.setLayout(new BorderLayout());
-
-        selectedNodeLabel = new JLabel("Selected Node: None");
-        selectedNodeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        selectedNodeLabel.setForeground(Color.BLACK);
-
-        nodeMenuPanel.add(selectedNodeLabel, BorderLayout.CENTER);
-        add(nodeMenuPanel);
+        nodeMenu = new NodeMenu();
+        add(nodeMenu);
     }
 
     private void createEdgeMenu() {
-        EdgeMenu edgeMenu = new EdgeMenu();
-
-        JPanel edgeMenuPanel = new JPanel();
-        edgeMenuPanel.setBounds(10, 50, 300, 30);
-        edgeMenuPanel.setBackground(Color.WHITE);
-
-        selectedEdgeLabel = new JLabel("Selected Edge: None");
-        selectedEdgeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        selectedEdgeLabel.setForeground(Color.BLACK);
-
-        edgeMenuPanel.add(selectedEdgeLabel, BorderLayout.CENTER);
-        add(edgeMenuPanel);
+        edgeMenu = new EdgeMenu();
+        add(edgeMenu);
     }
 
     private void createInformationPanel() {
@@ -94,7 +75,6 @@ public class GraphPanel extends JPanel implements GraphObserver {
         add(parentPanel);
     }
 
-
     /**
      * This updates two labels for nodes and edges that show us which ones are selected at the moment.
      */
@@ -102,7 +82,7 @@ public class GraphPanel extends JPanel implements GraphObserver {
         Node selectedNode = graph.getSelectedNode();
         Edge selectedEdge = graph.getSelectedEdge();
         if (selectedNode != null) {
-            selectedNodeLabel.setText("Selected Node: " + selectedNode.getName());
+            nodeMenu.updateSelectedNodeLabel("Selected Node: " + selectedNode.getName());
 
             StringBuilder infoBuilder = new StringBuilder();
             List<Army> armies = selectedNode.getArmies();
@@ -127,7 +107,7 @@ public class GraphPanel extends JPanel implements GraphObserver {
 
             informationJTextArea.setText(infoBuilder.toString());
         } else if (selectedEdge != null) {
-            selectedEdgeLabel.setText("Selected Edge: " + selectedEdge.getName());
+            edgeMenu.updateSelectedEdgeLabel("Selected Edge: " + selectedEdge.getName());
 
             StringBuilder infoBuilder = new StringBuilder();
             List<Event> events = selectedEdge.getEvents();
@@ -142,8 +122,8 @@ public class GraphPanel extends JPanel implements GraphObserver {
 
             informationJTextArea.setText(infoBuilder.toString());
         } else {
-            selectedNodeLabel.setText("Selected Node: None");
-            selectedEdgeLabel.setText("Selected Edge: None");
+            nodeMenu.updateSelectedNodeLabel("Selected Node: None");
+            edgeMenu.updateSelectedEdgeLabel("Selected Edge: None");
             informationJTextArea.setText("");
         }
     }
@@ -284,11 +264,11 @@ public class GraphPanel extends JPanel implements GraphObserver {
         }
 
         if (!nodeSelected) {
-            selectedNodeLabel.setText("Selected Node: None");
+            nodeMenu.updateSelectedNodeLabel("Selected Node: None");
         }
 
         if (!edgeSelected) {
-            selectedEdgeLabel.setText("Selected Edge: None");
+            edgeMenu.updateSelectedEdgeLabel("Selected Edge: None");
         }
         repaint();
         updateMenus();

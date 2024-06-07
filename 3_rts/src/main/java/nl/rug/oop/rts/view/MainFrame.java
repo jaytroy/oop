@@ -1,25 +1,19 @@
 package nl.rug.oop.rts.view;
 
 import lombok.Getter;
-import nl.rug.oop.rts.controller.actions.ButtonActions;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.ReinforcementsEvent;
-import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 @Getter
 public class MainFrame extends JFrame {
-    private final GraphPanel graphPanel;
     private final Graph graph;
-    private final ButtonActions buttonActions = new ButtonActions();
-    private JTextField nodeTextField;
-    private JTextField edgeTextField;
+    private final MainPanel mainPanel;
 
     public MainFrame() {
         setTitle("Graph Editor");
@@ -29,11 +23,9 @@ public class MainFrame extends JFrame {
         graph = new Graph();
 
         initializeGraph();
-        graphPanel = new GraphPanel(graph);
-        graphPanel.setFocusable(true);
-        graphPanel.requestFocusInWindow();
 
-        setContentPane(createMainPanel(graphPanel));
+        mainPanel = new MainPanel(graph, this);
+        setContentPane(mainPanel);
 
         MainMenu mainMenu = new MainMenu(this);
         setJMenuBar(mainMenu.createMenuBar());
@@ -56,52 +48,5 @@ public class MainFrame extends JFrame {
         graph.addEdge(edge1);
         graph.addEdge(edge2);
         graph.addEdge(edge3);
-    }
-
-    private JPanel createMainPanel(GraphPanel graphPanel) {
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(graphPanel, BorderLayout.CENTER);
-
-        JPanel optionsPanel = new JPanel();
-        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
-
-        JButton editNodeButton = new JButton("Edit Node Name");
-        JButton editEdgeButton = new JButton("Edit Edge Name");
-        createTextFields(editNodeButton, editEdgeButton);
-
-        optionsPanel.add(nodeTextField);
-        optionsPanel.add(editNodeButton);
-        optionsPanel.add(edgeTextField);
-        optionsPanel.add(editEdgeButton);
-
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, mainPanel, optionsPanel);
-        splitPane.setDividerLocation(600);
-        splitPane.setResizeWeight(1.0);
-
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(splitPane, BorderLayout.CENTER);
-        return panel;
-    }
-
-    private void createTextFields(JButton editNodeButton, JButton editEdgeButton) {
-        nodeTextField = new JTextField();
-        editNodeButton.addActionListener(e -> {
-            String newName = nodeTextField.getText();
-            Node selectedNode = graph.getSelectedNode();
-            if (selectedNode != null && !newName.isEmpty()) {
-                selectedNode.setName(newName);
-                graphPanel.repaint();
-            }
-        });
-
-        edgeTextField = new JTextField();
-        editEdgeButton.addActionListener(e -> {
-            String newName = edgeTextField.getText();
-            Edge selectedEdge = graph.getSelectedEdge();
-            if (selectedEdge != null && !newName.isEmpty()) {
-                selectedEdge.setName(newName);
-                graphPanel.repaint();
-            }
-        });
     }
 }

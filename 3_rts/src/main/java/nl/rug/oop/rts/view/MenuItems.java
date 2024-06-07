@@ -41,15 +41,16 @@ public class MenuItems {
     }
 
     private void createActionListeners(JMenuItem addNodeItem, JMenuItem removeNodeItem, JMenuItem addEdgeItem, JMenuItem removeEdgeItem, JMenuItem addArmyItem, JMenuItem removeArmyItem, JMenuItem addEventItem, JMenuItem removeEventItem, JMenuItem sim1Step) {
-        ButtonActions buttonActions = mainFrame.getButtonActions();
-        addNodeItem.addActionListener(e -> buttonActions.addNode(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        removeNodeItem.addActionListener(e -> buttonActions.removeNode(mainFrame.getGraph(), mainFrame.getGraphPanel()));
-        addEdgeItem.addActionListener(e -> buttonActions.addEdge(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(mainFrame.getGraph(), mainFrame.getGraphPanel()));
-        addArmyItem.addActionListener(e -> buttonActions.addArmyToSelectedNode(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        addEventItem.addActionListener(e -> buttonActions.addEventToSelectedElement(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        removeEventItem.addActionListener(e -> buttonActions.removeEventFromSelectedElement(mainFrame.getGraph(), mainFrame.getGraphPanel(), mainFrame));
-        sim1Step.addActionListener(e -> buttonActions.simulation1Step(mainFrame.getGraph(), mainFrame.getGraphPanel()));
+        ButtonActions buttonActions = mainFrame.getMainPanel().getButtonActions();
+        var mainPanel = mainFrame.getMainPanel();
+        addNodeItem.addActionListener(e -> buttonActions.addNode(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        removeNodeItem.addActionListener(e -> buttonActions.removeNode(mainPanel.getGraph(), mainPanel.getGraphPanel()));
+        addEdgeItem.addActionListener(e -> buttonActions.addEdge(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(mainPanel.getGraph(), mainPanel.getGraphPanel()));
+        addArmyItem.addActionListener(e -> buttonActions.addArmyToSelectedNode(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        removeArmyItem.addActionListener(e -> buttonActions.removeArmyFromSelectedNode(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        addEventItem.addActionListener(e -> buttonActions.addEventToSelectedElement(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        removeEventItem.addActionListener(e -> buttonActions.removeEventFromSelectedElement(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
+        sim1Step.addActionListener(e -> buttonActions.simulation1Step(mainPanel.getGraph(), mainPanel.getGraphPanel()));
     }
 }
