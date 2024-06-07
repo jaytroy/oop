@@ -3,6 +3,9 @@ package nl.rug.oop.rts.view.components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * CURRENTLY UNUSED
+ */
 public class EdgeMenu extends JPanel {
     private final JButton removeEdgeButton;
     private final JButton addEdgeButton;
