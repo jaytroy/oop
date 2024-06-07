@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.controller;
+package nl.rug.oop.rts.view.components;
 
 import nl.rug.oop.rts.model.base.Graph;
 

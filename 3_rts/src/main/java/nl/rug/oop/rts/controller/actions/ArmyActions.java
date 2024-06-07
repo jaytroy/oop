@@ -5,7 +5,7 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.Panel;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ArmyActions {
      * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
-    public void addArmyToSelectedNode(Graph graph, Panel panel, MainFrame mainFrame) {
+    public void addArmyToSelectedNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
             Faction[] factions = Faction.values();
@@ -51,7 +51,7 @@ public class ArmyActions {
      * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
-    public void removeArmyFromSelectedNode(Graph graph, Panel panel, MainFrame mainFrame) {
+    public void removeArmyFromSelectedNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null && selectedNode.isHasArmy()) {
             List<Army> armies = selectedNode.getArmies();

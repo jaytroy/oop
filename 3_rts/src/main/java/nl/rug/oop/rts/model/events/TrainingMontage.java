@@ -9,9 +9,10 @@ import java.util.List;
  * This class handles a special event, where units in an army get a boost of accuracy.
  */
 public class TrainingMontage extends Event {
+    private final static String DESC = "Training Montage";
 
     public TrainingMontage(int nextid) {
-        super(nextid, "Training Montage");
+        super(nextid, DESC);
     }
 
     @Override

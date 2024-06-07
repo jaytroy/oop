@@ -6,12 +6,12 @@ import nl.rug.oop.rts.view.MainFrame;
 import javax.swing.*;
 
 /**
- * Main class of the application. Add more details here.
+ * Main class of the application.
  */
 public class Main {
 
     /**
-     * Main function. Add more details here.
+     * Main function. Starts the game.
      *
      * @param args Commandline arguments.
      */

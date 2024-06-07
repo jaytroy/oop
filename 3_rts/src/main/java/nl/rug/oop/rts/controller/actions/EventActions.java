@@ -1,12 +1,10 @@
 package nl.rug.oop.rts.controller.actions;
 
-import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.GameElement;
 import nl.rug.oop.rts.model.base.Graph;
-import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.events.*;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.Panel;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -14,9 +12,9 @@ import java.util.List;
 
 public class EventActions {
     private int nextEventID = 0;
+    private final EventFactory eventFactory = new EventFactory();
 
-
-    public void addEventToSelectedElement(Graph graph, Panel panel, MainFrame mainFrame) {
+    public void addEventToSelectedElement(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
 
@@ -31,20 +29,15 @@ public class EventActions {
                 eventTypes[0]
         );
         if (selectedEventType != null) {
-            switch (selectedEventType) {
-                case HiddenWeaponryEvent -> selectedElement.addEvent(new HiddenWeaponryEvent(nextEventID));
-                case NaturalDisasterEvent -> selectedElement.addEvent(new NaturalDisasterEvent(nextEventID));
-                case RandomEvent -> selectedElement.addEvent(RandomEvent.getRandomEvent(nextEventID));
-                case ReinforcementsEvent -> selectedElement.addEvent(new ReinforcementsEvent(nextEventID));
-                case TrainingMontage -> selectedElement.addEvent(new TrainingMontage(nextEventID));
-            }
+            Event newEvent = eventFactory.createEvent(selectedEventType, nextEventID);
+            selectedElement.addEvent(newEvent);
             nextEventID++;
             panel.repaint();
             System.out.println("Event added to the selected node.");
         }
     }
 
-    public void removeEventFromSelectedElement(Graph graph, Panel graphPanel, MainFrame mainFrame) {
+    public void removeEventFromSelectedElement(Graph graph, GraphPanel graphPanel, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
 

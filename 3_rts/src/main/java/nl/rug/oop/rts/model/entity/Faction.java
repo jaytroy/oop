@@ -13,7 +13,6 @@ public enum Faction {
     private final boolean team;
 
     Faction(boolean team) {
-
         this.team = team;
     }
 

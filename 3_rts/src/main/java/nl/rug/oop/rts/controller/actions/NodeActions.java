@@ -3,13 +3,13 @@ package nl.rug.oop.rts.controller.actions;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.Panel;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 
 public class NodeActions implements Action {
     /**
-     * This function handles adding a node. It shows an input dialog that let's you name your node, then creates one
+     * This function handles adding a node. It shows an input dialog that lets you name your node, then creates one
      * at coordinates (200,200).
      *
      * @param graph     the graph in which we have the node
@@ -17,7 +17,7 @@ public class NodeActions implements Action {
      * @param mainFrame the frame where this happens
      */
 
-    public void addAction(Graph graph, Panel panel, MainFrame mainFrame) {
+    public void addAction(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         String nodeName;
         boolean nameExists;
 
@@ -48,7 +48,7 @@ public class NodeActions implements Action {
      * @param graph the graph in which we have the node
      * @param panel the panel that we have to repaint
      */
-    public void removeAction(Graph graph, Panel panel) {
+    public void removeAction(Graph graph, GraphPanel panel) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
             graph.removeNode(selectedNode);

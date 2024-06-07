@@ -4,7 +4,7 @@ import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.Panel;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class EdgeActions {
      * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
-    public void addEdge(Graph graph, Panel panel, MainFrame mainFrame) {
+    public void addEdge(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
             String edgeName;
@@ -71,7 +71,7 @@ public class EdgeActions {
      * @param graph the graph in which we have the node
      * @param panel the panel that we have to repaint
      */
-    public void removeEdge(Graph graph, Panel panel) {
+    public void removeEdge(Graph graph, GraphPanel panel) {
         Edge selectedEdge = graph.getSelectedEdge();
         if (selectedEdge != null) {
             graph.removeEdge(selectedEdge);

@@ -1,7 +1,6 @@
-package nl.rug.oop.rts.view;
+package nl.rug.oop.rts.view.components;
 
-import nl.rug.oop.rts.controller.GraphObserver;
-import nl.rug.oop.rts.controller.NodeSelectionerListener;
+import nl.rug.oop.rts.controller.MouseSelector;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * This class handles the panel of the game.
  */
-public class Panel extends JPanel implements GraphObserver {
+public class GraphPanel extends JPanel implements GraphObserver {
     private Graph graph;
     private JLabel selectedNodeLabel;
     private JLabel selectedEdgeLabel;
@@ -27,12 +26,12 @@ public class Panel extends JPanel implements GraphObserver {
      *
      * @param graph graph it is in
      */
-    public Panel(Graph graph) {
+    public GraphPanel(Graph graph) {
         this.graph = graph;
         setBackground(Color.RED);
         setLayout(null);
 
-        NodeSelectionerListener listener = new NodeSelectionerListener(graph, this);
+        MouseSelector listener = new MouseSelector(graph, this);
         addMouseListener(listener);
         addMouseMotionListener(listener);
         setFocusable(true);
@@ -59,6 +58,8 @@ public class Panel extends JPanel implements GraphObserver {
     }
 
     private void createEdgeMenu() {
+        EdgeMenu edgeMenu = new EdgeMenu();
+
         JPanel edgeMenuPanel = new JPanel();
         edgeMenuPanel.setBounds(10, 50, 300, 30);
         edgeMenuPanel.setBackground(Color.WHITE);
@@ -95,7 +96,7 @@ public class Panel extends JPanel implements GraphObserver {
 
 
     /**
-     * This updates 2 labels for nodes and edges that show us which ones are selected at the moment.
+     * This updates two labels for nodes and edges that show us which ones are selected at the moment.
      */
     public void updateMenus() {
         Node selectedNode = graph.getSelectedNode();

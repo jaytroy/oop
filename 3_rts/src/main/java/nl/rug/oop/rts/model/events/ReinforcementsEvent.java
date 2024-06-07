@@ -9,9 +9,10 @@ import java.util.List;
  * This class handles a special event, when an army gets a random number of bonus units.
  */
 public class ReinforcementsEvent extends Event {
+    private final static String DESC = "Reinforcements";
 
     public ReinforcementsEvent(int nextid) {
-        super(nextid, "Reinforcements");
+        super(nextid, DESC);
     }
 
     @Override

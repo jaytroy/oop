@@ -4,14 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
-import nl.rug.oop.rts.view.Panel;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import java.awt.event.*;
 
 @Slf4j
-public class NodeSelectionerListener extends MouseAdapter {
+public class MouseSelector extends MouseAdapter {
     private Graph graph;
-    private Panel panel;
+    private GraphPanel panel;
     private Node selectedNode;
     private Edge selectedEdge;
     private int initialX;
@@ -19,7 +19,7 @@ public class NodeSelectionerListener extends MouseAdapter {
     private static final int NODE_CLICK_THRESHOLD = 50;
     private static final int EDGE_CLICK_THRESHOLD = 50;
 
-    public NodeSelectionerListener(Graph graph, Panel panel) {
+    public MouseSelector(Graph graph, GraphPanel panel) {
         this.graph = graph;
         this.panel = panel;
     }

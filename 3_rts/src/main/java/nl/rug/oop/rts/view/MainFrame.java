@@ -1,6 +1,5 @@
 package nl.rug.oop.rts.view;
 
-import lombok.Getter;
 import nl.rug.oop.rts.controller.actions.*;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
@@ -8,6 +7,7 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.ReinforcementsEvent;
+import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +16,6 @@ import java.awt.*;
  * This handles our main frame for the simulation.
  */
 public class MainFrame extends JFrame {
-    @Getter
-    private int nextArmyID;
     private JMenuItem addNodeItem;
     private JMenuItem removeNodeItem;
     private JMenuItem addEdgeItem;
@@ -39,15 +37,15 @@ public class MainFrame extends JFrame {
     private JButton addEventButton;
     private JButton removeEventButton;
 
-    private Panel graphPanel;
-    private Graph graph;
+    private final GraphPanel graphPanel;
+    private final Graph graph;
     private JTextField nodeTextField;
     private JTextField edgeTextField;
 
     private ButtonActions buttonActions = new ButtonActions();
 
     /**
-     * This is our main frame, where we define the graph and panel and add everything (nodes, edges, armies etc.).
+     * This is our main frame, where we define the graph and panel and add everything (nodes, edges, armies, etc.).
      */
     public MainFrame() {
         setTitle("Graph Editor");
@@ -55,6 +53,8 @@ public class MainFrame extends JFrame {
         setSize(800, 600);
         setLocationRelativeTo(null);
         graph = new Graph();
+
+        //Debug initialization
         Node node1 = new Node(1, "Node 1", 150, 200);
         Node node2 = new Node(2, "Node 2", 300, 300);
         Node node3 = new Node(3, "Node 3", 110, 400);
@@ -71,8 +71,9 @@ public class MainFrame extends JFrame {
         graph.addEdge(edge1);
         graph.addEdge(edge2);
         graph.addEdge(edge3);
+        //End init
 
-        graphPanel = new Panel(graph);
+        graphPanel = new GraphPanel(graph);
         graphPanel.setFocusable(true);
         graphPanel.requestFocusInWindow();
         setContentPane(createMainPanel(graphPanel));
@@ -85,7 +86,7 @@ public class MainFrame extends JFrame {
      * @param graphPanel the panel of the graph
      * @return the main panel
      */
-    private JPanel createMainPanel(Panel graphPanel) {
+    private JPanel createMainPanel(GraphPanel graphPanel) {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(graphPanel, BorderLayout.CENTER);
 
@@ -230,9 +231,7 @@ public class MainFrame extends JFrame {
      * This function handles the actual behaviour of the buttons.
      */
     public void createActionListeners() {
-        addNodeItem.addActionListener(e ->
-                buttonActions.addNode(graph, graphPanel, this)
-        );
+        addNodeItem.addActionListener(e -> buttonActions.addNode(graph, graphPanel, this));
         removeNodeItem.addActionListener(e -> buttonActions.removeNode(graph, graphPanel));
         addEdgeItem.addActionListener(e -> buttonActions.addEdge(graph, graphPanel, this));
         removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(graph, graphPanel));
@@ -241,12 +240,5 @@ public class MainFrame extends JFrame {
         addEventButton.addActionListener(e -> buttonActions.addEventToSelectedElement(graph, graphPanel, this));
         removeEventButton.addActionListener(e -> buttonActions.removeEventFromSelectedElement(graph, graphPanel, this));
         sim1Step.addActionListener(e -> buttonActions.simulation1Step(graph, graphPanel));
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MainFrame frame = new MainFrame();
-            frame.setVisible(true);
-        });
     }
 }
