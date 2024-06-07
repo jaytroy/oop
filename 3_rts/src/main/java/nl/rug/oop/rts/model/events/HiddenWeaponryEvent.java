@@ -9,7 +9,7 @@ import java.util.List;
  * This represents one of the special events, where units get a boost of damage.
  */
 public class HiddenWeaponryEvent extends Event {
-    public HiddenWeaponryEvent(int nextid, String description) {
+    public HiddenWeaponryEvent(int nextid) {
         super(nextid, "Hidden Weaponry");
     }
 

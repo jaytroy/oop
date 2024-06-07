@@ -12,9 +12,10 @@ import java.util.Random;
  * This class handles one of the special events, where units form an army die because of natural disasters.
  */
 public class NaturalDisasterEvent extends Event {
+    private static final String DESC = "Natural Disaster";
 
-    public NaturalDisasterEvent(int nextid, String description) {
-        super(nextid, "Natural Disaster");
+    public NaturalDisasterEvent(int nextId) {
+        super(nextId, DESC);
     }
 
     @Override

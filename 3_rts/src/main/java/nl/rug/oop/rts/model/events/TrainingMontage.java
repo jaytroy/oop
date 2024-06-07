@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class TrainingMontage extends Event {
 
-    public TrainingMontage(int nextid, String description) {
+    public TrainingMontage(int nextid) {
         super(nextid, "Training Montage");
     }
 

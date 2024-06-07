@@ -59,7 +59,7 @@ public class MainFrame extends JFrame {
         Node node2 = new Node(2, "Node 2", 300, 300);
         Node node3 = new Node(3, "Node 3", 110, 400);
         node1.addArmy(new Army(1, Faction.MEN));
-        node1.addEvent(new ReinforcementsEvent(1, "hey"));
+        node1.addEvent(new ReinforcementsEvent(1));
 
         Edge edge1 = new Edge(1, "Edge 1", node1, node2);
         Edge edge2 = new Edge(2, "Edge 2", node2, node3);
@@ -81,6 +81,7 @@ public class MainFrame extends JFrame {
 
     /**
      * This is where we create the main panel.
+     *
      * @param graphPanel the panel of the graph
      * @return the main panel
      */
@@ -111,6 +112,7 @@ public class MainFrame extends JFrame {
 
     /**
      * This handles the creation of the fields that help us edit the nodes and the edges.
+     *
      * @param editNodeButton button to confirm editing the node
      * @param editEdgeButton button to confirm editing the edge
      */
@@ -177,10 +179,11 @@ public class MainFrame extends JFrame {
 
     /**
      * This creates the actual menu items to do the previous things.
-     * @param nodeMenu menu handling actions on nodes
-     * @param edgeMenu menu handling actions on edges
-     * @param armyMenu menu handling actions on armies
-     * @param eventMenu menu handling actions on events
+     *
+     * @param nodeMenu       menu handling actions on nodes
+     * @param edgeMenu       menu handling actions on edges
+     * @param armyMenu       menu handling actions on armies
+     * @param eventMenu      menu handling actions on events
      * @param simulationMenu menu handling actions on the simulation
      */
     public void createMenuItems(JMenu nodeMenu, JMenu edgeMenu, JMenu armyMenu, JMenu eventMenu, JMenu simulationMenu) {
@@ -227,7 +230,9 @@ public class MainFrame extends JFrame {
      * This function handles the actual behaviour of the buttons.
      */
     public void createActionListeners() {
-        addNodeItem.addActionListener(e -> buttonActions.addNode(graph, graphPanel, this));
+        addNodeItem.addActionListener(e ->
+                buttonActions.addNode(graph, graphPanel, this)
+        );
         removeNodeItem.addActionListener(e -> buttonActions.removeNode(graph, graphPanel));
         addEdgeItem.addActionListener(e -> buttonActions.addEdge(graph, graphPanel, this));
         removeEdgeItem.addActionListener(e -> buttonActions.removeEdge(graph, graphPanel));

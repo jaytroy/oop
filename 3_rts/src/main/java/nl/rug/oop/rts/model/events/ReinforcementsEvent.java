@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ReinforcementsEvent extends Event {
 
-    public ReinforcementsEvent(int nextid, String description) {
+    public ReinforcementsEvent(int nextid) {
         super(nextid, "Reinforcements");
     }
 

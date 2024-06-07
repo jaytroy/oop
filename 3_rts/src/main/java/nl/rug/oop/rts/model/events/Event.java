@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.rug.oop.rts.model.entity.Army;
 
+@Setter
+@Getter
 public abstract class Event {
-    @Getter
-    @Setter
     private String description;
-    @Getter
-    @Setter
     private int id;
 
     public Event(int id, String description) {
@@ -19,10 +17,6 @@ public abstract class Event {
 
     public Army startEvent(Army army) {
         return army;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String toStringWithID() {
