@@ -80,6 +80,10 @@ public class Simulation {
     }
 
 
+    /**
+     * Takes a list of GameElement or a list of one of its subclasses and applies events to them.
+     * @param elements The GameElements.
+     */
     private void eventOnElement(List<? extends GameElement> elements) {
         Random random = new Random();
         for (GameElement element : elements) {

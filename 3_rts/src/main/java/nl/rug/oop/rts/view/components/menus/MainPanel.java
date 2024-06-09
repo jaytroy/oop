@@ -1,8 +1,9 @@
-package nl.rug.oop.rts.view;
+package nl.rug.oop.rts.view.components.menus;
 
 import lombok.Getter;
 import nl.rug.oop.rts.controller.actions.ButtonActions;
 import nl.rug.oop.rts.model.base.Graph;
+import nl.rug.oop.rts.view.MainFrame;
 import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;

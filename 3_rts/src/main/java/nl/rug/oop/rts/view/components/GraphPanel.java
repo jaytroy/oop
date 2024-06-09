@@ -7,6 +7,8 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.Event;
+import nl.rug.oop.rts.view.components.menus.whatisthis.EdgeMenu2;
+import nl.rug.oop.rts.view.components.menus.whatisthis.NodeMenu2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,8 +19,8 @@ import java.util.List;
  */
 public class GraphPanel extends JPanel implements GraphObserver {
     private Graph graph;
-    private NodeMenu nodeMenu;
-    private EdgeMenu edgeMenu;
+    private NodeMenu2 nodeMenu;
+    private EdgeMenu2 edgeMenu;
     private JTextArea informationJTextArea;
 
     /**
@@ -44,12 +46,12 @@ public class GraphPanel extends JPanel implements GraphObserver {
     }
 
     private void createNodeMenu() {
-        nodeMenu = new NodeMenu();
+        nodeMenu = new NodeMenu2();
         add(nodeMenu);
     }
 
     private void createEdgeMenu() {
-        edgeMenu = new EdgeMenu();
+        edgeMenu = new EdgeMenu2();
         add(edgeMenu);
     }
 

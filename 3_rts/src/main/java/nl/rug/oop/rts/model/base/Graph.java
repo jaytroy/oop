@@ -6,9 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.Saveable;
 import nl.rug.oop.rts.view.components.GraphObserver;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

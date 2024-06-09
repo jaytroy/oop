@@ -45,7 +45,7 @@ public abstract class GameElement implements Saveable {
 
     protected String saveExtraFields() {
         return "";
-    };
+    }
 
     @Override
     public String saveJson() {

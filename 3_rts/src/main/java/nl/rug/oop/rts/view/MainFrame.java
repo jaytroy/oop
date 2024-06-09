@@ -7,6 +7,8 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.ReinforcementsEvent;
+import nl.rug.oop.rts.view.components.menus.NavBar;
+import nl.rug.oop.rts.view.components.menus.MainPanel;
 
 import javax.swing.*;
 
@@ -27,7 +29,7 @@ public class MainFrame extends JFrame {
         mainPanel = new MainPanel(graph, this);
         setContentPane(mainPanel);
 
-        MainMenu mainMenu = new MainMenu(this);
+        NavBar mainMenu = new NavBar(this);
         setJMenuBar(mainMenu.createMenuBar());
     }
 
