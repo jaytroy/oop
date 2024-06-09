@@ -2,8 +2,13 @@ package nl.rug.oop.rts.model.base;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import nl.rug.oop.rts.model.Saveable;
 import nl.rug.oop.rts.view.components.GraphObserver;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +16,8 @@ import java.util.Random;
 /**
  * This class handles the Graph in our simulator.
  */
-public class Graph {
+@Slf4j
+public class Graph implements Saveable {
     @Getter
     private List<Node> nodes;
     @Getter
@@ -157,5 +163,32 @@ public class Graph {
         Random random = new Random();
         int index = random.nextInt(edges.size());
         return edges.get(index);
+    }
+
+    @Override
+    public String saveJson() {
+        StringBuilder json = new StringBuilder();
+
+        json.append("{\n");
+
+        json.append("\t\"Nodes\": [\n");
+        for (Node node : nodes) {
+            json.append(node.saveJson());
+            json.append(",\n");
+        }
+        json.deleteCharAt(json.length() - 2);
+        json.append("\t],\n");
+
+        json.append("\t\"Edges\": [\n");
+        for (Edge edge : edges) {
+            json.append(edge.saveJson());
+            json.append(",\n");
+        }
+        json.deleteCharAt(json.length() - 2);
+        json.append("\t]\n");
+
+        json.append("}\n");
+
+        return json.toString();
     }
 }

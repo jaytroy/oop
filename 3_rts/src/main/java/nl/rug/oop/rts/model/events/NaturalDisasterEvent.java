@@ -12,14 +12,16 @@ import java.util.Random;
  * This class handles one of the special events, where units form an army die because of natural disasters.
  */
 public class NaturalDisasterEvent extends Event {
+    private static int nextId = 0;
     private static final String DESC = "Natural Disaster";
 
-    public NaturalDisasterEvent(int nextId) {
+    public NaturalDisasterEvent() {
         super(nextId, DESC);
+        nextId++;
     }
 
     @Override
-    public Army startEvent(Army army) {
+    public void startEvent(Army army) {
         List<Army> armies = new ArrayList<>();
         List<Unit> armylist = army.getUnits();
         Random random = new Random();
@@ -35,6 +37,5 @@ public class NaturalDisasterEvent extends Event {
         armies.add(army);
         Battle.removeCasualties(armies);
         System.out.println("EVENT HAPPENS");
-        return army;
     }
 }

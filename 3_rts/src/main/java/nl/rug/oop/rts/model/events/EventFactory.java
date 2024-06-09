@@ -2,12 +2,12 @@ package nl.rug.oop.rts.model.events;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class EventFactory {
     //Map to store the constructors for each event type.
-    //The function here returns a new event with a given Integer id (nextId).
-    private final Map<EventTypes, Function<Integer,Event>> eventConstructors = new HashMap<>();
+    //Supplier takes no arguments and returns a result, the result being a new instance of a class.
+    private final Map<EventTypes, Supplier<Event>> eventConstructors = new HashMap<>();
 
     public EventFactory() {
         //Add the event constructors to the map
@@ -18,9 +18,9 @@ public class EventFactory {
         eventConstructors.put(EventTypes.RandomEvent, RandomEvent::getRandomEvent);
     }
 
-    public Event createEvent(EventTypes type, int nextEventId) {
+    public Event createEvent(EventTypes type) {
         if(eventConstructors.containsKey(type)) {
-            return eventConstructors.get(type).apply(nextEventId);
+            return eventConstructors.get(type).get();
         } else {
             throw new IllegalArgumentException("Invalid event type: " + type);
         }

@@ -49,6 +49,9 @@ target/
 # Custom Save Files
 *.ser
 
+#RTS save folder
+/saves/
+
 # BlueJ files
 *.ctxt
 

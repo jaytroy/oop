@@ -1,0 +1,313 @@
+{
+	"Nodes": [
+		{
+			"Id": 1,
+			"Name": "Groningen",
+			"Armies": [
+				{
+					"id": 1,
+					"faction": "MEN",
+					"team": true,
+					"units": [
+						{
+							"name": "Tower Guard",
+							"damage": 6,
+							"health": 125,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 1,
+							"health": 123,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 9,
+							"health": 91,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 2,
+							"health": 50,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 10,
+							"health": 53,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 10,
+							"health": 66,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 10,
+							"health": 86,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 8,
+							"health": 68,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 6,
+							"health": 60,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 9,
+							"health": 58,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 7,
+							"health": 56,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 9,
+							"health": 73,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 4,
+							"health": 127,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 8,
+							"health": 91,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 8,
+							"health": 63,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 1,
+							"health": 96,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 3,
+							"health": 56,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 1,
+							"health": 74,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 3,
+							"health": 126,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 5,
+							"health": 106,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 6,
+							"health": 125,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 1,
+							"health": 54,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 6,
+							"health": 138,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 9,
+							"health": 89,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 2,
+							"health": 95,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 1,
+							"health": 102,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 3,
+							"health": 69,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 4,
+							"health": 123,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 8,
+							"health": 115,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 3,
+							"health": 121,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 4,
+							"health": 66,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 2,
+							"health": 113,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 9,
+							"health": 86,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 1,
+							"health": 106,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 7,
+							"health": 75,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 2,
+							"health": 103,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 7,
+							"health": 145,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 5,
+							"health": 120,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 8,
+							"health": 143,
+							"accuracy": 50
+						},
+						{
+							"name": "Ithilien Ranger",
+							"damage": 3,
+							"health": 136,
+							"accuracy": 50
+						},
+						{
+							"name": "Gondor Soldier",
+							"damage": 2,
+							"health": 87,
+							"accuracy": 50
+						},
+						{
+							"name": "Tower Guard",
+							"damage": 2,
+							"health": 123,
+							"accuracy": 50
+						}
+					]
+				}
+			],
+			"Events": [
+				{
+					"description": "Reinforcements",
+					"id": 0
+				}
+			]
+		},
+		{
+			"Id": 2,
+			"Name": "Leeuwarden",
+			"Armies": [],
+			"Events": []
+		},
+		{
+			"Id": 3,
+			"Name": "Amsterdam",
+			"Armies": [],
+			"Events": []
+		}
+	],
+	"Edges": [
+		{
+			"Id": 1,
+			"Name": "Edge 1",
+			"Node1": 1,
+			"Node2": 2,
+			"Armies": [],
+			"Events": []
+		},
+		{
+			"Id": 2,
+			"Name": "Edge 2",
+			"Node1": 2,
+			"Node2": 3,
+			"Armies": [],
+			"Events": []
+		},
+		{
+			"Id": 3,
+			"Name": "Edge 3",
+			"Node1": 1,
+			"Node2": 3,
+			"Armies": [],
+			"Events": []
+		}
+	]
+}

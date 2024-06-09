@@ -43,6 +43,15 @@ public class Edge extends GameElement {
                     " with any other Nodes");
             return null;
         }
+    }
 
+    @Override
+    protected String saveExtraFields() {
+        StringBuilder json = new StringBuilder();
+
+        json.append("\t\t\t\"Node1\": ").append(Node1.getId()).append(",\n");
+        json.append("\t\t\t\"Node2\": ").append(Node2.getId()).append(",\n");
+
+        return json.toString();
     }
 }

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventActions {
-    private int nextEventID = 0;
     private final EventFactory eventFactory = new EventFactory();
 
     public void addEventToSelectedElement(Graph graph, GraphPanel panel, MainFrame mainFrame) {
@@ -29,9 +28,8 @@ public class EventActions {
                 eventTypes[0]
         );
         if (selectedEventType != null) {
-            Event newEvent = eventFactory.createEvent(selectedEventType, nextEventID);
+            Event newEvent = eventFactory.createEvent(selectedEventType);
             selectedElement.addEvent(newEvent);
-            nextEventID++;
             panel.repaint();
             System.out.println("Event added to the selected node.");
         }

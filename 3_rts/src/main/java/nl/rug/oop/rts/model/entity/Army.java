@@ -2,6 +2,7 @@ package nl.rug.oop.rts.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.rug.oop.rts.model.Saveable;
 import nl.rug.oop.rts.model.base.Node;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Random;
  * This class handles the details of armies.
  */
 @Getter
-public class Army {
+public class Army implements Saveable {
     private List<Unit> units;
     private Faction faction;
     private Boolean team;
@@ -60,6 +61,29 @@ public class Army {
             randomUnits.add(new Unit(randomUnitName, randDamage, randHealth));
         }
         return randomUnits;
+    }
+
+    @Override
+    public String saveJson() {
+        StringBuilder json = new StringBuilder();
+        json.append("\n\t\t\t\t{\n");
+        json.append("\t\t\t\t\t\"id\": ").append(id).append(",\n");
+        json.append("\t\t\t\t\t\"faction\": \"").append(faction).append("\",\n");
+        json.append("\t\t\t\t\t\"team\": ").append(team).append(",\n");
+        json.append("\t\t\t\t\t\"units\": [");
+        for (Unit unit : units) {
+            json.append(unit.saveJson()).append(",");
+        }
+
+        if(units.isEmpty()) {
+            json.append("],\n");
+        } else {
+            json.deleteCharAt(json.length() - 1);
+            json.append("\n\t\t\t\t\t]\n");
+        }
+        json.append("\t\t\t\t}");
+
+        return json.toString();
     }
 }
 

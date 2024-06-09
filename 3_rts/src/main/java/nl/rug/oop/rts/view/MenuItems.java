@@ -13,7 +13,7 @@ public class MenuItems {
         this.mainFrame = mainFrame;
     }
 
-    public void createMenuItems(JMenu nodeMenu, JMenu edgeMenu, JMenu armyMenu, JMenu eventMenu, JMenu simulationMenu) {
+    public void createMenuItems(JMenu nodeMenu, JMenu edgeMenu, JMenu armyMenu, JMenu eventMenu, JMenu simulationMenu, JMenu saveMenu) {
         JMenuItem addNodeItem = new JMenuItem("Add Node");
         JMenuItem removeNodeItem = new JMenuItem("Remove Node");
         nodeMenu.add(addNodeItem);
@@ -37,10 +37,13 @@ public class MenuItems {
         JMenuItem sim1Step = new JMenuItem("Simulate Single Time Step");
         simulationMenu.add(sim1Step);
 
-        createActionListeners(addNodeItem, removeNodeItem, addEdgeItem, removeEdgeItem, addArmyItem, removeArmyItem, addEventItem, removeEventItem, sim1Step);
+        JMenuItem saveGame = new JMenuItem("Save Game");
+        saveMenu.add(saveGame);
+
+        createActionListeners(addNodeItem, removeNodeItem, addEdgeItem, removeEdgeItem, addArmyItem, removeArmyItem, addEventItem, removeEventItem, sim1Step, saveGame);
     }
 
-    private void createActionListeners(JMenuItem addNodeItem, JMenuItem removeNodeItem, JMenuItem addEdgeItem, JMenuItem removeEdgeItem, JMenuItem addArmyItem, JMenuItem removeArmyItem, JMenuItem addEventItem, JMenuItem removeEventItem, JMenuItem sim1Step) {
+    private void createActionListeners(JMenuItem addNodeItem, JMenuItem removeNodeItem, JMenuItem addEdgeItem, JMenuItem removeEdgeItem, JMenuItem addArmyItem, JMenuItem removeArmyItem, JMenuItem addEventItem, JMenuItem removeEventItem, JMenuItem sim1Step, JMenuItem saveGame) {
         ButtonActions buttonActions = mainFrame.getMainPanel().getButtonActions();
         var mainPanel = mainFrame.getMainPanel();
         addNodeItem.addActionListener(e -> buttonActions.addNode(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
@@ -52,5 +55,6 @@ public class MenuItems {
         addEventItem.addActionListener(e -> buttonActions.addEventToSelectedElement(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
         removeEventItem.addActionListener(e -> buttonActions.removeEventFromSelectedElement(mainPanel.getGraph(), mainPanel.getGraphPanel(), mainFrame));
         sim1Step.addActionListener(e -> buttonActions.simulation1Step(mainPanel.getGraph(), mainPanel.getGraphPanel()));
+        saveGame.addActionListener(e -> buttonActions.saveGame(mainPanel.getGraph()));
     }
 }

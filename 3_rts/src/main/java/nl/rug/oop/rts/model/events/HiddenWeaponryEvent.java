@@ -9,18 +9,19 @@ import java.util.List;
  * This represents one of the special events, where units get a boost of damage.
  */
 public class HiddenWeaponryEvent extends Event {
+    private static int nextId = 0;
     private final static String DESC = "Hidden Weaponry";
 
-    public HiddenWeaponryEvent(int nextid) {
-        super(nextid, DESC);
+    public HiddenWeaponryEvent() {
+        super(nextId, DESC);
+        nextId++;
     }
 
     @Override
-    public Army startEvent(Army army) {
+    public void startEvent(Army army) {
         List<Unit> units = army.getUnits();
         for (Unit unit : units) {
             unit.setDamage(unit.getDamage() + 5);
         }
-        return army;
     }
 }

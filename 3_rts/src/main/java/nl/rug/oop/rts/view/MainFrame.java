@@ -31,12 +31,15 @@ public class MainFrame extends JFrame {
         setJMenuBar(mainMenu.createMenuBar());
     }
 
+    /**
+     * Initializes the graph with some nodes and edges.
+     */
     private void initializeGraph() {
-        Node node1 = new Node(1, "Node 1", 150, 200);
-        Node node2 = new Node(2, "Node 2", 300, 300);
-        Node node3 = new Node(3, "Node 3", 110, 400);
+        Node node1 = new Node(1, "Groningen", 150, 200);
+        Node node2 = new Node(2, "Leeuwarden", 300, 300);
+        Node node3 = new Node(3, "Amsterdam", 110, 400);
         node1.addArmy(new Army(1, Faction.MEN));
-        node1.addEvent(new ReinforcementsEvent(1));
+        node1.addEvent(new ReinforcementsEvent());
 
         Edge edge1 = new Edge(1, "Edge 1", node1, node2);
         Edge edge2 = new Edge(2, "Edge 2", node2, node3);

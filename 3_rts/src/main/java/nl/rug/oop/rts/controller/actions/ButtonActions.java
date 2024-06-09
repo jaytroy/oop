@@ -13,6 +13,7 @@ public class ButtonActions {
     private final EdgeActions edgeActions = new EdgeActions();
     private final ArmyActions armyActions = new ArmyActions();
     private final EventActions eventActions = new EventActions();
+    private final SaveActions saveActions = new SaveActions();
 
     public void addNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         nodeActions.addAction(graph, panel, mainFrame);
@@ -44,6 +45,10 @@ public class ButtonActions {
 
     public void removeEventFromSelectedElement(Graph graph, GraphPanel graphPanel, MainFrame mainFrame) {
         eventActions.removeEventFromSelectedElement(graph, graphPanel, mainFrame);
+    }
+
+    public void saveGame(Graph graph) {
+        saveActions.saveGame(graph);
     }
 
     /**

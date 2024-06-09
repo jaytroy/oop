@@ -16,9 +16,9 @@ public class RandomEvent {
      *
      * @return the selected event.
      */
-    public static Event getRandomEvent(int nextId) {
+    public static Event getRandomEvent() {
         int eventTypeIndex = random.nextInt(eventTypes.length);
         EventTypes selectedType = eventTypes[eventTypeIndex];
-        return eventFactory.createEvent(selectedType, nextId);
+        return eventFactory.createEvent(selectedType);
     }
 }
