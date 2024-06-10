@@ -8,7 +8,7 @@ import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.ReinforcementsEvent;
 import nl.rug.oop.rts.view.components.menus.NavBar;
-import nl.rug.oop.rts.view.components.menus.MainPanel;
+import nl.rug.oop.rts.view.components.MainPanel;
 
 import javax.swing.*;
 

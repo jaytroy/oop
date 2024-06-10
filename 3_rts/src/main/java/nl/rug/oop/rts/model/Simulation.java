@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Class that handles the simulations.
  */
@@ -26,6 +27,7 @@ public class Simulation {
     public void simulateSingleStep(Graph graph) {
         List<Node> nodes = new ArrayList<>(graph.getNodes());
         List<Edge> edges = new ArrayList<>(graph.getEdges());
+        
 
         // Phase 1: Resolve battles on nodes before moving armies to edges
         for (Node node : nodes) {

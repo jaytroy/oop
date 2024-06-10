@@ -1,4 +1,4 @@
-package nl.rug.oop.rts.view.components.menus.Indicators;
+package nl.rug.oop.rts.view.components.Indicators;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,5 +1,6 @@
 package nl.rug.oop.rts.controller.actions;
 
+import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.MainFrame;
@@ -52,6 +53,16 @@ public class NodeActions implements Action {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
             graph.removeNode(selectedNode);
+            panel.repaint();
+        }
+    }
+
+    public void renameNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+        String newNodeName;
+        Node selectedNode = graph.getSelectedNode();
+        if (selectedNode != null) {
+            newNodeName = JOptionPane.showInputDialog(mainFrame, "Enter the new name for the node:");
+            selectedNode.setName(newNodeName);
             panel.repaint();
         }
     }

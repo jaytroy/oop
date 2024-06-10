@@ -23,12 +23,20 @@ public class ButtonActions {
         nodeActions.removeAction(graph, panel);
     }
 
+    public void renameNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+        nodeActions.renameNode(graph, panel, mainFrame);
+    }
+
     public void addEdge(Graph graph, GraphPanel panel, MainFrame mainFrame) {
         edgeActions.addEdge(graph, panel, mainFrame);
     }
 
     public void removeEdge(Graph graph, GraphPanel panel) {
         edgeActions.removeEdge(graph, panel);
+    }
+
+    public void renameEdge(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+        edgeActions.renameEdge(graph, panel, mainFrame);
     }
 
     public void addArmyToSelectedNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {

@@ -78,4 +78,14 @@ public class EdgeActions {
             panel.repaint();
         }
     }
+
+    public void renameEdge(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+        String newEdgeName;
+        Edge selectedEdge = graph.getSelectedEdge();
+        if (selectedEdge != null) {
+            newEdgeName = JOptionPane.showInputDialog(mainFrame, "Enter the new name for the edge:");
+            selectedEdge.setName(newEdgeName);
+            panel.repaint();
+        }
+    }
 }

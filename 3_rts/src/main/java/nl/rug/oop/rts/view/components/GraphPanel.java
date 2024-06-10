@@ -7,8 +7,8 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.Event;
-import nl.rug.oop.rts.view.components.menus.Indicators.CurrentEdgeIndicator;
-import nl.rug.oop.rts.view.components.menus.Indicators.CurrentNodeIndicator;
+import nl.rug.oop.rts.view.components.Indicators.CurrentEdgeIndicator;
+import nl.rug.oop.rts.view.components.Indicators.CurrentNodeIndicator;
 
 import javax.swing.*;
 import java.awt.*;

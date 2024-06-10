@@ -2,7 +2,7 @@ package nl.rug.oop.rts.view.components.menus.navitems;
 
 import nl.rug.oop.rts.controller.actions.ButtonActions;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.components.menus.MainPanel;
+import nl.rug.oop.rts.view.components.MainPanel;
 
 import javax.swing.*;
 

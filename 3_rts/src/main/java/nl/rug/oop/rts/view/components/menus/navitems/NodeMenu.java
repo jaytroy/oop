@@ -13,10 +13,13 @@ public class NodeMenu extends Menu {
     public void createMenuItems() {
         JMenuItem addNodeItem = new JMenuItem("Add Node");
         JMenuItem removeNodeItem = new JMenuItem("Remove Node");
+        JMenuItem renameNodeItem = new JMenuItem("Rename Node");
         add(addNodeItem);
         add(removeNodeItem);
+        add(renameNodeItem);
 
         addNodeItem.addActionListener(e -> actions.addNode(panel.getGraph(), panel.getGraphPanel(), frame));
         removeNodeItem.addActionListener(e -> actions.removeNode(panel.getGraph(), panel.getGraphPanel()));
+        renameNodeItem.addActionListener(e -> actions.renameNode(panel.getGraph(), panel.getGraphPanel(), frame));
     }
 }
