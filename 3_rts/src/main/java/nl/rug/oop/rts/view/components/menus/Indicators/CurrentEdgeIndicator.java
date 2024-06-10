@@ -1,12 +1,12 @@
-package nl.rug.oop.rts.view.components.menus.whatisthis;
+package nl.rug.oop.rts.view.components.menus.Indicators;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EdgeMenu2 extends JPanel {
+public class CurrentEdgeIndicator extends JPanel {
     private final JLabel selectedEdgeLabel;
 
-    public EdgeMenu2() {
+    public CurrentEdgeIndicator() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBounds(10, 50, 300, 30);

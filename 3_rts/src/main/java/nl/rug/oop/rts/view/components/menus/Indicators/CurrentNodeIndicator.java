@@ -1,12 +1,12 @@
-package nl.rug.oop.rts.view.components.menus.whatisthis;
+package nl.rug.oop.rts.view.components.menus.Indicators;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class NodeMenu2 extends JPanel {
+public class CurrentNodeIndicator extends JPanel {
     private final JLabel selectedNodeLabel;
 
-    public NodeMenu2() {
+    public CurrentNodeIndicator() {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
         setBounds(10, 10, 300, 30);
