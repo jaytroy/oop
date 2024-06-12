@@ -4,7 +4,8 @@ John Doe (s1234567) & Foo Bar (s2345678)
 
 ## Introduction
 
-> *Very briefly describe what your program does.*
+> *The program is a simulation game designed to model and visualize interactions between different armies on a map. It utilizes the Model-View-Controller (MVC) architectural pattern to separate concerns and ensure a modular and maintainable codebase. Users can interact with the game through a graphical user interface, which allows them to manage armies, nodes, and edges, control events, and observe the outcomes of their actions in a dynamic and engaging way.
+*
  
 >Expected length: ~100 words
 
@@ -36,7 +37,7 @@ Please answer the following questions:
 
 ___
 
-Answer:
+Answer: THe three componenets of the MVC pattern are: 
 
 ___
 
@@ -66,4 +67,4 @@ ___
 
 ## Conclusions
 
-> *Add a very short summary/concluding remarks here*
+> *Overall, we are quite happy with our result. We believe the code adheres to the MVC pattern, the rule of separation of concerns and the basic principle of Object Oriented Programming. The workflow was efficient and the cooperation among the group mates was smooth and pleasant. It was an instructive project and a great implementation of the concepts presented to us throughout the course.*

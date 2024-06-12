@@ -11,11 +11,11 @@ public class EventFactory {
 
     public EventFactory() {
         //Add the event constructors to the map
-        eventConstructors.put(EventTypes.HiddenWeaponryEvent, HiddenWeaponryEvent::new);
-        eventConstructors.put(EventTypes.NaturalDisasterEvent, NaturalDisasterEvent::new);
-        eventConstructors.put(EventTypes.ReinforcementsEvent, ReinforcementsEvent::new);
-        eventConstructors.put(EventTypes.TrainingMontage, TrainingMontage::new);
-        eventConstructors.put(EventTypes.RandomEvent, RandomEvent::getRandomEvent);
+        eventConstructors.put(EventTypes.HIDDEN_WEAPONRY_EVENT, HiddenWeaponryEvent::new);
+        eventConstructors.put(EventTypes.NATURAL_DISASTER_EVENT, NaturalDisasterEvent::new);
+        eventConstructors.put(EventTypes.REINFORCEMENTS_EVENT, ReinforcementsEvent::new);
+        eventConstructors.put(EventTypes.TRAINING_MONTAGE, TrainingMontage::new);
+        eventConstructors.put(EventTypes.RANDOM_EVENT, RandomEvent::getRandomEvent);
     }
 
     public Event createEvent(EventTypes type) {
