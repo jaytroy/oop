@@ -16,6 +16,7 @@ public class Main {
      * @param args Commandline arguments.
      */
     public static void main(String[] args) {
+        System.out.println("Starting");
         FlatDarculaLaf.setup();
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();

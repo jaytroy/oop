@@ -16,7 +16,7 @@ public class EventMenu extends Menu {
         add(addEventItem);
         add(removeEventItem);
 
-        addEventItem.addActionListener(e -> actions.addEventToSelectedElement(panel.getGraph(), panel.getGraphPanel(), frame));
-        removeEventItem.addActionListener(e -> actions.removeEventFromSelectedElement(panel.getGraph(), panel.getGraphPanel(), frame));
+        addEventItem.addActionListener(e -> actions.addEventToSelectedElement(panel.getGraph(), frame));
+        removeEventItem.addActionListener(e -> actions.removeEventFromSelectedElement(panel.getGraph(), frame));
     }
 }

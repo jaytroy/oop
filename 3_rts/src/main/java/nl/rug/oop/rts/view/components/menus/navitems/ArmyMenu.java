@@ -16,7 +16,7 @@ public class ArmyMenu extends Menu {
         add(addArmyItem);
         add(removeArmyItem);
 
-        addArmyItem.addActionListener(e -> actions.addArmyToSelectedNode(panel.getGraph(), panel.getGraphPanel(),frame));
-        removeArmyItem.addActionListener(e -> actions.removeArmyFromSelectedNode(panel.getGraph(), panel.getGraphPanel(),frame));
+        addArmyItem.addActionListener(e -> actions.addArmyToSelectedNode(panel.getGraph(), frame));
+        removeArmyItem.addActionListener(e -> actions.removeArmyFromSelectedNode(panel.getGraph(), frame));
     }
 }

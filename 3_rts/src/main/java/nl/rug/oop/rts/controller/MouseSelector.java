@@ -8,7 +8,6 @@ import nl.rug.oop.rts.view.components.GraphPanel;
 
 import java.awt.event.*;
 
-@Slf4j
 public class MouseSelector extends MouseAdapter {
     private Graph graph;
     private GraphPanel panel;

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.Saveable;
-import nl.rug.oop.rts.view.components.GraphObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Random;
 /**
  * This class handles the Graph in our simulator.
  */
-@Slf4j
 public class Graph implements Saveable {
     @Getter
     private List<Node> nodes;

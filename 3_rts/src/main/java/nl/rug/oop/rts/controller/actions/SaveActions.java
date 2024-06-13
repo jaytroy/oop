@@ -8,10 +8,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-@Slf4j
 public class SaveActions {
     public void saveGame(Graph graph) {
-        log.info("Saving the game");
 
         File dir = createSaveFolderIfNotExists();
         JFileChooser fileChooser = new JFileChooser(dir);
@@ -25,7 +23,7 @@ public class SaveActions {
                 output.write(json.getBytes());
                 output.close();
             } catch (IOException e) {
-                log.error("Error saving the file: {}", e.getMessage());
+                System.out.println("Error saving file: " + e.getMessage());
             }
         }
     }

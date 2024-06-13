@@ -16,7 +16,6 @@ import java.util.Random;
 /**
  * Class that handles the simulations.
  */
-@Slf4j
 public class Simulation {
     private final double CHANCE = 0.70;
 
@@ -72,13 +71,10 @@ public class Simulation {
         for (Node node : nodes) {
             node.setArmies(Battle.battleStart(node.getArmies()));
         }
-        log.info("EVENTS START");
 
         // Phase 7: Apply events to armies on nodes
         eventOnElement(nodes);
-        log.info("EVENTS END");
 
-        log.info("Simulation complete");
     }
 
 
@@ -96,7 +92,7 @@ public class Simulation {
                     for (Army army : element.getArmies()) {
                         if (army != null) {
                             randomEvent.startEvent(army);
-                            log.info("Event started for army: {}", army);
+                            System.out.println("Event: " + randomEvent.getDescription() + " on army: " + army.getFaction());
                         }
                     }
                 }

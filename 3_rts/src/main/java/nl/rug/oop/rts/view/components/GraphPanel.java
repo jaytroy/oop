@@ -1,8 +1,10 @@
 package nl.rug.oop.rts.view.components;
 
+import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.controller.MouseSelector;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
+import nl.rug.oop.rts.model.base.GraphObserver;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
@@ -30,6 +32,7 @@ public class GraphPanel extends JPanel implements GraphObserver {
      */
     public GraphPanel(Graph graph) {
         this.graph = graph;
+        this.graph.addObserver(this);
         setBackground(Color.RED);
         setLayout(null);
 
@@ -132,8 +135,8 @@ public class GraphPanel extends JPanel implements GraphObserver {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        super.paintComponent(g);
 
         for (Edge edge : graph.getEdges()) {
             paintEdgesSelected((Graphics2D) g, edge, g2d);
@@ -272,7 +275,8 @@ public class GraphPanel extends JPanel implements GraphObserver {
         if (!edgeSelected) {
             edgeMenu.updateSelectedEdgeLabel("Selected Edge: None");
         }
-        repaint();
         updateMenus();
+        this.revalidate();
+        this.repaint();
     }
 }

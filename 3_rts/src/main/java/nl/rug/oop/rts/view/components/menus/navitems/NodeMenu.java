@@ -18,8 +18,8 @@ public class NodeMenu extends Menu {
         add(removeNodeItem);
         add(renameNodeItem);
 
-        addNodeItem.addActionListener(e -> actions.addNode(panel.getGraph(), panel.getGraphPanel(), frame));
-        removeNodeItem.addActionListener(e -> actions.removeNode(panel.getGraph(), panel.getGraphPanel()));
-        renameNodeItem.addActionListener(e -> actions.renameNode(panel.getGraph(), panel.getGraphPanel(), frame));
+        addNodeItem.addActionListener(e -> actions.addNode(panel.getGraph(), frame));
+        removeNodeItem.addActionListener(e -> actions.removeNode(panel.getGraph()));
+        renameNodeItem.addActionListener(e -> actions.renameNode(panel.getGraph(), frame));
     }
 }

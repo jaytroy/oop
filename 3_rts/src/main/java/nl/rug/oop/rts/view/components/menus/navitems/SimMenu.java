@@ -13,6 +13,6 @@ public class SimMenu extends Menu {
         JMenuItem sim1step = new JMenuItem("Simulate 1 step");
         add(sim1step);
 
-        sim1step.addActionListener(e -> actions.simulation1Step(panel.getGraph(), panel.getGraphPanel()));
+        sim1step.addActionListener(e -> actions.simulation1Step(panel.getGraph()));
     }
 }

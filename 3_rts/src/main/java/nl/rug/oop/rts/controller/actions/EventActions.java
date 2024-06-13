@@ -13,7 +13,7 @@ import java.util.List;
 public class EventActions {
     private final EventFactory eventFactory = new EventFactory();
 
-    public void addEventToSelectedElement(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+    public void addEventToSelectedElement(Graph graph, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
 
@@ -30,12 +30,12 @@ public class EventActions {
         if (selectedEventType != null) {
             Event newEvent = eventFactory.createEvent(selectedEventType);
             selectedElement.addEvent(newEvent);
-            panel.repaint();
+            graph.notifyObservers();
             System.out.println("Event added to the selected node.");
         }
     }
 
-    public void removeEventFromSelectedElement(Graph graph, GraphPanel graphPanel, MainFrame mainFrame) {
+    public void removeEventFromSelectedElement(Graph graph, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
 
@@ -66,7 +66,7 @@ public class EventActions {
 
                 if (selectedEvent != null) {
                     selectedElement.removeEvent(selectedEvent);
-                    graphPanel.repaint();
+                    graph.notifyObservers();
                 }
             }
         } else {

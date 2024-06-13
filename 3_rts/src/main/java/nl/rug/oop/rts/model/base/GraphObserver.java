@@ -1,6 +1,4 @@
-package nl.rug.oop.rts.view.components;
-
-import nl.rug.oop.rts.model.base.Graph;
+package nl.rug.oop.rts.model.base;
 
 /**
  * This interface handles the update of the observers.

@@ -19,10 +19,9 @@ public class ArmyActions {
      * the faction of your army.
      *
      * @param graph     the graph in which we have the node
-     * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
-    public void addArmyToSelectedNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+    public void addArmyToSelectedNode(Graph graph, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null) {
             Faction[] factions = Faction.values();
@@ -39,7 +38,7 @@ public class ArmyActions {
                 Army army = new Army(nextArmyID, selectedFaction);
                 selectedNode.addArmy(army);
                 nextArmyID++;
-                panel.repaint();
+                graph.notifyObservers();
             }
         }
     }
@@ -48,10 +47,9 @@ public class ArmyActions {
      * This function handles the removal of an army from the selected node.
      *
      * @param graph     the graph in which we have the node
-     * @param panel     the panel that we have to repaint
      * @param mainFrame the frame where this happens
      */
-    public void removeArmyFromSelectedNode(Graph graph, GraphPanel panel, MainFrame mainFrame) {
+    public void removeArmyFromSelectedNode(Graph graph, MainFrame mainFrame) {
         Node selectedNode = graph.getSelectedNode();
         if (selectedNode != null && selectedNode.isHasArmy()) {
             List<Army> armies = selectedNode.getArmies();
@@ -85,7 +83,7 @@ public class ArmyActions {
 
                 if (selectedArmy != null) {
                     selectedNode.removeArmy(selectedArmy);
-                    panel.repaint();
+                    graph.notifyObservers();
                 }
             }
         } else {

@@ -18,8 +18,8 @@ public class EdgeMenu extends Menu {
         add(removeEdgeItem);
         add(renameEdgeItem);
 
-        addEdgeItem.addActionListener(e -> actions.addEdge(panel.getGraph(), panel.getGraphPanel(), frame));
-        removeEdgeItem.addActionListener(e -> actions.removeEdge(panel.getGraph(), panel.getGraphPanel()));
-        renameEdgeItem.addActionListener(e -> actions.renameEdge(panel.getGraph(), panel.getGraphPanel(), frame));
+        addEdgeItem.addActionListener(e -> actions.addEdge(panel.getGraph(), frame));
+        removeEdgeItem.addActionListener(e -> actions.removeEdge(panel.getGraph()));
+        renameEdgeItem.addActionListener(e -> actions.renameEdge(panel.getGraph(), frame));
     }
 }
