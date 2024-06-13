@@ -5,10 +5,12 @@ import nl.rug.oop.rts.controller.actions.ButtonActions;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.view.MainFrame;
 
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The main panel of the game.
+ */
 @Getter
 public class MainPanel extends JPanel {
     private final Graph graph;
@@ -17,6 +19,11 @@ public class MainPanel extends JPanel {
     private final MainFrame mainFrame;
     private final ConsoleTextArea consoleTextArea;
 
+    /**
+     * Constructor for the main panel.
+     * @param graph The graph of the game.
+     * @param mainFrame The main frame of the game.
+     */
     public MainPanel(Graph graph, MainFrame mainFrame) {
         this.graph = graph;
         this.mainFrame = mainFrame;

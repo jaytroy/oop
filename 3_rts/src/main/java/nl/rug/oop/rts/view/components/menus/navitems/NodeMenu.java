@@ -4,7 +4,7 @@ import nl.rug.oop.rts.view.MainFrame;
 
 import javax.swing.*;
 
-public class NodeMenu extends Menu {
+public class NodeMenu extends NavItem {
     public NodeMenu(String label, MainFrame frame) {
         super(label,frame);
     }

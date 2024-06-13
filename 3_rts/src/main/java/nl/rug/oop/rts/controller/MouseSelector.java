@@ -1,6 +1,5 @@
 package nl.rug.oop.rts.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
@@ -8,6 +7,9 @@ import nl.rug.oop.rts.view.components.GraphPanel;
 
 import java.awt.event.*;
 
+/**
+ * This class handles the mouse selection of nodes and edges.
+ */
 public class MouseSelector extends MouseAdapter {
     private Graph graph;
     private GraphPanel panel;
@@ -22,7 +24,6 @@ public class MouseSelector extends MouseAdapter {
         this.graph = graph;
         this.panel = panel;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -148,7 +149,9 @@ public class MouseSelector extends MouseAdapter {
 
     private double pointToSegmentDistance(int x1, int y1, int x2, int y2, int px, int py) {
         double lineLengthSquared = Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2);
-        if (lineLengthSquared == 0) return Math.hypot(px - x1, py - y1);
+        if (lineLengthSquared == 0) {
+            return Math.hypot(px - x1, py - y1);
+        }
 
         double t = ((px - x1) * (x2 - x1) + (py - y1) * (y2 - y1)) / lineLengthSquared;
         t = Math.max(0, Math.min(1, t));

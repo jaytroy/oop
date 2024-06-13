@@ -6,12 +6,12 @@ import nl.rug.oop.rts.view.components.MainPanel;
 
 import javax.swing.*;
 
-public abstract class Menu extends JMenu {
+public abstract class NavItem extends JMenu {
     protected MainFrame frame;
     protected MainPanel panel;
     protected ButtonActions actions;
 
-    public Menu(String label, MainFrame frame) {
+    public NavItem(String label, MainFrame frame) {
         super(label);
         this.frame = frame;
         this.panel = frame.getMainPanel();

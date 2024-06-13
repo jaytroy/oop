@@ -3,19 +3,20 @@ package nl.rug.oop.rts.controller.actions;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 
-public class NodeActions implements Action {
+/**
+ * Action handler for nodes.
+ */
+public class NodeActions {
     /**
-     * This function handles adding a node. It shows an input dialog that lets you name your node, then creates one
+     * This function handles adding a node. It shows an input dialogue that lets you name your node, then creates one
      * at coordinates (200,200).
      *
-     * @param graph     the graph in which we have the node
-     * @param mainFrame the frame where this happens
+     * @param graph     The graph in which we have the node
+     * @param mainFrame The frame where this happens
      */
-
     public void addAction(Graph graph, MainFrame mainFrame) {
         String nodeName;
         boolean nameExists;
@@ -41,6 +42,7 @@ public class NodeActions implements Action {
         graph.addNode(node);
         graph.notifyObservers();
     }
+
     /**
      * This function removes the selected node.
      *
@@ -54,6 +56,11 @@ public class NodeActions implements Action {
         }
     }
 
+    /**
+     * Renames a node.
+     * @param graph The graph containing the node.
+     * @param mainFrame The frame displaying the graph.
+     */
     public void renameNode(Graph graph, MainFrame mainFrame) {
         String newNodeName;
         Node selectedNode = graph.getSelectedNode();

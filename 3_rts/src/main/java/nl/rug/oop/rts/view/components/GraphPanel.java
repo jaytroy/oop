@@ -1,6 +1,5 @@
 package nl.rug.oop.rts.view.components;
 
-import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.controller.MouseSelector;
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.Graph;
@@ -9,8 +8,7 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.model.events.Event;
-import nl.rug.oop.rts.view.components.Indicators.CurrentEdgeIndicator;
-import nl.rug.oop.rts.view.components.Indicators.CurrentNodeIndicator;
+import nl.rug.oop.rts.view.components.Indicators.CurrentElementIndicator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,8 +19,7 @@ import java.util.List;
  */
 public class GraphPanel extends JPanel implements GraphObserver {
     private Graph graph;
-    private CurrentNodeIndicator nodeMenu;
-    private CurrentEdgeIndicator edgeMenu;
+    private CurrentElementIndicator elementMenu;
     private JTextArea informationJTextArea;
 
     /**
@@ -42,20 +39,14 @@ public class GraphPanel extends JPanel implements GraphObserver {
         setFocusable(true);
         requestFocus();
 
-        createNodeMenu();
-        createEdgeMenu();
+        createElementMenu();
         createInformationPanel();
         updateMenus();
     }
 
-    private void createNodeMenu() {
-        nodeMenu = new CurrentNodeIndicator();
-        add(nodeMenu);
-    }
-
-    private void createEdgeMenu() {
-        edgeMenu = new CurrentEdgeIndicator();
-        add(edgeMenu);
+    private void createElementMenu() {
+        elementMenu = new CurrentElementIndicator();
+        add(elementMenu);
     }
 
     private void createInformationPanel() {
@@ -81,56 +72,64 @@ public class GraphPanel extends JPanel implements GraphObserver {
     }
 
     /**
-     * This updates two labels for nodes and edges that show us which ones are selected at the moment.
+     * Updates the menus.
      */
     public void updateMenus() {
         Node selectedNode = graph.getSelectedNode();
         Edge selectedEdge = graph.getSelectedEdge();
         if (selectedNode != null) {
-            nodeMenu.updateSelectedNodeLabel("Selected Node: " + selectedNode.getName());
-
-            StringBuilder infoBuilder = new StringBuilder();
-            List<Army> armies = selectedNode.getArmies();
-            if (!armies.isEmpty()) {
-                infoBuilder.append("Armies:\n");
-                for (Army army : armies) {
-                    infoBuilder.append("- Faction: ").append(army.getFaction()).append(", Units: ").append(army.getUnits().size()).append("\n");
-                }
-            } else {
-                infoBuilder.append("No armies\n");
-            }
-
-            List<Event> events = selectedNode.getEvents();
-            if (!events.isEmpty()) {
-                infoBuilder.append("\nEvents:\n");
-                for (Event event : events) {
-                    infoBuilder.append("- ").append(event.getDescription()).append("\n");
-                }
-            } else {
-                infoBuilder.append("\nNo events.\n");
-            }
-
-            informationJTextArea.setText(infoBuilder.toString());
+            updateNodeMenu(selectedNode);
         } else if (selectedEdge != null) {
-            edgeMenu.updateSelectedEdgeLabel("Selected Edge: " + selectedEdge.getName());
-
-            StringBuilder infoBuilder = new StringBuilder();
-            List<Event> events = selectedEdge.getEvents();
-            if (!events.isEmpty()) {
-                infoBuilder.append("Events:\n");
-                for (Event event : events) {
-                    infoBuilder.append("- ").append(event.getDescription()).append("\n");
-                }
-            } else {
-                infoBuilder.append("No events.\n");
-            }
-
-            informationJTextArea.setText(infoBuilder.toString());
+            updateEdgeMenu(selectedEdge);
         } else {
-            nodeMenu.updateSelectedNodeLabel("Selected Node: None");
-            edgeMenu.updateSelectedEdgeLabel("Selected Edge: None");
+            elementMenu.updateSelectedElementLabel("Selected Element: None");
             informationJTextArea.setText("");
         }
+    }
+
+    private void updateNodeMenu(Node selectedNode) {
+        elementMenu.updateSelectedElementLabel("Selected Node: " + selectedNode.getName());
+
+        StringBuilder infoBuilder = new StringBuilder();
+        List<Army> armies = selectedNode.getArmies();
+        if (!armies.isEmpty()) {
+            infoBuilder.append("Armies:\n");
+            for (Army army : armies) {
+                infoBuilder.append("- Faction: ").append(army.getFaction()).append(", Units: ")
+                        .append(army.getUnits().size()).append("\n");
+            }
+        } else {
+            infoBuilder.append("No armies\n");
+        }
+
+        List<Event> events = selectedNode.getEvents();
+        if (!events.isEmpty()) {
+            infoBuilder.append("\nEvents:\n");
+            for (Event event : events) {
+                infoBuilder.append("- ").append(event.getDescription()).append("\n");
+            }
+        } else {
+            infoBuilder.append("\nNo events.\n");
+        }
+
+        informationJTextArea.setText(infoBuilder.toString());
+    }
+
+    private void updateEdgeMenu(Edge selectedEdge) {
+        elementMenu.updateSelectedElementLabel("Selected Edge: " + selectedEdge.getName());
+
+        StringBuilder infoBuilder = new StringBuilder();
+        List<Event> events = selectedEdge.getEvents();
+        if (!events.isEmpty()) {
+            infoBuilder.append("Events:\n");
+            for (Event event : events) {
+                infoBuilder.append("- ").append(event.getDescription()).append("\n");
+            }
+        } else {
+            infoBuilder.append("No events.\n");
+        }
+
+        informationJTextArea.setText(infoBuilder.toString());
     }
 
     @Override
@@ -192,7 +191,6 @@ public class GraphPanel extends JPanel implements GraphObserver {
         }
     }
 
-
     /**
      * This handles painting the node that is selected.
      *
@@ -236,7 +234,6 @@ public class GraphPanel extends JPanel implements GraphObserver {
         }
     }
 
-
     private Color getFactionColor(Faction faction) {
         return switch (faction) {
             case MEN -> Color.WHITE;
@@ -268,13 +265,10 @@ public class GraphPanel extends JPanel implements GraphObserver {
             }
         }
 
-        if (!nodeSelected) {
-            nodeMenu.updateSelectedNodeLabel("Selected Node: None");
+        if (!nodeSelected && !edgeSelected) {
+            elementMenu.updateSelectedElementLabel("Selected Node: None");
         }
 
-        if (!edgeSelected) {
-            edgeMenu.updateSelectedEdgeLabel("Selected Edge: None");
-        }
         updateMenus();
         this.revalidate();
         this.repaint();

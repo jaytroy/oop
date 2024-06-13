@@ -4,7 +4,7 @@ import nl.rug.oop.rts.view.MainFrame;
 
 import javax.swing.*;
 
-public class SimMenu extends Menu {
+public class SimMenu extends NavItem {
     public SimMenu(String label, MainFrame frame) {
         super(label, frame);
     }

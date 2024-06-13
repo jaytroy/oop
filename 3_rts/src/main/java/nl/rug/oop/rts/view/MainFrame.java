@@ -12,11 +12,18 @@ import nl.rug.oop.rts.view.components.MainPanel;
 
 import javax.swing.*;
 
+/**
+ * MainFrame is the main window of the application.
+ * It contains the graph and the main panel.
+ */
 @Getter
 public class MainFrame extends JFrame {
     private final Graph graph;
     private final MainPanel mainPanel;
 
+    /**
+     * Constructor for the MainFrame.
+     */
     public MainFrame() {
         setTitle("Graph Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

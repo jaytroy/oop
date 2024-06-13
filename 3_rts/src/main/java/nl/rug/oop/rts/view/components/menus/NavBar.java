@@ -16,7 +16,7 @@ public class NavBar {
 
     public JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        List<Menu> menus = new ArrayList<>();
+        List<NavItem> menus = new ArrayList<>();
 
         menus.add(new NodeMenu("Node", frame));
         menus.add(new EdgeMenu("Edge", frame));
@@ -25,7 +25,7 @@ public class NavBar {
         menus.add(new SimMenu("Simulation", frame));
         menus.add(new SaveMenu("Save", frame));
 
-        for(Menu menu : menus) {
+        for(NavItem menu : menus) {
             menu.createMenuItems();
             menuBar.add(menu);
         }

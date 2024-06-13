@@ -5,12 +5,14 @@ import nl.rug.oop.rts.model.base.Node;
 import nl.rug.oop.rts.model.entity.Army;
 import nl.rug.oop.rts.model.entity.Faction;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Armies action handler.
+ */
 public class ArmyActions {
     private int nextArmyID = 0;
 
@@ -80,7 +82,6 @@ public class ArmyActions {
                         break;
                     }
                 }
-
                 if (selectedArmy != null) {
                     selectedNode.removeArmy(selectedArmy);
                     graph.notifyObservers();

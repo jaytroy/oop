@@ -5,7 +5,7 @@ import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.view.MainFrame;
 
 /**
- * This is the class that handles what every button does.
+ * A facade for actions that can be performed by pressing buttons.
  */
 public class ButtonActions {
     private final NodeActions nodeActions = new NodeActions();

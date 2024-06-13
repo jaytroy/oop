@@ -1,6 +1,5 @@
 package nl.rug.oop.rts.controller.actions;
 
-import lombok.extern.slf4j.Slf4j;
 import nl.rug.oop.rts.model.base.Graph;
 
 import javax.swing.*;
@@ -8,14 +7,22 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Saving action handler. Saves to JSON.
+ */
 public class SaveActions {
-    public void saveGame(Graph graph) {
 
+    /**
+     * Saves the current game state to JSON.
+     *
+     * @param graph The graph being saved.
+     */
+    public void saveGame(Graph graph) {
         File dir = createSaveFolderIfNotExists();
         JFileChooser fileChooser = new JFileChooser(dir);
         int val = fileChooser.showSaveDialog(null);
 
-        if(val == JFileChooser.APPROVE_OPTION) {
+        if (val == JFileChooser.APPROVE_OPTION) {
             String json = graph.saveJson();
 
             try {

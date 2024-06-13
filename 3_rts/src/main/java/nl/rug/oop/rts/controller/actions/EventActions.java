@@ -4,15 +4,22 @@ import nl.rug.oop.rts.model.base.GameElement;
 import nl.rug.oop.rts.model.base.Graph;
 import nl.rug.oop.rts.model.events.*;
 import nl.rug.oop.rts.view.MainFrame;
-import nl.rug.oop.rts.view.components.GraphPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Action handler for events.
+ */
 public class EventActions {
     private final EventFactory eventFactory = new EventFactory();
 
+    /**
+     * Adds an event to a GameElement.
+     * @param graph The graph containing the element.
+     * @param mainFrame The frame that displays the graph.
+     */
     public void addEventToSelectedElement(Graph graph, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
@@ -35,6 +42,11 @@ public class EventActions {
         }
     }
 
+    /**
+     * Removes an event from a GameElement.
+     * @param graph The graph containing the element.
+     * @param mainFrame The frame that displays the graph.
+     */
     public void removeEventFromSelectedElement(Graph graph, MainFrame mainFrame) {
         boolean node = graph.getSelectedNode() != null;
         GameElement selectedElement = node ? graph.getSelectedNode() : graph.getSelectedEdge();
