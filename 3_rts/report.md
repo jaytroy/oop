@@ -1,6 +1,6 @@
 # Report
 
-Pana (s4339959) & Jay (s5069890)
+Pana (s4339959) & Jakub Borcel (s5069890)
 
 ## Introduction
 
