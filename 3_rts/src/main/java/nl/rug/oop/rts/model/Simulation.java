@@ -1,5 +1,5 @@
 package nl.rug.oop.rts.model;
-import lombok.extern.slf4j.Slf4j;
+
 import nl.rug.oop.rts.model.base.Edge;
 import nl.rug.oop.rts.model.base.GameElement;
 import nl.rug.oop.rts.model.base.Graph;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
  * Class that handles the simulations.
  */
@@ -20,7 +19,8 @@ public class Simulation {
     private final double CHANCE = 0.70;
 
     /**
-      * Simulation of  a single step in the simulation.
+     * Simulation of a single step in the simulation.
+     *
      * @param graph graph where it happens
      */
     public void simulateSingleStep(Graph graph) {
@@ -29,12 +29,25 @@ public class Simulation {
 
         System.out.println("The simulation has started.");
 
-        // Phase 1: Resolve battles on nodes before moving armies to edges
+        resolveBattlesOnNodes(nodes);
+        moveArmiesToEdges(nodes, graph);
+        resolveBattlesOnEdges(edges);
+        applyEventsOnEdges(edges);
+        moveArmiesBackToNodes(edges, graph);
+        resolveBattlesOnNodes(nodes);
+        applyEventsOnNodes(nodes);
+
+        System.out.println("Simulation complete");
+    }
+
+    private void resolveBattlesOnNodes(List<Node> nodes) {
         for (Node node : nodes) {
             node.setArmies(Battle.battleStart(node.getArmies()));
         }
+    }
 
-        // Phase 2: Move armies to a random edge
+    private void moveArmiesToEdges(List<Node> nodes, Graph graph) {
+        Random random = new Random();
         for (Node node : nodes) {
             List<Edge> nodeEdges = new ArrayList<>(node.getEdges());
             List<Army> armies = new ArrayList<>(node.getArmies());
@@ -47,16 +60,19 @@ public class Simulation {
                 }
             }
         }
+    }
 
-        // Phase 3: Resolve battles on edges after moving armies
+    private void resolveBattlesOnEdges(List<Edge> edges) {
         for (Edge edge : edges) {
             edge.setArmies(Battle.battleStart(edge.getArmies()));
         }
+    }
 
-        // Phase 4: Apply events to armies on edges
+    private void applyEventsOnEdges(List<Edge> edges) {
         eventOnElement(edges);
+    }
 
-        // Phase 5: Move armies back to nodes
+    private void moveArmiesBackToNodes(List<Edge> edges, Graph graph) {
         for (Edge edge : edges) {
             List<Army> armies = new ArrayList<>(edge.getArmies());
             for (Army army : armies) {
@@ -67,21 +83,15 @@ public class Simulation {
                 }
             }
         }
-
-        // Phase 6: Resolve battles on nodes after moving armies back
-        for (Node node : nodes) {
-            node.setArmies(Battle.battleStart(node.getArmies()));
-        }
-
-        // Phase 7: Apply events to armies on nodes
-        eventOnElement(nodes);
-        System.out.println("Simulation complete");
-
     }
 
+    private void applyEventsOnNodes(List<Node> nodes) {
+        eventOnElement(nodes);
+    }
 
     /**
      * Takes a list of GameElement or a list of one of its subclasses and applies events to them.
+     *
      * @param elements The GameElements.
      */
     private void eventOnElement(List<? extends GameElement> elements) {

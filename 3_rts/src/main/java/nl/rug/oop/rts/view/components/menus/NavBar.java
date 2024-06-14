@@ -7,13 +7,25 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Navigation bar class.
+ */
+
 public class NavBar {
     private final MainFrame frame;
 
+    /**
+     * navigation abr constructor.
+     * @param mainFrame Mianframe that the abr will be added to.
+     */
     public NavBar(MainFrame mainFrame) {
         this.frame = mainFrame;
     }
 
+    /**
+     * Creates the standard menu bar.
+     * @return menubar.
+     */
     public JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         List<NavItem> menus = new ArrayList<>();

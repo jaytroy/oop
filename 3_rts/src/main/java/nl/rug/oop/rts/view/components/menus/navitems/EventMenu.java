@@ -5,7 +5,7 @@ import nl.rug.oop.rts.view.MainFrame;
 import javax.swing.*;
 
 /**
- * Menu for the event actions
+ * Menu for the event actions.
  */
 
 public class EventMenu extends NavItem {

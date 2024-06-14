@@ -7,17 +7,29 @@ import nl.rug.oop.rts.view.components.MainPanel;
 import javax.swing.*;
 
 /**
- * bstract class of generic navigation item.
+ * Abstract class of generic navigation item.
  */
 public abstract class NavItem extends JMenu {
+    /**
+     * The main frame associated with this navigation item.
+     */
     protected MainFrame frame;
+
+    /**
+     * The main panel associated with the main frame.
+     */
     protected MainPanel panel;
+
+    /**
+     * The button actions associated with the main panel.
+     */
     protected ButtonActions actions;
 
     /**
-     * constructor of generic nav item.
-     * @param label label fo the item.
-     * @param frame frame that the item would be added.
+     * Constructor for a generic navigation item.
+     *
+     * @param label the label for the item.
+     * @param frame the main frame that the item will be added to.
      */
     public NavItem(String label, MainFrame frame) {
         super(label);
@@ -27,8 +39,7 @@ public abstract class NavItem extends JMenu {
     }
 
     /**
-     * Abstract method to create a menu tiem.
+     * Abstract method to create menu items.
      */
-
     public abstract void createMenuItems();
 }

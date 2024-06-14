@@ -7,16 +7,23 @@ import java.io.PrintStream;
 /**
  * Console text area class for displaying messages.
  */
-
 public class ConsoleTextArea extends JTextArea {
     /**
      * Console text area constructor.
-     * @param rows rows of the area.
+     *
+     * @param rows    rows of the area.
      * @param columns columns of the area.
      */
     public ConsoleTextArea(int rows, int columns) {
         super(rows, columns);
         setEditable(false);
+        initializeOutputStream();
+    }
+
+    /**
+     * Initializes the output stream for capturing System.out and System.err.
+     */
+    void initializeOutputStream() {
         PrintStream printStream = new PrintStream(new ConsoleOutputStream(this));
         System.setOut(printStream);
         System.setErr(printStream);

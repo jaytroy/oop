@@ -10,10 +10,10 @@ import java.util.function.Supplier;
 
 public class EventFactory {
     private final Map<EventTypes, Supplier<Event>> eventConstructors = new HashMap<>();
-
     /**
      * Factory class getting the constructors ready.
      */
+
     public EventFactory() {
         eventConstructors.put(EventTypes.HIDDEN_WEAPONRY_EVENT, HiddenWeaponryEvent::new);
         eventConstructors.put(EventTypes.NATURAL_DISASTER_EVENT, NaturalDisasterEvent::new);
@@ -23,7 +23,7 @@ public class EventFactory {
     }
 
     /**
-     * Method to create a specific event
+     * Method to create a specific event.
      * @param type type of event to be created.
      * @return event.
      */
