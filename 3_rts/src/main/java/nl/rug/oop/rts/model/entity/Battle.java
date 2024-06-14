@@ -30,7 +30,17 @@ public class Battle {
         while (!goodArmies.isEmpty() && !evilArmies.isEmpty()) {
             Army goodArmy = goodArmies.get(random.nextInt(goodArmies.size()));
             Army evilArmy = evilArmies.get(random.nextInt(evilArmies.size()));
+            int goodArmyCasualties = goodArmy.getUnits().size();
+            int evilArmyCasualties = evilArmy.getUnits().size();
+
             simulateBattle(goodArmy, evilArmy);
+
+            goodArmyCasualties -= goodArmy.getUnits().size();
+            evilArmyCasualties -= evilArmy.getUnits().size();
+
+            System.out.println("Battle: " + goodArmy.getFaction() + " " + goodArmy.getNumUnits() + " vs " + evilArmy.getFaction() + " " + evilArmy.getNumUnits());
+            System.out.println(goodArmy.getFaction() + " " + goodArmy.getNumUnits() + " casualties: " + goodArmyCasualties);
+            System.out.println(evilArmy.getFaction() + " " + evilArmy.getNumUnits() + " casualties: " + evilArmyCasualties);
             if (goodArmy.getUnits().isEmpty()) {
                 goodArmies.remove(goodArmy);
             }

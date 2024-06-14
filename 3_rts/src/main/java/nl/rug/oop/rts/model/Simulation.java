@@ -26,7 +26,8 @@ public class Simulation {
     public void simulateSingleStep(Graph graph) {
         List<Node> nodes = new ArrayList<>(graph.getNodes());
         List<Edge> edges = new ArrayList<>(graph.getEdges());
-        
+
+        System.out.println("The simulation has started.");
 
         // Phase 1: Resolve battles on nodes before moving armies to edges
         for (Node node : nodes) {
@@ -74,6 +75,7 @@ public class Simulation {
 
         // Phase 7: Apply events to armies on nodes
         eventOnElement(nodes);
+        System.out.println("Simulation complete");
 
     }
 
@@ -92,7 +94,9 @@ public class Simulation {
                     for (Army army : element.getArmies()) {
                         if (army != null) {
                             randomEvent.startEvent(army);
-                            System.out.println("Event: " + randomEvent.getDescription() + " on army: " + army.getFaction());
+                            System.out.println(randomEvent.getDescription() +
+                                    " started for army: " + army.getFaction() +
+                                    " " + army.getNumUnits());
                         }
                     }
                 }

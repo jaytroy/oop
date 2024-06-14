@@ -20,6 +20,7 @@ public class Army implements Saveable {
     private int id;
     @Setter
     private Node comingFrom;
+    private int numUnits;
 
     /**
      * This is the constructor of the army.
@@ -53,7 +54,7 @@ public class Army implements Saveable {
 
         Random random = new Random();
         Names names = new Names();
-        int numUnits = random.nextInt(41) + 10;
+        numUnits = random.nextInt(41) + 10;
         for (int i = 0; i < numUnits; i++) {
             String randomUnitName = names.getUnitNames(faction);
             int randDamage = random.nextInt(10) + 1;
