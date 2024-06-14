@@ -11,8 +11,8 @@ import java.awt.event.*;
  * This class handles the mouse selection of nodes and edges.
  */
 public class MouseSelector extends MouseAdapter {
-    private Graph graph;
-    private GraphPanel panel;
+    private final Graph graph;
+    private final GraphPanel panel;
     private Node selectedNode;
     private Edge selectedEdge;
     private int initialX;
@@ -51,7 +51,7 @@ public class MouseSelector extends MouseAdapter {
         }
 
         updateSelection();
-        panel.repaint();
+        graph.notifyObservers();
     }
 
     private boolean isPointNearNode(int x, int y, Node node) {
@@ -80,7 +80,7 @@ public class MouseSelector extends MouseAdapter {
         for (Edge edge : graph.getEdges()) {
             edge.setSelected(edge == selectedEdge);
         }
-        panel.updateMenus();
+        graph.notifyObservers();
     }
 
     //Sets the mouse position when a press is registered
@@ -136,7 +136,7 @@ public class MouseSelector extends MouseAdapter {
             initialX = mouseX;
             initialY = mouseY;
 
-            panel.repaint();
+            graph.notifyObservers();
         }
     }
 
@@ -144,7 +144,7 @@ public class MouseSelector extends MouseAdapter {
     public void mouseReleased(MouseEvent e) {
         selectedNode = null;
         selectedEdge = null;
-        panel.repaint();
+        graph.notifyObservers();
     }
 
     private double pointToSegmentDistance(int x1, int y1, int x2, int y2, int px, int py) {
@@ -158,6 +158,5 @@ public class MouseSelector extends MouseAdapter {
         double projectionX = x1 + t * (x2 - x1);
         double projectionY = y1 + t * (y2 - y1);
         return Math.hypot(px - projectionX, py - projectionY);
-
     }
 }
