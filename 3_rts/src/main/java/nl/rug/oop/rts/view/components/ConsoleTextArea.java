@@ -32,7 +32,7 @@ public class ConsoleTextArea extends JTextArea {
     private static class ConsoleOutputStream extends OutputStream {
         private final JTextArea textArea;
 
-        public ConsoleOutputStream(JTextArea textArea) {
+        ConsoleOutputStream(JTextArea textArea) {
             this.textArea = textArea;
         }
 
