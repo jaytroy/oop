@@ -4,6 +4,10 @@ import nl.rug.oop.rts.view.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * Menu for the edge actions.
+ */
+
 public class EdgeMenu extends NavItem {
     public EdgeMenu(String label, MainFrame frame) {
         super(label,frame);

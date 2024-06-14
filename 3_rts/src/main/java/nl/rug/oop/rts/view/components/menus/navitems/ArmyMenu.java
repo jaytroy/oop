@@ -4,6 +4,10 @@ import nl.rug.oop.rts.view.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * Menu for the army actions.
+ */
+
 public class ArmyMenu extends NavItem {
     public ArmyMenu(String label, MainFrame frame) {
         super(label,frame);

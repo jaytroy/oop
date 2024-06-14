@@ -4,13 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * Factory class for constructing the specific desired event.
+ */
+
 public class EventFactory {
-    //Map to store the constructors for each event type.
-    //Supplier takes no arguments and returns a result, the result being a new instance of a class.
     private final Map<EventTypes, Supplier<Event>> eventConstructors = new HashMap<>();
 
+    /**
+     * Factory class getting the constructors ready.
+     */
     public EventFactory() {
-        //Add the event constructors to the map
         eventConstructors.put(EventTypes.HIDDEN_WEAPONRY_EVENT, HiddenWeaponryEvent::new);
         eventConstructors.put(EventTypes.NATURAL_DISASTER_EVENT, NaturalDisasterEvent::new);
         eventConstructors.put(EventTypes.REINFORCEMENTS_EVENT, ReinforcementsEvent::new);
@@ -18,6 +22,11 @@ public class EventFactory {
         eventConstructors.put(EventTypes.RANDOM_EVENT, RandomEvent::getRandomEvent);
     }
 
+    /**
+     * Method to create a specific event
+     * @param type type of event to be created.
+     * @return event.
+     */
     public Event createEvent(EventTypes type) {
         if(eventConstructors.containsKey(type)) {
             return eventConstructors.get(type).get();

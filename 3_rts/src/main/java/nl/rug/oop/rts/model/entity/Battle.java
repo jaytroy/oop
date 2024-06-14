@@ -38,9 +38,18 @@ public class Battle {
             goodArmyCasualties -= goodArmy.getUnits().size();
             evilArmyCasualties -= evilArmy.getUnits().size();
 
-            System.out.println("Battle: " + goodArmy.getFaction() + " " + goodArmy.getNumUnits() + " vs " + evilArmy.getFaction() + " " + evilArmy.getNumUnits());
-            System.out.println(goodArmy.getFaction() + " " + goodArmy.getNumUnits() + " casualties: " + goodArmyCasualties);
-            System.out.println(evilArmy.getFaction() + " " + evilArmy.getNumUnits() + " casualties: " + evilArmyCasualties);
+            System.out.println("Battle: " + goodArmy.getFaction() +
+                    " " + goodArmy.getNumUnits() +
+                    " vs " + evilArmy.getFaction() +
+                    " " + evilArmy.getNumUnits());
+            System.out.println(goodArmy.getFaction() +
+                    " " + goodArmy.getNumUnits() +
+                    " casualties: " +
+                    goodArmyCasualties);
+            System.out.println(evilArmy.getFaction() +
+                    " " + evilArmy.getNumUnits() +
+                    " casualties: " +
+                    evilArmyCasualties);
             if (goodArmy.getUnits().isEmpty()) {
                 goodArmies.remove(goodArmy);
             }

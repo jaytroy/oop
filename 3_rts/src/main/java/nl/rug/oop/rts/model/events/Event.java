@@ -5,6 +5,10 @@ import lombok.Setter;
 import nl.rug.oop.rts.model.Saveable;
 import nl.rug.oop.rts.model.entity.Army;
 
+/**
+ * Abstract class of a generic event.
+ */
+
 @Setter
 @Getter
 public abstract class Event implements Saveable {

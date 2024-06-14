@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ReinforcementsEvent extends Event {
     private static int nextId = 0;
-    private final static String DESC = "Reinforcements";
+    private static final String DESC = "Reinforcements";
 
     public ReinforcementsEvent() {
         super(nextId, DESC);

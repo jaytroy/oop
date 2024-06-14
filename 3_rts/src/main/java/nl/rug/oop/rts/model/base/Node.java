@@ -19,7 +19,6 @@ public class Node extends GameElement {
     private int height;
     private boolean selected;
 
-
     /**
      * This is the constructor of the nodes.
      * @param id the id of the node
@@ -45,8 +44,12 @@ public class Node extends GameElement {
         edges.remove(edge);
     }
 
-
-
+    /**
+     * defines the diameters of a Node.
+     * @param x x axis axis constraints.
+     * @param y y axis axis constraints.
+     * @return reutrn value for x and y.
+     */
     public boolean contains(int x, int y) {
         int halfWidth = 15 + this.width / 2;
         int halfHeight = 15 + this.height / 2;
@@ -58,6 +61,11 @@ public class Node extends GameElement {
         return !super.getArmies().isEmpty();
     }
 
+    /**
+     * Indicates if the node has any out going edges connected to it.
+     * @param node Node to be examined.
+     * @return boolean of if it is connected or not.
+     */
     public boolean isConnected(Node node) {
         for (Edge edge : edges) {
             if (edge.getNode1() == node || edge.getNode2() == node) {

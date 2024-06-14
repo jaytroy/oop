@@ -4,6 +4,9 @@ import nl.rug.oop.rts.view.MainFrame;
 
 import javax.swing.*;
 
+/**
+ * Menu for the possible ndoe actions.
+ */
 public class NodeMenu extends NavItem {
     public NodeMenu(String label, MainFrame frame) {
         super(label,frame);

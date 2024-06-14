@@ -20,6 +20,12 @@ public abstract class GameElement implements Saveable {
     private List<Army> armies;
     private List<Event> events;
 
+    /**
+     * abstract constructor of generic game element.
+     * @param id game element id.
+     * @param name game element name.
+     */
+
     public GameElement(int id, String name) {
         this.id = id;
         this.name = name;

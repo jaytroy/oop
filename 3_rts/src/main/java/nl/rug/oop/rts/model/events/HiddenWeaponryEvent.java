@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class HiddenWeaponryEvent extends Event {
     private static int nextId = 0;
-    private final static String DESC = "Hidden Weaponry";
+    private static final String DESC = "Hidden Weaponry";
 
     public HiddenWeaponryEvent() {
         super(nextId, DESC);
