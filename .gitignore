@@ -49,9 +49,6 @@ target/
 # Custom Save Files
 *.ser
 
-#RTS save folder
-saves/
-
 # BlueJ files
 *.ctxt
 
@@ -65,4 +62,3 @@ saves/
 *.ear
 *.zip
 *.tar.gz
-*.rar
