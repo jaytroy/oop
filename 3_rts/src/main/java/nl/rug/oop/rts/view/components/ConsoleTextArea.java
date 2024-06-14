@@ -4,7 +4,16 @@ import javax.swing.*;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * Console text area class for displaying messages.
+ */
+
 public class ConsoleTextArea extends JTextArea {
+    /**
+     * Console text area constructor.
+     * @param rows rows of the area.
+     * @param columns columns of the area.
+     */
     public ConsoleTextArea(int rows, int columns) {
         super(rows, columns);
         setEditable(false);
